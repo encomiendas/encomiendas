@@ -15,7 +15,7 @@ configurando el servidor.
 ### Paso 0, clonar el repositorio
 
 ```shell
-git clone https://github.com/domainsoft/encomiendas.git
+https://github.com/encomiendas/encomiendas.git
 ```
 ### Paso 1, crear la base de datos
 
