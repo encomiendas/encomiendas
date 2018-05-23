@@ -1,5 +1,5 @@
 ## Ejecutar el servidor 
-El servidor PSP utiliza un sistema de compilación basado en Maven y liquibase para la evolución de la base de datos. También utiliza Spring Boot para ejecutar el JAR compilado con un servidor Tomcat integrado.
+El servidor Encomiendas utiliza un sistema de compilación basado en Maven y liquibase para la evolución de la base de datos. También utiliza Spring Boot para ejecutar el JAR compilado con un servidor Tomcat integrado.
 
 ## Pre-requisitos
 
@@ -15,7 +15,7 @@ configurando el servidor.
 ### Paso 0, clonar el repositorio
 
 ```shell
-git clone https://github.com/domainsoft/encomiendas.git
+https://github.com/encomiendas/encomiendas.git
 ```
 ### Paso 1, crear la base de datos
 
@@ -30,9 +30,15 @@ Yo can also copy and paste the following snippet to your favorite PSQL client:
 ```
 CREATE USER "encomiendas" WITH ENCRYPTED PASSWORD 'encomiendas';
 ALTER ROLE "encomiendas" WITH createdb;
-\c "dbname=postgres user=encomiendas password=encomiendas";
-CREATE database "encomiendas";
-SELECT datname FROM pg_database WHERE datistemplate = false;
+
+CREATE DATABASE encomiendas
+  WITH OWNER = encomiendas
+       ENCODING = 'UTF8'
+       TABLESPACE = pg_default
+       LC_COLLATE = 'es_PY.UTF-8'
+       LC_CTYPE = 'es_PY.UTF-8'
+       CONNECTION LIMIT = -1;
+       
 ```
 
 Esto generará la base de datos inicial, y a partir de este punto cualquier cambio relacionado con la base de datos será a través de [Liquibase] (LIQUIBASE.md).
@@ -42,15 +48,15 @@ needed).
 
 ### Paso 2, compilar la aplicación
 
-From the encomiendas directory, run:
+Desde el directorio de encomiendas, ejecutar:
 
 ```shell
-mvn clean install -DskipTests
+mvn clean package
 ```
 
 ### Paso 3, ejecutas la aplicación
 
-Start the server:
+Iniciar el servidor:
 
 ```shell
 java -jar target/encomiendas-0.0.1-SNAPSHOT.war
