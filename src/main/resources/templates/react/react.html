@@ -1,0 +1,42 @@
+<!-- BASE HTML -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- STYLES IMPORTS -->
+<th:block th:replace="fragments/head :: head"></th:block>
+
+<body class="hold-transition skin-green sidebar-mini ">
+
+	<script src="https://fb.me/react-15.0.1.js"></script>
+	<script src="https://fb.me/react-dom-15.0.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+	<script type="text/babel">
+	</script>
+
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<th:block th:replace="fragments/header :: header"></th:block>
+		<!-- ASIDE MENU -->
+		<th:block th:replace="fragments/aside :: aside"></th:block>
+
+		<!-- =============================================== -->
+
+		<!-- CONTENIDO PRINCIPAL DE LA PAGINA -->
+		<div class="content-wrapper">
+			<div id='root'></div>
+		</div>
+
+		<!-- =============================================== -->
+
+		<!-- FOOTER -->
+		<th:block th:replace="fragments/footer :: footer"></th:block>
+
+	</div>
+
+	<!-- SCRIPTS -->
+	<th:block th:replace="fragments/scripts :: scripts"></th:block>
+
+</body>
+
+</html>

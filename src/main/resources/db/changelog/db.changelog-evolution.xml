@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!--
+    This script create the first schemas and tables for the project.
+    -->
+    <changeSet id="2018-05-22T11:32" author="mcespedes">
+        <sqlFile path="sql/2018-05-22T11:32.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+</databaseChangeLog>
