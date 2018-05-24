@@ -1,0 +1,276 @@
+<!-- BASE HTML -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- STYLES IMPORTS -->
+<th:block th:replace="fragments/head :: head"></th:block>
+
+<body class="hold-transition skin-green sidebar-mini ">
+
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<th:block th:replace="fragments/header :: header"></th:block>
+		<!-- ASIDE MENU -->
+		<th:block th:replace="fragments/aside :: aside"></th:block>
+
+		<!-- =============================================== -->
+
+		<!-- CONTENIDO PRINCIPAL DE LA PAGINA -->
+		<div class="content-wrapper">
+
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>Mantenimiento de Empleado</h1>
+				<ol class="breadcrumb">
+					<li><a href="home"><i class="fa fa-edit"></i>Home</a></li>
+					<li><a href="#">Procesos</a></li>
+					<li class="active">Mantenimiento de Empleado</li>
+				</ol>
+			</section>
+
+			<section class="content">
+
+				<div class="row">
+					<div class="col-md-12">
+
+						<div class="box box-success">
+
+							<div class="box-header"></div>
+
+							<form class="form-horizontal">
+
+								<div class="box-body">
+
+									<div class="row">
+
+										<div class="form-group">
+
+											<div class="col-xs-2">
+												<label for="codigo" class="col-sm-2 control-label">Codigo</label>
+											</div>
+											<div class="col-xs-2">
+												<input type="number" class="form-control" placeholder="Codigo">
+											</div>
+											<div class="col-xs-1">
+												<label for="codigo" class="col-sm-2 control-label">Estado</label>
+											</div>
+											<div class="col-xs-1">
+												<input type="checkbox" class="flat-red">
+											</div>
+
+										</div>
+									</div>
+
+									<div class="row">
+
+										<div class="form-group">
+
+											<div class="col-xs-2">
+												<label for="usuario" class="col-sm-2 control-label">Usuario</label>
+											</div>
+											<div class="col-xs-2">
+												<input type="text" class="form-control" placeholder="Usuario">
+											</div>
+
+
+										</div>
+
+									</div>
+
+									<div class="row">
+
+										<div class="form-group">
+
+											<div class="col-xs-2">
+												<label for="usuario" class="col-sm-2 control-label">Clave</label>
+											</div>
+											<div class="col-xs-2">
+												<input type="password" class="form-control" placeholder="Clave">
+											</div>
+
+										</div>
+
+									</div>
+
+									<div class="row">
+
+										<div class="form-group">
+
+											<div class="col-xs-2">
+												<label for="documento" class="col-sm-2 control-label">Documento</label>
+											</div>
+											<div class="col-xs-2">
+												<input type="text" class="form-control" placeholder="Documento">
+											</div>
+
+										</div>
+
+									</div>
+
+									<div class="row">
+
+										<div class="form-group">
+
+											<div class="col-xs-2">
+												<label for="nombre" class="col-sm-2 control-label">Nombre</label>
+											</div>
+											<div class="col-xs-8">
+												<input type="text" class="form-control" placeholder="Nombre y apellido">
+											</div>
+
+										</div>
+
+									</div>
+									
+									<div class="row">
+
+										<div class="form-group">
+
+											<div class="col-xs-2">
+												<label for="nombre" class="col-sm-2 control-label">Fec.Nacimiento</label>
+											</div>
+											<div class="col-xs-2">
+
+												<div class="input-group date">
+													<div class="input-group-addon">
+														<i class="fa fa-calendar"></i>
+													</div>
+													<input type="text" class="form-control pull-right" id="datepicker">
+												</div>
+
+											</div>
+
+										</div>
+
+									</div>
+
+
+									<div class="row">
+
+										<div class="form-group">
+
+											<div class="col-xs-2">
+												<label for="nombre" class="col-sm-2 control-label">Sucursal</label>
+											</div>
+
+											<div class="col-xs-2">
+												<select class="form-control">
+													<option>Matriz</option>
+													<option>Sucursal 2</option>
+												</select>
+											</div>
+
+										</div>
+
+									</div>
+
+									<div class="row">
+
+										<div class="form-group">
+
+											<div class="col-xs-2">
+												<label for="nombre" class="col-sm-2 control-label">Masculino</label>
+											</div>
+
+											<div class="col-xs-1">
+												<input type="radio" name="r1" class="minimal" checked>
+											</div>
+
+											<div class="col-xs-2">
+												<label for="nombre" class="col-sm-2 control-label">Femenino</label>
+											</div>
+
+											<div class="col-xs-1">
+												<input type="radio" name="r1" class="minimal">
+											</div>
+
+
+										</div>
+									</div>
+
+									<div class="row">
+
+										<div class="form-group">
+
+											<div class="col-xs-2">
+												<label for="nombre" class="col-sm-2 control-label">Dirección</label>
+											</div>
+											<div class="col-xs-8">
+												<input type="text" class="form-control" placeholder="Direccion">
+											</div>
+
+										</div>
+
+									</div>
+									
+									<div class="row">
+
+										<div class="form-group">
+
+											<div class="col-xs-2">
+												<label for="nombre" class="col-sm-2 control-label">Teléfonos</label>
+											</div>
+											<div class="col-xs-4">
+												<input type="text" class="form-control" placeholder="Teléfonos">
+											</div>
+
+										</div>
+
+									</div>
+
+								</div>
+								<div class="box-footer">
+									<button type="submit" class="btn btn-default">Editar</button>
+									<button type="submit" class="btn btn-default">Grabar</button>
+									<button type="submit" class="btn btn-default">Cancelar</button>
+									<button type="submit" class="btn btn-default">Salir</button>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+
+			</section>
+
+		</div>
+
+		<!-- =============================================== -->
+
+		<!-- FOOTER -->
+		<th:block th:replace="fragments/footer :: footer"></th:block>
+
+	</div>
+
+	<!-- SCRIPTS -->
+	<th:block th:replace="fragments/scripts :: scripts"></th:block>
+
+	<script>
+		$(function() {
+			//iCheck for checkbox and radio inputs
+			$('input[type="checkbox"].minimal, input[type="radio"].minimal')
+					.iCheck({
+						checkboxClass : 'icheckbox_minimal-blue',
+						radioClass : 'iradio_minimal-blue'
+					});
+
+			//Flat red color scheme for iCheck
+			$('input[type="checkbox"].flat-red, input[type="radio"].flat-red')
+					.iCheck({
+						checkboxClass : 'icheckbox_flat-green',
+						radioClass : 'iradio_flat-green'
+					});
+
+			//Date picker
+			$('#datepicker').datepicker({
+				autoclose : true,
+				format: 'dd/mm/yyyy'
+			});
+
+		});
+	</script>
+
+</body>
+
+</html>
