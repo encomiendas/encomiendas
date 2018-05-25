@@ -122,7 +122,7 @@
 										</div>
 
 									</div>
-									
+
 									<div class="row">
 
 										<div class="form-group">
@@ -181,10 +181,9 @@
 												<label for="nombre" class="col-sm-2 control-label">Femenino</label>
 											</div>
 
-											<div class="col-xs-1">
+											<div class="col-xs-2">
 												<input type="radio" name="r1" class="minimal">
 											</div>
-
 
 										</div>
 									</div>
@@ -203,7 +202,7 @@
 										</div>
 
 									</div>
-									
+
 									<div class="row">
 
 										<div class="form-group">
@@ -221,10 +220,10 @@
 
 								</div>
 								<div class="box-footer">
-									<button type="submit" class="btn btn-default">Editar</button>
-									<button type="submit" class="btn btn-default">Grabar</button>
-									<button type="submit" class="btn btn-default">Cancelar</button>
-									<button type="submit" class="btn btn-default">Salir</button>
+									<button type="submit" class="btn btn-success">Editar</button>
+									<button type="submit" class="btn btn-success">Grabar</button>
+									<button type="submit" class="btn btn-success">Cancelar</button>
+									<button type="submit" class="btn btn-success">Salir</button>
 								</div>
 							</form>
 						</div>
@@ -265,8 +264,10 @@
 			//Date picker
 			$('#datepicker').datepicker({
 				autoclose : true,
-				format: 'dd/mm/yyyy'
+				format : 'dd/mm/yyyy'
 			});
+			
+			$("#datepicker").datepicker().datepicker("setDate", new Date());
 
 		});
 	</script>

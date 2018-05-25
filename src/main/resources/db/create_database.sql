@@ -1,11 +1,6 @@
--- Run this with psql
-CREATE USER "encomiendas" WITH ENCRYPTED PASSWORD 'encomiendas';
+-- Run this with psql -U YourUser -f create_database.sql
+CREATE USER "fp_psp_db" WITH ENCRYPTED PASSWORD 'encomiendas';
 ALTER ROLE "encomiendas" WITH createdb;
-
-CREATE DATABASE encomiendas
-  WITH OWNER = encomiendas
-       ENCODING = 'UTF8'
-       TABLESPACE = pg_default
-       LC_COLLATE = 'es_PY.UTF-8'
-       LC_CTYPE = 'es_PY.UTF-8'
-       CONNECTION LIMIT = -1;
+\c "dbname=postgres user=encomiendas password=encomiendas";
+CREATE database "encomiendas";
+SELECT datname FROM pg_database WHERE datistemplate = false;

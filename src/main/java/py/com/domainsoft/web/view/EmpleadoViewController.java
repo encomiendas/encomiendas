@@ -16,6 +16,7 @@ public class EmpleadoViewController {
     public String home(Model model, Principal principal) {
         
         UserDetailsDTO loginedUser = (UserDetailsDTO) ((Authentication) principal).getPrincipal();
+        
         model.addAttribute("userInfo", loginedUser.getUsername());
         
         return "seguridad/empleado";
