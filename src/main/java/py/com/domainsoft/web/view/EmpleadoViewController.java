@@ -15,6 +15,8 @@ public class EmpleadoViewController {
     @GetMapping("/empleado")
     public String home(Model model, Principal principal) {
         
+        System.out.println("deployado en heroku");
+        
         UserDetailsDTO loginedUser = (UserDetailsDTO) ((Authentication) principal).getPrincipal();
         model.addAttribute("userInfo", loginedUser.getUsername());
         
