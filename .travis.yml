@@ -1,3 +1,2 @@
-- psql -c "CREATE USER encomiendas WITH PASSWORD 'encomiendas';" -U postgres
 language: java
 script: mvn package
