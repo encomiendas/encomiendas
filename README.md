@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/encomiendas/encomiendas.svg?branch=develop)](https://travis-ci.org/encomiendas/encomiendas)
+
 # Encomiendas
 DomainSoft ha desarrollado una aplicación llamada Encomiendas, que busca
 automatizar las encomiendas de las empresas de forma ligera, facil y 
