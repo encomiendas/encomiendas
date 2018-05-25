@@ -17,7 +17,6 @@ public class UserDetailsDTO implements UserDetails {
     private final List<GrantedAuthority> grantedAuthorities;
     private final String correo;
 
-
     UserDetailsDTO(String username,
             String password,
             boolean enabled,
