@@ -1,7 +1,7 @@
 -- This script create the first schemas and tables for the project. --
 
 -- Tabla usuarios
-CREATE TABLE public.usuarios
+CREATE TABLE public.usuario
 (
   id serial not null primary key,
   login character varying(30) not null,
