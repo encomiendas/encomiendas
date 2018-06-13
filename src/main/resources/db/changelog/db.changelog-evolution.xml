@@ -9,5 +9,10 @@
     <changeSet id="2018-05-22T11:32" author="mcespedes">
         <sqlFile path="sql/2018-05-22T11:32.sql" relativeToChangelogFile="true"/>
     </changeSet>
+    
+    <!-- This script create the Pais table -->
+    <changeSet id="2018-06-12T20:50" author="lbareiro">
+        <sqlFile path="sql/2018-06-12T20:50.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 
 </databaseChangeLog>

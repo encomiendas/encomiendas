@@ -14,7 +14,7 @@ import org.hibernate.id.enhanced.SequenceStyleGenerator;
 import com.google.common.base.MoreObjects;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "usuario")
 public class UsuarioEntity {
 
     @Id
