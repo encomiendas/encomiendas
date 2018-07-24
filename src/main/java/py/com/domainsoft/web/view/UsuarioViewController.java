@@ -21,7 +21,7 @@ import py.com.domainsoft.seguridad.services.UsuarioService;
 @Controller
 public class UsuarioViewController {
 
-    UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
     public UsuarioViewController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
@@ -62,22 +62,8 @@ public class UsuarioViewController {
     public ModelAndView createNewUser(@Valid UsuarioDTO user,
             BindingResult bindingResult) {
 
-        // UsuarioDTO userExists = usuarioService.findByLogin(user.getLogin());
-
-        // if (userExists != null) {
-        // System.out.println("entro porque es != null");
-        // bindingResult.rejectValue("login", "error.user",
-        // "Ya hay un usuario registrado con el login proporcionado");
-        // }
-        // if (bindingResult.hasErrors()) {
-        // modelAndView.setViewName("seguridad/usuario-lista");
-        // } else {
-        
-        System.out.println("el id es: " + user.getIdUsuario());
-        
         usuarioService.grabarUsuario(user);
 
-        // }
         return new ModelAndView("redirect:/usuario-exitoso");
     }
 

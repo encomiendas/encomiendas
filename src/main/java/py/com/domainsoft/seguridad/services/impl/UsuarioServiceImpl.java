@@ -19,13 +19,13 @@ import py.com.domainsoft.seguridad.services.UsuarioService;
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
-    UsuarioRepository usuarioRepo;
+    private final UsuarioRepository usuarioRepo;
 
-    UsuarioMapper usuarioMapper;
+    private final UsuarioMapper usuarioMapper;
     
-    UsuarioRoleRepository usuarioRoleRepo;
+    private final UsuarioRoleRepository usuarioRoleRepo;
     
-    RoleRepository roleRepo;
+    private final RoleRepository roleRepo;
 
     public UsuarioServiceImpl(
             UsuarioRepository usuarioRepo,
