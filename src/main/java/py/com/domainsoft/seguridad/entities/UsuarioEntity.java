@@ -18,16 +18,16 @@ import com.google.common.base.MoreObjects;
 public class UsuarioEntity {
 
     @Id
-    @GenericGenerator(name = "usuariosSequenceGenerator",
+    @GenericGenerator(name = "usuarioSequenceGenerator",
     strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
     parameters = {
             @Parameter(name = SequenceStyleGenerator.SEQUENCE_PARAM,
-                    value = "usuarios_id_seq"),
+                    value = "usuario_id_seq"),
             @Parameter(name = SequenceStyleGenerator.INITIAL_PARAM,
             value = "1"),
             @Parameter(name = SequenceStyleGenerator.INCREMENT_PARAM,
             value = "1") })
-    @GeneratedValue(generator = "usuariosSequenceGenerator")
+    @GeneratedValue(generator = "usuarioSequenceGenerator")
     @Column(name = "id")
     private Integer id;
 
