@@ -1,5 +1,7 @@
 package py.com.domainsoft.seguridad.entities;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,7 +52,7 @@ public class PersonaEntity {
     
     private String documento2;
     
-    private java.util.Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     
     private String telefono;
     
@@ -101,10 +103,10 @@ public class PersonaEntity {
     public void setDocumento2(String documento2) {
         this.documento2 = documento2;
     }
-    public java.util.Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
-    public void setFechaNacimiento(java.util.Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
     public String getTelefono() {
