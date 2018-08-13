@@ -1,14 +1,14 @@
-package py.com.domainsoft.entidad.services.impl;
+package py.com.domainsoft.seguridad.services.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import py.com.domainsoft.entidad.dtos.TipoDocumentoDTO;
-import py.com.domainsoft.entidad.mapper.TipoDocumentoMapper;
-import py.com.domainsoft.entidad.repositories.TipoDocumentoRepository;
-import py.com.domainsoft.entidad.services.TipoDocumentoService;
+import py.com.domainsoft.seguridad.dtos.TipoDocumentoDTO;
+import py.com.domainsoft.seguridad.mapper.TipoDocumentoMapper;
+import py.com.domainsoft.seguridad.repositories.TipoDocumentoRepository;
+import py.com.domainsoft.seguridad.services.TipoDocumentoService;
 
 @Service
 public class TipoDocumentoServiceImpl implements TipoDocumentoService {

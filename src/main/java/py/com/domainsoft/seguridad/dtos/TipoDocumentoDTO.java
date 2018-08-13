@@ -1,4 +1,4 @@
-package py.com.domainsoft.entidad.dtos;
+package py.com.domainsoft.seguridad.dtos;
 
 import com.google.common.base.MoreObjects;
 

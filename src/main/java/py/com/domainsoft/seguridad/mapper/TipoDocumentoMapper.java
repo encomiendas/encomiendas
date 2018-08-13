@@ -1,4 +1,4 @@
-package py.com.domainsoft.entidad.mapper;
+package py.com.domainsoft.seguridad.mapper;
 
 import java.util.List;
 import java.util.Objects;
@@ -8,8 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import py.com.domainsoft.common.BaseMapper;
-import py.com.domainsoft.entidad.dtos.TipoDocumentoDTO;
-import py.com.domainsoft.entidad.entities.TipoDocumentoEntity;
+import py.com.domainsoft.seguridad.dtos.TipoDocumentoDTO;
+import py.com.domainsoft.seguridad.entities.TipoDocumentoEntity;
 
 /**
  * 

@@ -1,9 +1,8 @@
-package py.com.domainsoft.entidad.repositories;
+package py.com.domainsoft.seguridad.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import py.com.domainsoft.entidad.entities.TipoDocumentoEntity;
-
+import py.com.domainsoft.seguridad.entities.TipoDocumentoEntity;
 public interface TipoDocumentoRepository extends JpaRepository<TipoDocumentoEntity, Integer> {
 
 }

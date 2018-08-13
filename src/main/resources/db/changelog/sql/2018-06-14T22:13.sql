@@ -12,3 +12,6 @@ WITH (
 );
 ALTER TABLE tipo_documento
   OWNER TO encomiendas;
+
+insert into tipo_documento (descripcion, estado) values ('DOCUMENTO DE IDENTIDAD', true);
+insert into tipo_documento (descripcion, estado) values ('PASAPORTE', true);
