@@ -43,8 +43,6 @@ public class PersonaDTO {
     
     private Boolean estado;
     
-    public PersonaDTO() {}
-
     public Integer getIdPersona() {
         return idPersona;
     }
