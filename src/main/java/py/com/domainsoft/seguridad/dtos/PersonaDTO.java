@@ -2,6 +2,8 @@ package py.com.domainsoft.seguridad.dtos;
 
 import java.time.LocalDate;
 
+import com.google.common.base.MoreObjects;
+
 import py.com.domainsoft.entidad.entities.PaisEntity;
 import py.com.domainsoft.seguridad.entities.EstadoCivilEntity;
 import py.com.domainsoft.seguridad.entities.TipoDocumentoEntity;
@@ -291,6 +293,28 @@ public class PersonaDTO {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+    
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("idPersona", idPersona)
+                .add("nombres", nombres)
+                .add("apellidos", apellidos)
+                .add("documento", documento)
+                .add("documento2", documento2)
+                .add("fechaNacimiento", fechaNacimiento)
+                .add("telefono", telefono)
+                .add("direccion", direccion)
+                .add("genero", genero)
+                .add("estado", estado)
+                .add("tipoPersona", tipoPersona)
+                .add("tipoDocumento", tipoDocumento)
+                .add("tipoDocumento2", tipoDocumento2)
+                .add("pais", pais)
+                .add("paisNacionalidad", paisNacionalidad)
+                .add("estadoCivil", estadoCivil)
+                .toString();
     }
     
 }
