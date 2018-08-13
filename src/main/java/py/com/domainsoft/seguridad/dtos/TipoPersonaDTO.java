@@ -2,8 +2,6 @@ package py.com.domainsoft.seguridad.dtos;
 
 import com.google.common.base.MoreObjects;
 
-import py.com.domainsoft.seguridad.dtos.TipoDocumentoDTO.Builder;
-
 public class TipoPersonaDTO {
 
     private Integer idTipoPersona;

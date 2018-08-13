@@ -74,7 +74,7 @@ public class PersonaEntity {
     private String genero;
     
     @ManyToOne(targetEntity = EstadoCivilEntity.class)
-    @JoinColumn(name = "id_tipo_persona")
+    @JoinColumn(name = "id_estado_civil")
     private EstadoCivilEntity estadoCivil;
     
     private Boolean estado;
