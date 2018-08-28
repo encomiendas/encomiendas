@@ -35,4 +35,14 @@
         <sqlFile path="sql/2018-08-13T13:42.sql" relativeToChangelogFile="true"/>
     </changeSet>
     
+    <!-- This script create the empresa table -->
+    <changeSet id="2018-08-28T10:36" author="mcespedes">
+        <sqlFile path="sql/2018-08-28T10:36.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    
+    <!-- This script create the sucursal table -->
+    <changeSet id="2018-08-28T14:49" author="mcespedes">
+        <sqlFile path="sql/2018-08-28T14:49.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    
 </databaseChangeLog>
