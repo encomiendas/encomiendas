@@ -10,8 +10,6 @@ public class SucursalDTO {
     
     private EmpresaDTO empresa;
     
-    public SucursalDTO() {}
-
     public Integer getIdSucursal() {
         return idSucursal;
     }

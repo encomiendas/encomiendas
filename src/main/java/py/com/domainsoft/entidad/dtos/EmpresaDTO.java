@@ -16,8 +16,6 @@ public class EmpresaDTO {
 
     private Boolean estado;
     
-    public EmpresaDTO() {}
-
     public Integer getIdEmpresa() {
         return idEmpresa;
     }
