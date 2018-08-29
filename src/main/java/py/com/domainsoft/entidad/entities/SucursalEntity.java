@@ -35,6 +35,9 @@ public class SucursalEntity {
     @Column(name = "descripcion")
     private String descripcion;
     
+    @Column(name = "estado")
+    private boolean estado;
+    
     @ManyToOne(targetEntity = EmpresaEntity.class)
     @JoinColumn(name = "id_empresa")
     private EmpresaEntity empresa;
@@ -62,6 +65,14 @@ public class SucursalEntity {
     public void setEmpresa(EmpresaEntity empresa) {
         this.empresa = empresa;
     }
+    
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -86,6 +97,7 @@ public class SucursalEntity {
                 .add("idSucursal", idSucursal)
                 .add("descripcion", descripcion)
                 .add("empresa", empresa)
+                .add("estado", estado)
                 .toString();
     }
     

@@ -6,4 +6,6 @@ create table empresa (
 	direccion varchar(100),
 	telefono varchar(100),
 	estado boolean 
-)
+);
+
+insert into empresa (descripcion, estado) values ('ADMINISTRADOR', true); 

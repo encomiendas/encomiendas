@@ -71,6 +71,6 @@ public class PerfilEntity {
                 .add("idPerfil", idPerfil)
                 .add("descripcion", descripcion)
                 .toString();
-    }  
+    }
     
 }

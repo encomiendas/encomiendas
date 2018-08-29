@@ -12,16 +12,24 @@ public class PaisDTO {
 
 	private Integer codPaisNum;
 
-	private String codPaisAlfa;
+	private String codPaisAlfa2;
+	
+	private String codPaisAlfa3;
 
 	public PaisDTO() {}
 
-	public PaisDTO(Integer idpais, String descripcion, String gentilicio, Integer codPaisNum, String codPaisAlfa) {
+	public PaisDTO(Integer idpais,
+	        String descripcion,
+	        String gentilicio,
+	        Integer codPaisNum,
+	        String codPaisAlfa2,
+	        String codPaisAlfa3) {
 		this.idPais = idpais;
 		this.descripcion = descripcion;
 		this.gentilicio = gentilicio;
 		this.codPaisNum = codPaisNum;
-		this.codPaisAlfa = codPaisAlfa;
+		this.codPaisAlfa2 = codPaisAlfa2;
+		this.codPaisAlfa3 = codPaisAlfa3;
 	}
 
 	public static class Builder {
@@ -30,7 +38,8 @@ public class PaisDTO {
 		private String descripcion;
 		private String gentilicio;
 		private Integer codPaisNum;
-		private String codPaisAlfa;
+		private String codPaisAlfa2;
+		private String codPaisAlfa3;
 
 		public Builder idPais(Integer idPais) {
 			this.idPais = idPais;
@@ -52,13 +61,18 @@ public class PaisDTO {
 			return this;
 		}
 
-		public Builder codPaisAlfa(String codPaisAlfa) {
-			this.codPaisAlfa = codPaisAlfa;
+		public Builder codPaisAlfa2(String codPaisAlfa2) {
+			this.codPaisAlfa2 = codPaisAlfa2;
 			return this;
 		}
 
 		public PaisDTO build() {
-			return new PaisDTO(idPais, descripcion, gentilicio, codPaisNum, codPaisAlfa);
+			return new PaisDTO(idPais,
+			        descripcion,
+			        gentilicio,
+			        codPaisNum,
+			        codPaisAlfa2,
+			        codPaisAlfa3);
 		}
 
 	}
@@ -99,22 +113,30 @@ public class PaisDTO {
 		this.codPaisNum = codPaisNum;
 	}
 
-	public String getCodPaisAlfa() {
-		return codPaisAlfa;
+	public String getCodPaisAlfa2() {
+		return codPaisAlfa2;
 	}
 
-	public void setCodPaisAlfa(String codPaisAlfa) {
-		this.codPaisAlfa = codPaisAlfa;
+	public void setCodPaisAlfa2(String codPaisAlfa2) {
+		this.codPaisAlfa2 = codPaisAlfa2;
 	}
 	
-	@Override
+	public String getCodPaisAlfa3() {
+        return codPaisAlfa3;
+    }
+
+    public void setCodPaisAlfa3(String codPaisAlfa3) {
+        this.codPaisAlfa3 = codPaisAlfa3;
+    }
+
+    @Override
 	public String toString() {
 	   return MoreObjects.toStringHelper(this)
 	          .add("idPais", idPais)
 	          .add("descripcion", descripcion)
 	          .add("gentilicio", gentilicio)
 	          .add("codPaisNum", codPaisNum)
-	          .add("codPaisAlfa", codPaisAlfa)
+	          .add("codPaisAlfa2", codPaisAlfa2)
 	          .toString();
 	}
 

@@ -1,9 +1,13 @@
 package py.com.domainsoft.seguridad.entities;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -12,6 +16,8 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
 
 import com.google.common.base.MoreObjects;
+
+import py.com.domainsoft.entidad.entities.SucursalEntity;
 
 @Entity
 @Table(name = "usuario")
@@ -39,11 +45,22 @@ public class UsuarioEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "correo")
-    private String correo;
-
     @Column(name = "activo")
     private boolean activo;
+    
+    @Column(name = "expira")
+    private boolean expira;
+    
+    @Column(name = "fecha_expiracion")
+    private LocalDate fechaExpiracion;
+    
+    @ManyToOne(targetEntity = PersonaEntity.class)
+    @JoinColumn(name = "id_persona")
+    private PersonaEntity persona;
+    
+    @ManyToOne(targetEntity = SucursalEntity.class)
+    @JoinColumn(name = "id_sucursal")
+    private SucursalEntity sucursal;
 
     public Integer getId() {
         return id;
@@ -69,20 +86,44 @@ public class UsuarioEntity {
         this.password = password;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-    
     public boolean isActivo() {
         return activo;
     }
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+    
+    public PersonaEntity getPersona() {
+        return persona;
+    }
+
+    public SucursalEntity getSucursal() {
+        return sucursal;
+    }
+
+    public void setPersona(PersonaEntity persona) {
+        this.persona = persona;
+    }
+
+    public void setSucursal(SucursalEntity sucursal) {
+        this.sucursal = sucursal;
+    }
+    
+    public boolean isExpira() {
+        return expira;
+    }
+
+    public LocalDate getFechaExpiracion() {
+        return fechaExpiracion;
+    }
+
+    public void setExpira(boolean expira) {
+        this.expira = expira;
+    }
+
+    public void setFechaExpiracion(LocalDate fechaExpiracion) {
+        this.fechaExpiracion = fechaExpiracion;
     }
 
     @Override
@@ -108,8 +149,11 @@ public class UsuarioEntity {
                 .add("id", id)
                 .add("login", login)
                 .add("password", password)
-                .add("correo", correo)
                 .add("activo", activo)
+                .add("persona", persona)
+                .add("sucursal", sucursal)
+                .add("expira", expira)
+                .add("fechaExpiracion", fechaExpiracion)
                 .toString();
     }
     

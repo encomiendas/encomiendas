@@ -58,6 +58,8 @@ public class PersonaEntity {
     
     private String direccion;
     
+    private String correo;
+    
     @ManyToOne(targetEntity = PaisEntity.class)
     @JoinColumn(name = "id_pais")
     private PaisEntity pais;
@@ -176,6 +178,12 @@ public class PersonaEntity {
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
+    public String getCorreo() {
+        return correo;
+    }
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -212,6 +220,7 @@ public class PersonaEntity {
                 .add("pais", pais)
                 .add("paisNacionalidad", paisNacionalidad)
                 .add("estadoCivil", estadoCivil)
+                .add("correo", correo)
                 .toString();
     }
 

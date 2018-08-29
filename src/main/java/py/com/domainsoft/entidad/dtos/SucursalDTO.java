@@ -10,6 +10,8 @@ public class SucursalDTO {
     
     private EmpresaDTO empresa;
     
+    private boolean estado;
+    
     public Integer getIdSucursal() {
         return idSucursal;
     }
@@ -34,12 +36,21 @@ public class SucursalDTO {
         this.empresa = empresa;
     }
     
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     @Override
     public String toString() {
        return MoreObjects.toStringHelper(this)
               .add("idSucursal", idSucursal)
               .add("descripcion", descripcion)
               .add("empresa", empresa)
+              .add("estado", estado)
               .toString();
     }
     
