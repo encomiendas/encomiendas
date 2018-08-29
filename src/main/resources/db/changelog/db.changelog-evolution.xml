@@ -45,4 +45,14 @@
         <sqlFile path="sql/2018-08-28T14:49.sql" relativeToChangelogFile="true"/>
     </changeSet>
     
+    <!-- This script create the perfil table -->
+    <changeSet id="2018-08-29T08:31" author="mcespedes">
+        <sqlFile path="sql/2018-08-29T08:31.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    
+    <!-- This script create the pagina table -->
+    <changeSet id="2018-08-29T08:39" author="mcespedes">
+        <sqlFile path="sql/2018-08-29T08:39.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    
 </databaseChangeLog>
