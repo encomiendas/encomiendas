@@ -11,6 +11,6 @@ create table perfil_usuario (
     CONSTRAINT perfil_usuario_usuario FOREIGN KEY (id_usuario)
       REFERENCES usuario (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
-)
+);
 
 insert into perfil_usuario (id_perfil, id_usuario) values (1,1);
