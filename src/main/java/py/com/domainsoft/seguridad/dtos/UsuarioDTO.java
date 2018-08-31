@@ -4,6 +4,8 @@ import javax.validation.constraints.NotNull;
 
 import com.google.common.base.MoreObjects;
 
+import py.com.domainsoft.entidad.dtos.SucursalDTO;
+
 public class UsuarioDTO {
 
     private Integer idUsuario;
@@ -14,26 +16,35 @@ public class UsuarioDTO {
     @NotNull
     private String password;
 
-    private String correo;
-
     private boolean activo;
+    
+    private PersonaDTO persona;
+    
+    private SucursalDTO sucursal;
 
     public UsuarioDTO() {}
 
-    private UsuarioDTO(Integer idUsuario, String login, String password, String correo, boolean activo) {
+    private UsuarioDTO(Integer idUsuario, 
+            String login,
+            String password,
+            boolean activo,
+            PersonaDTO persona,
+            SucursalDTO sucursal) {
         this.idUsuario = idUsuario;
         this.login = login;
         this.password = password;
-        this.correo = correo;
         this.activo = activo;
+        this.persona = persona;
+        this.sucursal = sucursal;
     }
 
     public static class Builder {
         private Integer idUsuario;
         private String login;
         private String password;
-        private String correo;
         private boolean activo;
+        private PersonaDTO persona;
+        private SucursalDTO sucursal;
 
         public Builder idUsuario(Integer idUsuario) {
             this.idUsuario = idUsuario;
@@ -50,18 +61,23 @@ public class UsuarioDTO {
             return this;
         }
 
-        public Builder correo(String correo) {
-            this.correo = correo;
-            return this;
-        }
-
         public Builder activo(boolean activo) {
             this.activo = activo;
             return this;
         }
+        
+        public Builder persona(PersonaDTO persona) {
+            this.persona = persona;
+            return this;
+        }
+        
+        public Builder sucursal(SucursalDTO sucursal) {
+            this.sucursal = sucursal;
+            return this;
+        }
 
         public UsuarioDTO build() {
-            return new UsuarioDTO(idUsuario, login, password, correo, activo);
+            return new UsuarioDTO(idUsuario, login, password, activo, persona, sucursal);
         }
     }
     
@@ -93,14 +109,6 @@ public class UsuarioDTO {
         this.password = password;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
     public boolean isActivo() {
         return activo;
     }
@@ -109,14 +117,31 @@ public class UsuarioDTO {
         this.activo = activo;
     }
     
+    public PersonaDTO getPersona() {
+        return persona;
+    }
+
+    public SucursalDTO getSucursal() {
+        return sucursal;
+    }
+
+    public void setPersona(PersonaDTO persona) {
+        this.persona = persona;
+    }
+
+    public void setSucursal(SucursalDTO sucursal) {
+        this.sucursal = sucursal;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("idUsuario", idUsuario)
                 .add("login", login)
                 .add("password", password)
-                .add("correo", correo)
                 .add("activo", activo)
+                .add("persona", persona)
+                .add("sucursal", sucursal)
                 .toString();
     }
     

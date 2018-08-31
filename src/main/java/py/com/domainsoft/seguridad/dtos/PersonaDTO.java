@@ -43,6 +43,8 @@ public class PersonaDTO {
     
     private Boolean estado;
     
+    private String correo;
+    
     public Integer getIdPersona() {
         return idPersona;
     }
@@ -171,6 +173,14 @@ public class PersonaDTO {
         this.estado = estado;
     }
     
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -190,6 +200,7 @@ public class PersonaDTO {
                 .add("pais", pais)
                 .add("paisNacionalidad", paisNacionalidad)
                 .add("estadoCivil", estadoCivil)
+                .add("correo", correo)
                 .toString();
     }
     

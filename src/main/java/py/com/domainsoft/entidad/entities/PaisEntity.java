@@ -43,9 +43,13 @@ public class PaisEntity {
     @Column(name = "cod_pais_num")
     private Integer codPaisNum;
     
-    @Column(name = "cod_pais_alfa")
-    private String codPaisAlfa;
+    @Column(name = "cod_pais_alfa2")
+    private String codPaisAlfa2;
 
+    @Column(name = "cod_pais_alfa3")
+    private String codPaisAlfa3;
+    
+    
 	public Integer getId() {
 		return id;
 	}
@@ -78,15 +82,23 @@ public class PaisEntity {
 		this.codPaisNum = codPaisNum;
 	}
 
-	public String getCodPaisAlfa() {
-		return codPaisAlfa;
+	public String getCodPaisAlfa2() {
+		return codPaisAlfa2;
 	}
 
-	public void setCodPaisAlfa(String codPaisAlfa) {
-		this.codPaisAlfa = codPaisAlfa;
+	public void setCodPaisAlfa2(String codPaisAlfa2) {
+		this.codPaisAlfa2 = codPaisAlfa2;
 	}
-    
-	@Override
+	
+	public String getCodPaisAlfa3() {
+        return codPaisAlfa3;
+    }
+
+    public void setCodPaisAlfa3(String codPaisAlfa3) {
+        this.codPaisAlfa3 = codPaisAlfa3;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -110,7 +122,8 @@ public class PaisEntity {
                 .add("descripcion", descripcion)
                 .add("gentilicio", gentilicio)
                 .add("codPaisNum", codPaisNum)
-                .add("codPaisAlfa", codPaisAlfa)
+                .add("codPaisAlfa2", codPaisAlfa2)
+                .add("codPaisAlfa3", codPaisAlfa3)
                 .toString();
     }    
     
