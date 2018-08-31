@@ -221,7 +221,7 @@
 
 		function insertForm(fila) {
 			$("#usuario").val(fila.cells[0].innerHTML);
-			$("#idusuario").val(fila.cells[3].innerHTML);
+			$("#idusuario").val(fila.cells[1].innerHTML);
 
 			if ($.trim(fila.cells[2].innerHTML) == '<span>ACTIVO</span>') {
 				$("#estado").prop('selectedIndex', 1);
@@ -263,6 +263,8 @@
 			$("#formulario select").prop("disabled", false);
 			
 			$("#formulario #idusuario").prop("disabled", true);
+			
+			$("#estado").prop('selectedIndex', 1);
 			
 			$("#usuario").focus();
 			
