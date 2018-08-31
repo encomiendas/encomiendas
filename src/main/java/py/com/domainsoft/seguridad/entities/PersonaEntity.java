@@ -33,7 +33,7 @@ public class PersonaEntity {
             @Parameter(name = SequenceStyleGenerator.INCREMENT_PARAM,
             value = "1") })
     @GeneratedValue(generator = "personaSequenceGenerator")
-    @Column(name = "idpersona")
+    @Column(name = "id_persona")
     private Integer idPersona;
     
     private String nombres;

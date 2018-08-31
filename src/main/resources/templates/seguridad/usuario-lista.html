@@ -73,16 +73,6 @@
 									</div>
 
 									<div class="form-group has-feedback">
-										<label>Correo</label> 
-										<input 
-											type="text" 
-											class="form-control" 
-											id="correo"
-											th:field="*{correo}"
-											placeholder="Correo" disabled required>
-									</div>
-
-									<div class="form-group has-feedback">
 										<label>Estado</label> 
 										<select class="form-control" id="estado" disabled>
 											<option value="" selected disabled>Estado</option>
@@ -145,7 +135,6 @@
 													<thead>
 														<tr>
 															<th>Login</th>
-															<th>Correo</th>
 															<th>Estado</th>
 															<th>ID</th>
 														</tr>
@@ -153,7 +142,6 @@
 													<tbody>
 														<tr th:each="person : ${persons}" class="selected">
 															<td th:text="${person.login}"></td>
-															<td th:text="${person.correo}"></td>
 															<td th:switch="${person.activo}"><span th:case="true" th:text="ACTIVO"></span> <span
 																th:case="false" th:text="INACTIVO"></span></td>
 															<td th:text="${person.idUsuario}"></td>
@@ -233,7 +221,6 @@
 
 		function insertForm(fila) {
 			$("#usuario").val(fila.cells[0].innerHTML);
-			$("#correo").val(fila.cells[1].innerHTML);
 			$("#idusuario").val(fila.cells[3].innerHTML);
 
 			if ($.trim(fila.cells[2].innerHTML) == '<span>ACTIVO</span>') {
@@ -245,7 +232,6 @@
 
 		function habilitarCampos() {
 			$('#usuario').attr('disabled', false);
-			$('#correo').attr('disabled', false);
 			$('#estado').attr('disabled', false);
 			
 			$('#btnGrabar').attr('disabled', false);
