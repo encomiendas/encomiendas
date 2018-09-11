@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class UserDetailsDTOBuilder {
+    
+    private Integer idUsuario;
     private String username;
     private String password;
     private boolean enabled;
@@ -57,8 +59,14 @@ public class UserDetailsDTOBuilder {
         return this;
     }
     
+    public UserDetailsDTOBuilder idUsuario(Integer idUsuario){
+        this.idUsuario = idUsuario;
+        return this;
+    }
+    
     public UserDetailsDTO build() {
-        return new UserDetailsDTO(username,
+        return new UserDetailsDTO(idUsuario,
+                username,
                 password,
                 enabled,
                 grantedAuthorities,
