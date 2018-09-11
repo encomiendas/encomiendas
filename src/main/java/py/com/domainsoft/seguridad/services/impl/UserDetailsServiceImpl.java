@@ -52,6 +52,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         
         return UserDetailsDTO.builder()
+        .idUsuario(appUser.getId())
         .username(appUser.getLogin())
         .password(appUser.getPassword())
         .enabled(appUser.isActivo())

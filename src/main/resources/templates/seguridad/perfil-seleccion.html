@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Encomiendas | Perfiles</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="font-awesome-4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="ionicons-2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition login-page">
+	<!-- <c:url value="/j_spring_security_logout" var="logoutUrl" /> -->
+	<div class="login-box">
+		<!-- <div class="login-logo">
+			<a href="${pageContext.request.contextPath}/login"> <img src="img/logo.png" alt="Smiley face">
+			</a>
+		</div> -->
+		<div class="login-box-body">
+			<p class="login-box-msg">Por favor, seleccione su perfil</p>
+
+			<form name='f' th:object="${perfil}" method='POST'>
+				<div class="form-group has-feedback">
+					<select class="form-control" th:field="*{perfil.idPerfil}">
+						<option th:each="listValue : ${perfiles}" th:value="${listValue.perfil.idPerfil}"
+							th:utext="${listValue.perfil.descripcion}" />
+					</select> <br>
+					<button type="submit" value="button"
+						data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Cargando.."
+						class="btn btn-success btn-block btn-flat" autofocus>Adelante</button>
+				</div>
+			</form>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<a th:href="@{/logout}" class="btn btn-danger btn-block btn-flat">Salir</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/iCheck/icheck.min.js"></script>
+</html>

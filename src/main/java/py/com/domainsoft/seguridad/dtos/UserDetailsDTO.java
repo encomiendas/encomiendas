@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class UserDetailsDTO implements UserDetails {
 
+    private final Integer idUsuario;
     private final String password;
     private final  String username;
     private final boolean enabled;
@@ -23,7 +24,9 @@ public class UserDetailsDTO implements UserDetails {
     private final PersonaDTO persona;
     private final SucursalDTO sucursal;
 
-    UserDetailsDTO(String username,
+    UserDetailsDTO(
+            Integer idUsuario,
+            String username,
             String password,
             boolean enabled,
             List<GrantedAuthority> grantedAuthorities,
@@ -31,6 +34,7 @@ public class UserDetailsDTO implements UserDetails {
             LocalDate fechaExpiracion,
             PersonaDTO persona,
             SucursalDTO sucursal) {
+        this.idUsuario = idUsuario;
         this.password = password;
         this.username = username;
         this.enabled = enabled;
@@ -53,6 +57,10 @@ public class UserDetailsDTO implements UserDetails {
     @Override
     public String getPassword() {
         return password;
+    }
+    
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
     @Override
