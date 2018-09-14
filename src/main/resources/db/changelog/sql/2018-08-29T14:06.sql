@@ -2,6 +2,8 @@
 create table menu (
 	id_menu serial not null primary key,
 	tipo_menu varchar(1) not null,
+	descripcion varchar(250),
+	id_menu_anterior int4,
 	posicion int4,
 	id_perfil int4,
 	id_pagina int4,
@@ -12,5 +14,16 @@ create table menu (
       
     CONSTRAINT menu_pagina FOREIGN KEY (id_pagina)
       REFERENCES pagina (id_pagina) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+      
+    CONSTRAINT Fk_menu_menuanterior FOREIGN KEY (id_menu_anterior) 
+      REFERENCES menu (id_menu) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
-)
+);
+
+INSERT INTO menu(tipo_menu, posicion, id_perfil, id_pagina, descripcion, id_menu_anterior)
+    VALUES ('M', 1, 1, null, 'Procesos', null);
+    
+INSERT INTO menu(tipo_menu, posicion, id_perfil, id_pagina, descripcion, id_menu_anterior)
+    VALUES ('S', 1, 1, 1, 'Usuarios', 1);
+    

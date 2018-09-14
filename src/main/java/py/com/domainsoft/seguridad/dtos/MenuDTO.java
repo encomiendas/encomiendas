@@ -1,5 +1,7 @@
 package py.com.domainsoft.seguridad.dtos;
 
+import java.util.List;
+
 import com.google.common.base.MoreObjects;
 
 import py.com.domainsoft.seguridad.entities.PaginaEntity;
@@ -11,11 +13,33 @@ public class MenuDTO {
     
     private String tipoMenu;
     
+    private String descripcion;
+    
     private Integer posicion;
     
     private PerfilEntity perfil;
     
     private PaginaEntity pagina;
+    
+    private MenuDTO menuAnterior;
+    
+    private List<MenuDTO> listSubMenu;
+    
+    public List<MenuDTO> getListSubMenu() {
+        return listSubMenu;
+    }
+
+    public void setListSubMenu(List<MenuDTO> listSubMenu) {
+        this.listSubMenu = listSubMenu;
+    }
+
+    public MenuDTO getMenuAnterior() {
+        return menuAnterior;
+    }
+
+    public void setMenuAnterior(MenuDTO menuAnterior) {
+        this.menuAnterior = menuAnterior;
+    }
 
     public Integer getIdMenu() {
         return idMenu;
@@ -23,6 +47,14 @@ public class MenuDTO {
 
     public String getTipoMenu() {
         return tipoMenu;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Integer getPosicion() {
@@ -62,9 +94,12 @@ public class MenuDTO {
         return MoreObjects.toStringHelper(this)
                 .add("idMenu", idMenu)
                 .add("tipoMenu", tipoMenu)
+                .add("descripcion", descripcion)
                 .add("posicion", posicion)
                 .add("perfil", perfil)
                 .add("pagina", pagina)
+                .add("menuAnterior", menuAnterior)
+                .add("listSubMenu", listSubMenu)
                 .toString();
     }
     
