@@ -32,6 +32,8 @@ public class MenuEntity {
     @Column(name = "id_menu")
     private Integer idMenu;
     
+    private String descripcion;
+    
     private String tipoMenu;
     
     private Integer posicion;
@@ -43,6 +45,26 @@ public class MenuEntity {
     @ManyToOne(targetEntity = PaginaEntity.class)
     @JoinColumn(name = "id_pagina")
     private PaginaEntity pagina;
+    
+    @ManyToOne(targetEntity = MenuEntity.class)
+    @JoinColumn(name = "id_menu_anterior")
+    private MenuEntity menuAnterior;
+    
+    public MenuEntity getMenuAnterior() {
+        return menuAnterior;
+    }
+
+    public void setMenuAnterior(MenuEntity menuAnterior) {
+        this.menuAnterior = menuAnterior;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
     public Integer getIdMenu() {
         return idMenu;
@@ -109,6 +131,7 @@ public class MenuEntity {
                 .add("posicion", posicion)
                 .add("perfil", perfil)
                 .add("pagina", pagina)
+                .add("menuAnterior", menuAnterior)
                 .toString();
     }
     

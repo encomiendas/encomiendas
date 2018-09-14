@@ -35,13 +35,14 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="../../dist/img/160160.png" class="user-image" alt="User Image">
-              <span class="hidden-xs" th:if="${userInfo != null}" th:utext="${userInfo}" ></span>              
+              <span class="hidden-xs" th:if="${logindata != null}"  th:text="${logindata.username}"></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
                 <img src="../../dist/img/160160.png" class="img-circle" alt="User Image">
-                <p th:if="${userInfo != null}" th:utext="${userInfo}"></p>                
+                <p th:if="${logindata != null}" th:text="${logindata.persona.nombres}" ></p>
+                <p th:if="${logindata != null}" th:text="${logindata.persona.apellidos}"></p>
               </li>             
               <!-- Menu Footer-->
               <li class="user-footer">

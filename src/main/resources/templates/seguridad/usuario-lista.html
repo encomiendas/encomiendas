@@ -36,6 +36,11 @@
 					<div class="col-md-4">
 						<div class="box box-success">
 							<div class="register-box-body">
+							
+								<div th:if="${message != null}" th:text="${message}"
+						            style="color:red;margin:10px 0px;">
+						        </div>
+							
 								<form action="#" 
 								      method="post" 
 								      th:action="@{/usuario-lista}"
@@ -221,10 +226,11 @@
 
 		// se inserta los valores
 		function insertForm(fila) {
-			$("#usuario").val(fila.cells[0].innerHTML);
-			$("#idusuario").val(fila.cells[1].innerHTML);
 
-			if ($.trim(fila.cells[2].innerHTML) == '<span>ACTIVO</span>') {
+			$("#idusuario").val(fila.cells[2].innerHTML);
+			$("#usuario").val(fila.cells[0].innerHTML);
+
+			if ($.trim(fila.cells[1].innerHTML) == '<span>ACTIVO</span>') {
 				$("#estado").prop('selectedIndex', 1);
 			} else {
 				$("#estado").prop('selectedIndex', 2);

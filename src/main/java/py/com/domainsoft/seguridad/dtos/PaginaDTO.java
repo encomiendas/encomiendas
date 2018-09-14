@@ -7,7 +7,9 @@ public class PaginaDTO {
     private Integer idPagina;
 
     private String descripcion;
-
+    
+    private String url;
+    
     public Integer getIdPagina() {
         return idPagina;
     }
@@ -24,11 +26,20 @@ public class PaginaDTO {
         this.descripcion = descripcion;
     }
     
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("idPagina", idPagina)
                 .add("descripcion", descripcion)
+                .add("url", url)
                 .toString();
     }
     

@@ -28,7 +28,7 @@
 		<div class="login-box-body">
 			<p class="login-box-msg">Por favor, seleccione su perfil</p>
 
-			<form name='f' th:object="${perfil}" method='POST'>
+			<form name='f' th:action="@{/perfiles}" th:object="${perfil}" method='POST'>
 				<div class="form-group has-feedback">
 					<select class="form-control" th:field="*{perfil.idPerfil}">
 						<option th:each="listValue : ${perfiles}" th:value="${listValue.perfil.idPerfil}"

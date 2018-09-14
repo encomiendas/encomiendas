@@ -1,7 +1,9 @@
 package py.com.domainsoft.web.view;
 
+import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
@@ -15,23 +17,29 @@ import org.springframework.web.servlet.ModelAndView;
 
 import py.com.domainsoft.common.Constantes;
 import py.com.domainsoft.common.domain.Pager;
+import py.com.domainsoft.seguridad.dtos.MenuDTO;
+import py.com.domainsoft.seguridad.dtos.UserDetailsDTO;
 import py.com.domainsoft.seguridad.dtos.UsuarioDTO;
 import py.com.domainsoft.seguridad.services.UsuarioService;
 
 @Controller
 public class UsuarioViewController {
-
+    
+    private static final String USUARIO_LISTA = "/usuario-lista";
+    private static final String USUARIO_EXITOSO = "/usuario-exitoso";
+    
     private final UsuarioService usuarioService;
 
     public UsuarioViewController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/usuario-lista")
+    @GetMapping(USUARIO_LISTA)
     public ModelAndView usuarioLista(
             @RequestParam("pageSize") Optional<Integer> tamanhoPagina,
-            @RequestParam("page") Optional<Integer> numeroPagina) {
-
+            @RequestParam("page") Optional<Integer> numeroPagina,
+            HttpSession session) {
+        
         ModelAndView modelAndView = new ModelAndView("seguridad/usuario-lista");
 
         /**
@@ -49,17 +57,23 @@ public class UsuarioViewController {
 
         UsuarioDTO user = new UsuarioDTO();
 
+        modelAndView.addObject(Constantes.MENU_LIST, (List<MenuDTO>) 
+                session.getAttribute(Constantes.SESSION_MENU));
+        modelAndView.addObject(Constantes.SESSION_LOGIN_DATA, 
+                (UserDetailsDTO)session.getAttribute(Constantes.SESSION_LOGIN_DATA));
+        
         modelAndView.addObject("user", user);
         modelAndView.addObject("persons", persons);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", Constantes.PAGE_SIZES);
         modelAndView.addObject("pager", pager);
+        modelAndView.addObject("message", null);
 
         return modelAndView;
     }
 
-    @PostMapping(value = "/usuario-lista")
-    public ModelAndView createNewUser(@Valid UsuarioDTO user,
+    @PostMapping(USUARIO_LISTA)
+    public ModelAndView grabarUsuario(@Valid UsuarioDTO user,
             BindingResult bindingResult) {
 
         usuarioService.grabarUsuario(user);
@@ -67,7 +81,7 @@ public class UsuarioViewController {
         return new ModelAndView("redirect:/usuario-exitoso");
     }
 
-    @GetMapping(value = "/usuario-exitoso")
+    @GetMapping(USUARIO_EXITOSO)
     public ModelAndView usuarioExitoso() {
         ModelAndView modelAndView = new ModelAndView(
                 "seguridad/usuario-exitoso");
