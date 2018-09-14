@@ -73,7 +73,7 @@ public class UsuarioViewController {
     }
 
     @PostMapping(USUARIO_LISTA)
-    public ModelAndView createNewUseUSUARIO_LISTAr(@Valid UsuarioDTO user,
+    public ModelAndView grabarUsuario(@Valid UsuarioDTO user,
             BindingResult bindingResult) {
 
         usuarioService.grabarUsuario(user);
