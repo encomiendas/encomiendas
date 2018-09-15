@@ -51,7 +51,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // /userInfo page requires login as ROLE_USER or ROLE_ADMIN.
         // If no login, it will redirect to /login page.
         http.authorizeRequests().antMatchers("/home").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
-        http.authorizeRequests().antMatchers("/usuario-lista").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
  
         // For ADMIN only.
         http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
@@ -77,9 +76,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.authorizeRequests().and() //
 //                .rememberMe().tokenRepository(this.persistentTokenRepository()) //
 //                .tokenValiditySeconds(1 * 24 * 60 * 60); // 24h
-        
-        http.sessionManagement().maximumSessions(1).and().invalidSessionUrl("/login");
-        
     }
  
     @Bean

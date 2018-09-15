@@ -30,14 +30,14 @@ public class PaginaMapper implements BaseMapper<PaginaEntity, PaginaDTO> {
     }
 
     @Override
-    public PaginaDTO entityToDto(PaginaEntity entity) {
-        PaginaDTO dto = modelMapper.map(entity, PaginaDTO.class);
+    public PaginaDTO entityToDto(PaginaEntity pagina) {
+        PaginaDTO dto = modelMapper.map(pagina, PaginaDTO.class);
         return dto;
     }
 
     @Override
-    public PaginaEntity dtoToEntity(PaginaDTO dto) {
-        return modelMapper.map(dto, PaginaEntity.class);
+    public PaginaEntity dtoToEntity(PaginaDTO pagina) {
+        return modelMapper.map(pagina, PaginaEntity.class);
     }
 
 }
