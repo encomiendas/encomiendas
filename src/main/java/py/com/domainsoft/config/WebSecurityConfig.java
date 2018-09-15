@@ -71,6 +71,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 // Config for Logout Page
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login");
+        
+
+        http.sessionManagement().maximumSessions(1).and().invalidSessionUrl("/login");
  
 //        // Config Remember Me.
 //        http.authorizeRequests().and() //
