@@ -34,7 +34,7 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="../../dist/img/160160.png" class="user-image" alt="User Image">
+              
               <span class="hidden-xs" th:if="${logindata != null}"  th:text="${logindata.username}"></span>
             </a>
             <ul class="dropdown-menu">
@@ -47,14 +47,23 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a th:href="@{/perfil-usuario}" class="btn btn-default btn-flat">Mi perfil</a>
+                  <a th:href="@{/perfil-usuario}" class="btn btn-default btn-flat">Mis datos</a>
                 </div>
                 <div class="pull-right">
-                  <a  class="btn btn-default btn-flat" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
+                  <a  class="btn btn-default btn-flat" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Salir</a>
                 </div>
               </li>
             </ul>
-          </li>          
+          </li>
+          
+           <!-- Exit -->
+          <li class="dropdown notifications-menu">
+            <a th:href="@{/logout}" 
+               class="dropdown-toggle">
+              <i class="fa fa-sign-out"></i>              
+            </a>            
+          </li>
+          
         </ul>
       </div>
     </nav>
