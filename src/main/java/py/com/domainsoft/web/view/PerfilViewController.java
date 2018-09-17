@@ -1,105 +1,93 @@
 package py.com.domainsoft.web.view;
 
-import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import py.com.domainsoft.common.Constantes;
+import py.com.domainsoft.common.domain.Pager;
 import py.com.domainsoft.seguridad.dtos.MenuDTO;
-import py.com.domainsoft.seguridad.dtos.PerfilUsuarioDTO;
-import py.com.domainsoft.seguridad.services.MenuService;
-import py.com.domainsoft.seguridad.services.PerfilUsuarioService;
+import py.com.domainsoft.seguridad.dtos.PerfilDTO;
+import py.com.domainsoft.seguridad.dtos.UserDetailsDTO;
+import py.com.domainsoft.seguridad.services.PerfilService;
 import py.com.domainsoft.web.base.BaseViewController;
 
 @Controller
 public class PerfilViewController extends BaseViewController {
 
-    private final PerfilUsuarioService perfilUsuarioService;
+    private static final String PERFIL_LISTA = "/perfil-lista";
+    private static final String PERFIL_EXITOSO = "/perfil-exitoso";
     
-    private final MenuService menuService;
-    
-    private static final String PERFILES = "/perfiles";
+    private final PerfilService perfilService;
 
-    public PerfilViewController(
-            PerfilUsuarioService perfilUsuarioService,
-            MenuService menuService) {
-        this.perfilUsuarioService = perfilUsuarioService;
-        this.menuService = menuService;
+    public PerfilViewController(PerfilService perfilService) {
+        this.perfilService = perfilService;
     }
 
-    /***
-     * GET
-     * @param model
-     * @param principal
-     * @return
-     */
-    @GetMapping(PERFILES)
-    public ModelAndView home(        
-            Model model, 
-            Principal principal) {
-        
-        ModelAndView modelAndView = new ModelAndView(
-                Constantes.PERFIL_SELECCION_VIEW);
-        
-        /** 
-         * Inicializa el Objeto DTO del tag "
-         * th:object="${perfil}, Objeto que se manejará 
-         * en el POST
-         * */
-        modelAndView.addObject(Constantes.PERFIL_OBJECT, 
-                new PerfilUsuarioDTO());
-        
-        /** 
-         * Esto muestra la lista de perfiles en tag select
-         * */
-        modelAndView.addObject(Constantes.PERFILES_X_USUARIO,
-                perfilUsuarioService.perfilesByUsuario(principal));
-
-        return modelAndView;
-    }
-
-    /**
-     * POST
-     * @param model
-     * @param perfilUsuario
-     * @param principal
-     * @param session
-     * @return modelAndView
-     */
-    @PostMapping(PERFILES)
-    public ModelAndView setPerfiles(
-            Model model,
-            @ModelAttribute("perfil_usuario") PerfilUsuarioDTO perfilUsuario,
-            Principal principal,
+    @GetMapping(PERFIL_LISTA)
+    public ModelAndView perfilLista(
+            @RequestParam("pageSize") Optional<Integer> tamanhoPagina,
+            @RequestParam("page") Optional<Integer> numeroPagina,
             HttpSession session) {
+        
+        ModelAndView modelAndView = new ModelAndView("seguridad/perfil-lista");
 
-        ModelAndView modelAndView = new ModelAndView(
-                new RedirectView(Constantes.HOME_VIEW));
-        
-        List<MenuDTO> listaMenu = menuService.getMenuByPerfil(
-                perfilUsuario.getPerfil().getIdPerfil());
-        
         /**
-         * Cuando se inicia session, se ingresa a un perfil, se
-         * guardan en la memoria de session del usuario su menu y
-         * el UserDTO
+         * Evalua si es null, y muestra por defecto
          */
-        session.setAttribute(Constantes.SESSION_MENU, listaMenu);
-        session.setAttribute(Constantes.SESSION_LOGIN_DATA, 
-                getUsuarioDTO(principal));
+        int evalPageSize = tamanhoPagina.orElse(Constantes.INITIAL_PAGE_SIZE);
+        int evalPage = (numeroPagina.orElse(0) < 1) ? Constantes.INITIAL_PAGE
+                : numeroPagina.get() - 1;
+
+        Page<PerfilDTO> paginas = perfilService
+                .findAllPageable(PageRequest.of(evalPage, evalPageSize));
+
+        Pager pager = new Pager(paginas.getTotalPages(), paginas.getNumber(),
+                Constantes.BUTTONS_TO_SHOW);
+
+        PerfilDTO perfil = new PerfilDTO();
+
+        modelAndView.addObject(Constantes.MENU_LIST, (List<MenuDTO>) 
+                session.getAttribute(Constantes.SESSION_MENU));
+        modelAndView.addObject(Constantes.SESSION_LOGIN_DATA, 
+                (UserDetailsDTO)session.getAttribute(Constantes.SESSION_LOGIN_DATA));
         
-        modelAndView.addObject(Constantes.MENU_LIST, listaMenu);
+        modelAndView.addObject("perfil", perfil);
+        modelAndView.addObject("persons", paginas);
+        modelAndView.addObject("selectedPageSize", evalPageSize);
+        modelAndView.addObject("pageSizes", Constantes.PAGE_SIZES);
+        modelAndView.addObject("pager", pager);
+        modelAndView.addObject("message", null);
 
         return modelAndView;
     }
 
+    @PostMapping(PERFIL_LISTA)
+    public ModelAndView grabarPerfil(@Valid PerfilDTO perfil,
+            BindingResult bindingResult) {
+
+        perfilService.grabarPerfil(perfil);
+
+        return new ModelAndView("redirect:/perfil-exitoso");
+    }
+
+    @GetMapping(PERFIL_EXITOSO)
+    public ModelAndView perfilExitoso() {
+        ModelAndView modelAndView = new ModelAndView(
+                "seguridad/perfil-exitoso");
+
+        return modelAndView;
+    }
+    
 }

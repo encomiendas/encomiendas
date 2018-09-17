@@ -36,6 +36,7 @@
 		<!-- /.login-logo -->
 		<div class="login-box-body">
 			<p class="login-box-msg">Inicia sesión para comenzar</p>
+			<p class="login-box-msg">Modo: Desarrollo (para produccion, deshabilitar el usuario y contraseña por defecto)</p>
 
 			<!-- /login?error=true -->
 			<div th:if="${#request.getParameter('error') == 'true'}" style="color: red; margin: 10px 0px;">
@@ -43,17 +44,25 @@
 					th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
 					th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"> Static
 					summary </span>
-
 			</div>
 
 			<form name='loginform' th:action="@{/j_spring_security_check}" method='POST'>
 				<div class="form-group has-feedback">
-					<input type="text" name='username' class="form-control" placeholder="usuario" autofocus> <span
-						class="glyphicon glyphicon-envelope form-control-feedback"></span>
+					<input type="text" 
+						   name='username' 
+						   value="admin" 
+						   class="form-control" 
+						   placeholder="usuario" 
+						   autofocus> 
+						   <span class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" name='password' class="form-control" placeholder="clave"> <span
-						class="glyphicon glyphicon-lock form-control-feedback"></span>
+					<input type="password" 
+					       name='password' 
+					       value="admin" 
+					       class="form-control" 
+					       placeholder="clave"> 
+					       <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="row">
 					<div class="col-xs-8">
@@ -69,7 +78,7 @@
 				</div>
 			</form>
 
-			<a href="#">Olvidé mi contraseña</a><br>
+			<!-- <a href="#">Olvidé mi contraseña</a><br> -->
 
 		</div>
 		<!-- /.login-box-body -->
