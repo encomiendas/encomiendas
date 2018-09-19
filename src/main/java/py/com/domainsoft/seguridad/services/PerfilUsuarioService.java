@@ -9,4 +9,8 @@ public interface PerfilUsuarioService {
 
     List<PerfilUsuarioDTO> perfilesByUsuario(Principal principal);
     
+    List<PerfilUsuarioDTO> perfilesByUsuario(Integer idusuario);
+
+    void grabarPerfilesPorUsuario(Integer idusuario, Integer[] perfiles);
+    
 }

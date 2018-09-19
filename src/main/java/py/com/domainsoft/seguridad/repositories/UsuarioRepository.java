@@ -8,6 +8,6 @@ import py.com.domainsoft.seguridad.entities.UsuarioEntity;
  * @author mcespedes
  */
 public interface UsuarioRepository
-        extends PagingAndSortingRepository<UsuarioEntity, Long>  {
+        extends PagingAndSortingRepository<UsuarioEntity, Integer>  {
     UsuarioEntity findByLogin(String login);
 }

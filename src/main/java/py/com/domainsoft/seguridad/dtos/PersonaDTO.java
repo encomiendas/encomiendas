@@ -180,6 +180,10 @@ public class PersonaDTO {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+    
+    public String getFullName() {
+        return this.nombres + " " + (this.apellidos == null ? "" : this.apellidos);
+    }
 
     @Override
     public String toString() {

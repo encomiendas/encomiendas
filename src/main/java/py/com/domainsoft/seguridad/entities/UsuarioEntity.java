@@ -46,10 +46,10 @@ public class UsuarioEntity {
     private String password;
 
     @Column(name = "activo")
-    private boolean activo;
+    private Boolean activo;
     
     @Column(name = "expira")
-    private boolean expira;
+    private Boolean expira;
     
     @Column(name = "fecha_expiracion")
     private LocalDate fechaExpiracion;
@@ -85,14 +85,7 @@ public class UsuarioEntity {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
+    
     
     public PersonaEntity getPersona() {
         return persona;
@@ -110,20 +103,28 @@ public class UsuarioEntity {
         this.sucursal = sucursal;
     }
     
-    public boolean isExpira() {
-        return expira;
-    }
-
     public LocalDate getFechaExpiracion() {
         return fechaExpiracion;
     }
 
-    public void setExpira(boolean expira) {
-        this.expira = expira;
-    }
-
     public void setFechaExpiracion(LocalDate fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
+    }
+    
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public Boolean getExpira() {
+        return expira;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
+    public void setExpira(Boolean expira) {
+        this.expira = expira;
     }
 
     @Override

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- STYLES IMPORTS -->
+<th:block th:replace="fragments/head :: head"></th:block>
+
+<body class="hold-transition skin-green sidebar-mini ">
+
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<th:block th:replace="fragments/header :: header"></th:block>
+		<!-- ASIDE MENU -->
+		<th:block th:replace="fragments/aside :: aside"></th:block>
+
+		<!-- =============================================== -->
+
+		<!-- CONTENIDO PRINCIPAL DE LA PAGINA -->
+		<div class="content-wrapper">
+
+			<section class="content-header">
+				<h1>
+					Perfiles por usuario
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">Pagina</li>
+				</ol>
+			</section>
+			
+			<div id="feedback"></div>
+			
+			<!-- Main content -->
+			<section class="content">
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="box box-success">
+							<div class="register-box-body">
+							
+						     <form 
+								      
+									  id="formulario"								
+									  class="form-horizontal" 
+									  role="form">
+									  
+									<div class="form-group has-feedback">
+										<label>Usuario</label>
+										
+										<select class="form-control select2"											
+											    data-placeholder="usuarios" 
+											    style="width: 100%;"
+												id="selectUser" 
+												th:disabled="disabled"> 
+											
+											<option value='0'>Seleccione el usuario</option>
+											
+											<th:block th:each="listValue : ${listusuariosAll}">
+												<option th:class="${listValue.idUsuario}" 
+												        th:value="${listValue.idUsuario}">
+													<th:block th:text="${listValue.login}"></th:block>
+												</option>
+											</th:block>
+										</select>
+										
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Perfiles</label>
+										
+										<select class="form-control select2" multiple="multiple"
+											data-placeholder="Perfiles" style="width: 100%;"
+											id="selectPerfil" th:disabled="disabled"> 
+											<option value='0' th:disabled="disabled">Perfiles</option>
+											<th:block th:each="listValue : ${listperfilesAll}">
+												<option th:class="${listValue.idPerfil}" 
+												        th:value="${listValue.idPerfil}">
+													<th:block th:text="${listValue.descripcion}"></th:block>
+												</option>
+											</th:block>
+										</select>
+										
+									</div>
+									
+									<div class="row">
+										<div class="col-xs-4">
+											<button type="button" class="btn btn-success btn-block btn-flat" id="btnNuevo" onclick="nuevo()">Nuevo</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="button" class="btn btn-success btn-block btn-flat" id="btnGrabar" disabled>Grabar</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="button" class="btn btn-success btn-block btn-flat" id="btnCancelar" onclick="cancelar(this.form)">Cancelar</button>
+										</div>
+									</div>
+									
+								</form> 
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</section>
+		</div>
+
+		<!-- ======================================================== -->
+		<!-- FOOTER -->
+		<th:block th:replace="fragments/footer :: footer"></th:block>
+		<!-- ======================================================== -->
+
+	</div>
+
+	<!-- SCRIPTS -->
+	<th:block th:replace="fragments/scripts :: scripts"></th:block>
+	<script src="../../js/seguridad/perfil-usuario-lista.js"></script>
+	<script src="../../plugins/select2/select2.full.min.js"></script>
+	<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+	
+</body>
+</html>

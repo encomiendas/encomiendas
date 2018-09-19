@@ -1,50 +1,56 @@
 package py.com.domainsoft.seguridad.dtos;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import com.google.common.base.MoreObjects;
 
 import py.com.domainsoft.entidad.dtos.SucursalDTO;
 
-public class UsuarioDTO {
+public class UsuarioDTO implements Serializable{
 
     private Integer idUsuario;
 
     @NotNull
     private String login;
 
-    @NotNull
     private String password;
 
-    private boolean activo;
+    private Boolean activo;
     
     private PersonaDTO persona;
     
     private SucursalDTO sucursal;
+    
+    private Boolean expira;
 
     public UsuarioDTO() {}
 
     private UsuarioDTO(Integer idUsuario, 
             String login,
             String password,
-            boolean activo,
+            Boolean activo,
             PersonaDTO persona,
-            SucursalDTO sucursal) {
+            SucursalDTO sucursal,
+            Boolean expira) {
         this.idUsuario = idUsuario;
         this.login = login;
         this.password = password;
         this.activo = activo;
         this.persona = persona;
         this.sucursal = sucursal;
+        this.expira = expira;
     }
 
     public static class Builder {
         private Integer idUsuario;
         private String login;
         private String password;
-        private boolean activo;
+        private Boolean activo;
         private PersonaDTO persona;
         private SucursalDTO sucursal;
+        private Boolean expira;
 
         public Builder idUsuario(Integer idUsuario) {
             this.idUsuario = idUsuario;
@@ -75,9 +81,20 @@ public class UsuarioDTO {
             this.sucursal = sucursal;
             return this;
         }
+        
+        public Builder expira(Boolean expira){
+            this.expira = expira;
+            return this;
+        }
 
         public UsuarioDTO build() {
-            return new UsuarioDTO(idUsuario, login, password, activo, persona, sucursal);
+            return new UsuarioDTO(idUsuario, 
+                    login, 
+                    password, 
+                    activo, 
+                    persona, 
+                    sucursal, 
+                    expira);
         }
     }
     
@@ -109,14 +126,14 @@ public class UsuarioDTO {
         this.password = password;
     }
 
-    public boolean isActivo() {
+    public Boolean getActivo() {
         return activo;
     }
 
-    public void setActivo(boolean activo) {
+    public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-    
+
     public PersonaDTO getPersona() {
         return persona;
     }
@@ -132,6 +149,14 @@ public class UsuarioDTO {
     public void setSucursal(SucursalDTO sucursal) {
         this.sucursal = sucursal;
     }
+    
+    public Boolean getExpira() {
+        return expira;
+    }
+
+    public void setExpira(Boolean expira) {
+        this.expira = expira;
+    }
 
     @Override
     public String toString() {
@@ -142,6 +167,7 @@ public class UsuarioDTO {
                 .add("activo", activo)
                 .add("persona", persona)
                 .add("sucursal", sucursal)
+                .add("expira", expira)
                 .toString();
     }
     

@@ -55,9 +55,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         .idUsuario(appUser.getId())
         .username(appUser.getLogin())
         .password(appUser.getPassword())
-        .enabled(appUser.isActivo())
+        .enabled(appUser.getActivo())
         .grantedAuthorities(this.getGrantedAuthorities(grantList))
-        .expira(appUser.isExpira())
+        .expira(appUser.getExpira())
         .fechaExpiracion(appUser.getFechaExpiracion())
         .persona(personaMapper.entityToDto(appUser.getPersona()))
         .build();

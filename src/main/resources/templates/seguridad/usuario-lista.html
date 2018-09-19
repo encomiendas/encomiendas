@@ -5,6 +5,11 @@
 <!-- STYLES IMPORTS -->
 <th:block th:replace="fragments/head :: head"></th:block>
 
+  <style>
+  	#tablaProgramas td:nth-child(n+6){
+	display: none;}
+  </style>
+
 <body class="hold-transition skin-green sidebar-mini ">
 
 	<div class="wrapper">
@@ -42,13 +47,13 @@
 						        </div>
 							
 								<form action="#" 
-								      method="post" 
+								      method="POST" 
 								      th:action="@{/usuario-lista}"
-									  id="formulario"								
-									  th:object="${user}" 
-									  class="form-horizontal" 
+									  id="formulario"
+									  th:object="${usuario}"
+									  class="form-horizontal"
 									  role="form">
-
+									  
 									<div style="color: red" class="requerido">
 										<label id="label"></label>
 									</div>
@@ -79,11 +84,52 @@
 
 									<div class="form-group has-feedback">
 										<label>Estado</label> 
-										<select class="form-control" id="estado" disabled>
+										<select class="form-control" 
+										        id="estado"
+										        th:field="*{activo}"
+										        disabled>
 											<option value="" selected disabled>Estado</option>
 											<option value="true">Activo</option>
 											<option value="false">Inactivo</option>
 										</select>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Persona</label>
+																			
+										<select 
+												class="form-control select2"
+											    style="width: 100%;"
+												id="selectPersona" 
+												th:disabled="disabled"
+												th:object="${usuario}"  
+												th:field="${usuario.persona.idPersona}" >
+											<option th:each="dropDownItem : ${listpersonasAll}"
+											    th:value="${dropDownItem.getIdPersona()}"
+											    th:text="${dropDownItem.getFullName()}" />
+										
+										</select> 
+										
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Sucursal</label>
+										
+										<select class="form-control select2"
+											    style="width: 100%;"
+											    th:disabled="disabled"
+												id="selectSucursal" 
+												th:object="${usuario}"  
+												th:field="${usuario.sucursal.idSucursal}">
+											
+											<th:block th:each="listValue : ${listsucursalesAll}">
+												<option th:class="${listValue.idSucursal}" 
+												        th:value="${listValue.idSucursal}">
+													<th:block th:text="${listValue.descripcion}"></th:block>
+												</option>
+											</th:block>
+										</select>
+										
 									</div>
 
 									<div class="row">
@@ -139,7 +185,9 @@
 												<table id="tablaProgramas" class="table table-bordered table-hover ">
 													<thead>
 														<tr>
-															<th>Login</th>
+														    <th>Login</th>
+														    <th>Persona</th>
+															<th>Sucursal</th>
 															<th>Estado</th>
 															<th>ID</th>
 														</tr>
@@ -147,9 +195,13 @@
 													<tbody>
 														<tr th:each="person : ${persons}" class="selected">
 															<td th:text="${person.login}"></td>
+															<td th:text="${person.persona.fullName}"></td>
+															<td th:text="${person.sucursal.descripcion}"></td>
 															<td th:switch="${person.activo}"><span th:case="true" th:text="ACTIVO"></span> <span
 																th:case="false" th:text="INACTIVO"></span></td>
 															<td th:text="${person.idUsuario}"></td>
+															<td th:text="${person.persona.idPersona}"></td>
+															<td th:text="${person.sucursal.idSucursal}"></td>
 														</tr>
 
 													</tbody>
@@ -216,6 +268,9 @@
 
 	<script>
 		$(document).ready(function() {
+			
+			//$('#tablaProgramas tr > *:nth-child(6)').hide();
+			
 			$('#tablaProgramas tr').click(function(e) {
 				insertForm(this);
 				habilitarCampos();
@@ -227,19 +282,25 @@
 		// se inserta los valores
 		function insertForm(fila) {
 
-			$("#idusuario").val(fila.cells[2].innerHTML);
+			$("#idusuario").val(fila.cells[4].innerHTML);
 			$("#usuario").val(fila.cells[0].innerHTML);
 
-			if ($.trim(fila.cells[1].innerHTML) == '<span>ACTIVO</span>') {
+			if ($.trim(fila.cells[3].innerHTML) == '<span>ACTIVO</span>') {
 				$("#estado").prop('selectedIndex', 1);
 			} else {
 				$("#estado").prop('selectedIndex', 2);
 			}
+			
+			$('#selectPersona').val(fila.cells[5].innerHTML).trigger('change.select2');
+			$('#selectSucursal').val(fila.cells[6].innerHTML).trigger('change.select2');
+			
 		}
 
 		function habilitarCampos() {
 			$('#usuario').attr('disabled', false);
 			$('#estado').attr('disabled', false);
+			$('#selectPersona').attr('disabled', false);
+			$('#selectSucursal').attr('disabled', false);
 			
 			$('#btnGrabar').attr('disabled', false);
 			$('#btnNuevo').attr('disabled', true);
