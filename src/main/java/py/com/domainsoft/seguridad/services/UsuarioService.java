@@ -17,4 +17,6 @@ public interface UsuarioService {
     
     List<UsuarioDTO> findAll();
     
+    void actualizarUsuario(UsuarioDTO usuario);
+    
 }
