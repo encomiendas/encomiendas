@@ -23,6 +23,7 @@ public class Constantes {
     public static final String HOME_VIEW = "home";
     public static final String PERFIL_SELECCION_VIEW = "seguridad/perfil-seleccion";
     public static final String USUARIO_EXITOSO_VIEW = "seguridad/usuario-exitoso";
+    public static final String PERFIL_USUARIO_LISTA_VIEW = "seguridad/perfil-usuario-lista";
     
     /**URL*/
     public static final String USUARIO_EXITOSO_URL = "/usuario-exitoso";

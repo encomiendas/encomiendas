@@ -1,6 +1,9 @@
 package py.com.domainsoft.common;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -27,6 +30,11 @@ public class WebUtils {
             sb.append(")");
         }
         return sb.toString();
+    }
+    
+    public static <T> List<T> toList(final Iterable<T> iterable) {
+        return StreamSupport.stream(iterable.spliterator(), false)
+                            .collect(Collectors.toList());
     }
      
 }

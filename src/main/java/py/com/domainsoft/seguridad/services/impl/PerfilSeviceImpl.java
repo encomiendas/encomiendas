@@ -1,9 +1,12 @@
 package py.com.domainsoft.seguridad.services.impl;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import py.com.domainsoft.common.WebUtils;
 import py.com.domainsoft.seguridad.dtos.PerfilDTO;
 import py.com.domainsoft.seguridad.entities.PerfilEntity;
 import py.com.domainsoft.seguridad.mapper.PerfilMapper;
@@ -32,6 +35,11 @@ public class PerfilSeviceImpl implements PerfilService {
     public Page<PerfilDTO> findAllPageable(Pageable pageable) {
         Page<PerfilEntity> pageResponse = perfilRepo.findAll(pageable);
         return pageResponse.map(perfilMapper::entityToDto);
+    }
+
+    @Override
+    public List<PerfilDTO> findAll() {
+        return perfilMapper.entityListToDtoList(WebUtils.toList(perfilRepo.findAll()));
     }
 
 }

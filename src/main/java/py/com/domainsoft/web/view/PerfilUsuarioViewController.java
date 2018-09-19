@@ -16,8 +16,11 @@ import org.springframework.web.servlet.view.RedirectView;
 import py.com.domainsoft.common.Constantes;
 import py.com.domainsoft.seguridad.dtos.MenuDTO;
 import py.com.domainsoft.seguridad.dtos.PerfilUsuarioDTO;
+import py.com.domainsoft.seguridad.dtos.UserDetailsDTO;
 import py.com.domainsoft.seguridad.services.MenuService;
+import py.com.domainsoft.seguridad.services.PerfilService;
 import py.com.domainsoft.seguridad.services.PerfilUsuarioService;
+import py.com.domainsoft.seguridad.services.UsuarioService;
 import py.com.domainsoft.web.base.BaseViewController;
 
 @Controller
@@ -27,13 +30,51 @@ public class PerfilUsuarioViewController extends BaseViewController {
     
     private final MenuService menuService;
     
+    private final PerfilService perfilService;
+    
+    private final UsuarioService usuarioService;
+    
     private static final String PERFILES = "/perfiles-usuario";
+    
+    private static final String PERFILES_LISTA = "/perfil-usuario-lista";
 
     public PerfilUsuarioViewController(
             PerfilUsuarioService perfilUsuarioService,
-            MenuService menuService) {
+            MenuService menuService,
+            PerfilService perfilService,
+            UsuarioService usuarioService) {
         this.perfilUsuarioService = perfilUsuarioService;
         this.menuService = menuService;
+        this.perfilService = perfilService;
+        this.usuarioService = usuarioService;
+    }
+    
+    /***
+     * GET
+     * @param model
+     * @param principal
+     * @return
+     */
+    @GetMapping(PERFILES_LISTA)
+    public ModelAndView perfilUsuarioLista(        
+            Model model, 
+            Principal principal,
+            HttpSession session) {
+        
+        ModelAndView modelAndView = new ModelAndView(
+                Constantes.PERFIL_USUARIO_LISTA_VIEW);
+        
+       modelAndView.addObject(Constantes.MENU_LIST, (List<MenuDTO>) 
+                session.getAttribute(Constantes.SESSION_MENU));
+        
+        modelAndView.addObject(Constantes.SESSION_LOGIN_DATA, 
+                (UserDetailsDTO)session.getAttribute(Constantes.SESSION_LOGIN_DATA));
+        
+        modelAndView.addObject("listperfilesAll", perfilService.findAll());
+        modelAndView.addObject("listusuariosAll", usuarioService.findAll());
+        
+
+        return modelAndView;
     }
 
     /***
@@ -101,5 +142,5 @@ public class PerfilUsuarioViewController extends BaseViewController {
 
         return modelAndView;
     }
-
+    
 }
