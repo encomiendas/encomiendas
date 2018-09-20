@@ -4,9 +4,6 @@ import java.util.List;
 
 import com.google.common.base.MoreObjects;
 
-import py.com.domainsoft.seguridad.entities.PaginaEntity;
-import py.com.domainsoft.seguridad.entities.PerfilEntity;
-
 public class MenuDTO {
 
     private Integer idMenu;
@@ -17,14 +14,24 @@ public class MenuDTO {
     
     private Integer posicion;
     
-    private PerfilEntity perfil;
+    private PerfilDTO perfil;
     
-    private PaginaEntity pagina;
+    private PaginaDTO pagina;
     
     private MenuDTO menuAnterior;
     
     private List<MenuDTO> listSubMenu;
     
+    private Boolean estado;
+    
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
     public List<MenuDTO> getListSubMenu() {
         return listSubMenu;
     }
@@ -61,11 +68,11 @@ public class MenuDTO {
         return posicion;
     }
 
-    public PerfilEntity getPerfil() {
+    public PerfilDTO getPerfil() {
         return perfil;
     }
 
-    public PaginaEntity getPagina() {
+    public PaginaDTO getPagina() {
         return pagina;
     }
 
@@ -81,11 +88,11 @@ public class MenuDTO {
         this.posicion = posicion;
     }
 
-    public void setPerfil(PerfilEntity perfil) {
+    public void setPerfil(PerfilDTO perfil) {
         this.perfil = perfil;
     }
 
-    public void setPagina(PaginaEntity pagina) {
+    public void setPagina(PaginaDTO pagina) {
         this.pagina = pagina;
     }
     
@@ -100,6 +107,7 @@ public class MenuDTO {
                 .add("pagina", pagina)
                 .add("menuAnterior", menuAnterior)
                 .add("listSubMenu", listSubMenu)
+                .add("estado", estado)
                 .toString();
     }
     

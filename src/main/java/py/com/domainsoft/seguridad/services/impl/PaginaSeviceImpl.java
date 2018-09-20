@@ -1,9 +1,12 @@
 package py.com.domainsoft.seguridad.services.impl;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import py.com.domainsoft.common.WebUtils;
 import py.com.domainsoft.seguridad.dtos.PaginaDTO;
 import py.com.domainsoft.seguridad.entities.PaginaEntity;
 import py.com.domainsoft.seguridad.mapper.PaginaMapper;
@@ -32,6 +35,11 @@ public class PaginaSeviceImpl implements PaginaService {
     public Page<PaginaDTO> findAllPageable(Pageable pageable) {
         Page<PaginaEntity> pageResponse = paginaRepo.findAll(pageable);
         return pageResponse.map(paginaMapper::entityToDto);
+    }
+
+    @Override
+    public List<PaginaDTO> findAll() {
+        return paginaMapper.entityListToDtoList(WebUtils.toList(paginaRepo.findAll()));
     }
 
 }

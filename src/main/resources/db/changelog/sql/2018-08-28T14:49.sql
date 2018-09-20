@@ -9,4 +9,4 @@ create table sucursal (
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-insert into sucursal (descripcion, id_empresa, estado) values ('ADMINISTRADOR', 1, true);
+insert into sucursal (descripcion, id_empresa, estado) values ('MATRIZ', 1, true);

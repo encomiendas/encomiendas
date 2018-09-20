@@ -2,11 +2,11 @@ package py.com.domainsoft.seguridad.repositories;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import py.com.domainsoft.seguridad.entities.MenuEntity;
 
-public interface MenuRepository extends JpaRepository<MenuEntity, Integer> {
+public interface MenuRepository extends PagingAndSortingRepository<MenuEntity, Integer> {
 
     List<MenuEntity> findByPerfilIdPerfilAndTipoMenu(Integer idPerfil, String tipoMenu);
     

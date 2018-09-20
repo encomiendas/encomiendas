@@ -50,6 +50,16 @@ public class MenuEntity {
     @JoinColumn(name = "id_menu_anterior")
     private MenuEntity menuAnterior;
     
+    private Boolean estado;
+    
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
     public MenuEntity getMenuAnterior() {
         return menuAnterior;
     }
