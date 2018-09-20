@@ -6,3 +6,7 @@ create table pagina (
 );
 
 insert into pagina (descripcion, url) values ('Mant. Usuario', 'usuario-lista');
+insert into pagina (descripcion, url) values ('Mant. Menu', 'menu-lista');
+insert into pagina (descripcion, url) values ('Mant. Perfil', 'perfil-lista');
+insert into pagina (descripcion, url) values ('Mant. Perfil Usuario', 'perfil-usuario-lista');
+insert into pagina (descripcion, url) values ('Mant. Pagina', 'pagina-lista');

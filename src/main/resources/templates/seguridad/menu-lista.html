@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- STYLES IMPORTS -->
+<th:block th:replace="fragments/head :: head"></th:block>
+
+<!-- //TODO:Oculta dos columnas de la tabla --> 
+<style>
+  	#tablaMenu td:nth-child(n+6){
+	display: none;}
+</style>
+
+<body class="hold-transition skin-green sidebar-mini ">
+
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<th:block th:replace="fragments/header :: header"></th:block>
+		<!-- ASIDE MENU -->
+		<th:block th:replace="fragments/aside :: aside"></th:block>
+
+		<!-- =============================================== -->
+
+		<!-- CONTENIDO PRINCIPAL DE LA PAGINA -->
+		<div class="content-wrapper">
+
+			<section class="content-header">
+				<h1>
+					Menus <small>lista de menus</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">Menu</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="box box-success">
+							<div class="register-box-body">
+							
+								<div th:if="${message != null}" th:text="${message}"
+						            style="color:red;margin:10px 0px;">
+						        </div>
+							
+								<form action="#" 
+								      method="POST" 
+								      th:action="@{/menu-lista}"
+									  id="formulario"
+									  th:object="${menu}"
+									  class="form-horizontal"
+									  role="form">
+									  
+									<div style="color: red" class="requerido">
+										<label id="label"></label>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Identificador</label> 
+										<input 
+											type="text" 
+											value="" 
+											class="form-control"
+											id="idmenu" 
+											placeholder="Identificador"
+											readonly
+											th:field="*{idMenu}"
+											>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Perfil</label>
+
+										<select 
+												class="form-control select2"
+											    style="width: 100%;"
+												id="selectPerfil"
+												th:disabled="disabled"
+												th:object="${perfil}"  
+												th:field="${menu.perfil.idPerfil}" >
+											<option th:each="dropDownItem : ${perfiles}"
+											    th:value="${dropDownItem.getIdPerfil()}"
+											    th:text="${dropDownItem.getDescripcion()}" />
+										
+										</select>
+										
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Tipo menu</label> 
+										<select class="form-control" 
+										        id="tipomenu"
+										        th:field="*{tipoMenu}"
+										        disabled>
+											<option value="" selected >Seleccione</option>
+											<option value="M">Menu</option>
+											<option value="S">Sub Menu</option>
+										</select>
+									</div>
+									
+									<div hidden id="selectMenuAnterior" class="form-group has-feedback">
+										<label>Menu anterior</label>
+
+										<select 
+												class="form-control select2"
+											    style="width: 100%;"
+												id="selectMenuAnterior" 
+												th:disabled="disabled"
+												th:object="${menu}"
+												th:field="${menu.menuAnterior.idMenu}" >
+											<option th:each="dropDownItem : ${menusList}"
+											    th:value="${dropDownItem.getIdMenu()}"
+											    th:text="${dropDownItem.getDescripcion()}" />
+										
+										</select>
+										
+									</div>
+									
+									<div hidden id="selectPagina" class="form-group has-feedback">
+										<label>Pagina</label>
+
+										<select 
+												class="form-control select2"
+											    style="width: 100%;"
+												id="selectPagina"
+												th:disabled="disabled"
+												th:object="${pagina}"  
+												th:field="${menu.pagina.idPagina}" >
+											<option th:each="dropDownItem : ${paginas}"
+											    th:value="${dropDownItem.getIdPagina()}"
+											    th:text="${dropDownItem.getDescripcion()}" />
+										
+										</select>
+										
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Descripcion</label> 
+										<input 
+											type="text" 
+											class="form-control" 
+											id="descripcion"
+											placeholder="nombre descriptivo del menu o programa"
+											th:field="*{descripcion}"
+											disabled required>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Posicion</label> 
+										<input 
+											type="text" 
+											class="form-control" 
+											id="posicion"
+											placeholder="Posicion"
+											th:field="*{posicion}"
+											disabled >
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Estado</label> 
+										<select class="form-control" 
+										        id="estado"
+										        th:field="*{estado}"
+										        disabled>
+											<option value="" selected disabled>Estado</option>
+											<option value="true">Activo</option>
+											<option value="false">Inactivo</option>
+										</select>
+									</div>
+									
+									<div class="row">
+										<div class="col-xs-4">
+											<button type="button" class="btn btn-success btn-block btn-flat" id="btnNuevo" onclick="nuevo()">Nuevo</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="submit" class="btn btn-success btn-block btn-flat" id="btnGrabar" disabled>Grabar</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="button" class="btn btn-success btn-block btn-flat" id="btnCancelar" onclick="cancelar(this.form)">Cancelar</button>
+										</div>
+									</div> 
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8">
+						<div class="box box-success">
+							<div class="box-header"></div>
+							<!-- /.box-header -->
+							<div class="box-body" id="divTabla">
+								<div class="table-responsive">
+
+									<div id="tablaMenu_wrapper"
+										class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+										<div class="row">
+
+											<div class="col-sm-6">
+												<div class="dataTables_length" id="tablaMenu_length">
+													<label>Mostrar <select name="tablaMenu_length"
+														aria-controls="tablaMenu" class="form-control input-sm">
+															<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
+																th:value="${pageSize}" th:selected="${pageSize} == ${selectedPageSize}"></option>
+													</select> registros
+													</label>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<div id="tablaMenu_filter" class="dataTables_filter">
+													<label>Buscar:<input type="search" class="form-control input-sm"
+														placeholder="su texto aqui" aria-controls="tablaMenu"></label>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="row">
+
+											<div class="col-sm-12">
+
+												<table id="tablaMenu" class="table table-bordered table-hover ">
+													<thead>
+														<tr>
+														    <!-- <th>Login</th>
+														    <th>Persona</th>
+															<th>Sucursal</th>-->
+															<th>Tipo menu</th>
+															<th>Descripcion</th>
+															<th>ID</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="person : ${menus}" class="selected">
+															<td th:text="${person.tipoMenu}"></td>
+															<td th:text="${person.descripcion}"></td>
+															<td th:text="${person.idMenu}"></td>
+															<!-- <td th:text="${person.sucursal.descripcion}"></td>
+															<td th:switch="${person.activo}"><span th:case="true" th:text="ACTIVO"></span> <span
+																th:case="false" th:text="INACTIVO"></span></td>
+															<td th:text="${person.idUsuario}"></td>
+															<td th:text="${person.persona.idPersona}"></td>
+															<td th:text="${person.sucursal.idSucursal}"></td> -->
+														</tr>
+
+													</tbody>
+												</table>
+
+											</div>
+
+										</div>
+
+										<div class="row">
+
+											<div class="col-sm-5">
+												<div class="dataTables_info" id="tablaMenu_info" role="status" aria-live="polite">
+													Página <span th:text="${menus.Number + 1}"></span> de <span
+														th:text="${menus.TotalPages}"></span> de un total de <span
+														th:text="${menus.TotalElements}"></span> registros
+												</div>
+											</div>
+
+											<div th:if="${menus.totalPages != 1}" class="col-sm-7">
+
+												<div class="dataTables_paginate paging_simple_numbers" id="tablaMenu_paginate">
+
+													<ul class="pagination">
+														<li th:class="${menus.number == 0} ? disabled"><a class="pageLink"
+															th:href="@{/menu-lista(pageSize=${selectedPageSize}, page=1)}">&laquo;</a></li>
+														<li th:class="${menus.number == 0} ? disabled"><a class="pageLink"
+															th:href="@{/menu-lista(pageSize=${selectedPageSize}, page=${menus.number})}">&larr;</a></li>
+														<li th:class="${menus.number == (page - 1)} ? 'active pointer-disabled'"
+															th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}"><a
+															class="pageLink"
+															th:href="@{/menu-lista(pageSize=${selectedPageSize}, page=${page})}"
+															th:text="${page}"></a></li>
+														<li th:class="${menus.number + 1 == menus.totalPages} ? disabled"><a
+															class="pageLink"
+															th:href="@{/menu-lista(pageSize=${selectedPageSize}, page=${menus.number + 2})}">&rarr;</a>
+														</li>
+														<li th:class="${menus.number + 1 == menus.totalPages} ? disabled"><a
+															class="pageLink"
+															th:href="@{/menu-lista(pageSize=${selectedPageSize}, page=${menus.totalPages})}">&raquo;</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<!-- =============================================== -->
+		<!-- FOOTER -->
+		<th:block th:replace="fragments/footer :: footer"></th:block>
+		<!-- =============================================== -->
+
+	</div>
+
+	<!-- SCRIPTS -->
+	<th:block th:replace="fragments/scripts :: scripts"></th:block>
+	<script src="../../plugins/select2/select2.full.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			
+			$(function () {
+			    $(".select2").select2();
+			});
+			
+			$('#tipoMenu').val(0).change();
+			
+			$('#tablaMenu tr').click(function(e) {
+				insertForm(this);
+				habilitarCampos();
+				$('#tablaMenu tr').removeClass('highlighted');
+				$(this).toggleClass('highlighted');
+			});
+		});
+		
+		
+		$('#tipomenu').change(function(){
+			  var data= $(this).val();
+			  
+			  console.log("data " + data);
+			  
+			  if(data=='S'){
+				  console.log(data);
+				  $( "#selectMenuAnterior" ).show();
+				  $( "#selectPagina" ).show();		  
+			  }else{
+				  console.log(data);
+				  $( "#selectMenuAnterior" ).hide();
+				  $( "#selectPagina" ).hide();
+			  }
+			  
+			});
+		
+
+		// se inserta los valores
+		function insertForm(fila) {
+
+			$("#idusuario").val(fila.cells[4].innerHTML);
+			$("#usuario").val(fila.cells[0].innerHTML);
+
+			if ($.trim(fila.cells[3].innerHTML) == '<span>ACTIVO</span>') {
+				$("#estado").prop('selectedIndex', 1);
+			} else {
+				$("#estado").prop('selectedIndex', 2);
+			}
+			$('#selectPersona').val(fila.cells[5].innerHTML).trigger('change.select2');
+			$('#selectSucursal').val(fila.cells[6].innerHTML).trigger('change.select2');
+		}
+
+		function habilitarCampos() {
+			$('#usuario').attr('disabled', false);
+			$('#estado').attr('disabled', false);
+			$('#selectPersona').attr('disabled', false);
+			$('#selectSucursal').attr('disabled', false);
+			
+			$('#btnGrabar').attr('disabled', false);
+			$('#btnNuevo').attr('disabled', true);
+			
+			$("#usuario").focus();
+			$("#usuario").select();
+		}
+		
+		function cancelar() {
+			$( "#selectPagina" ).hide();
+			$( "#selectMenuAnterior" ).hide();
+			$('#btnGrabar').attr('disabled', true);
+			$('#btnNuevo').attr('disabled', false); 
+			
+			$("#formulario").trigger('reset');
+			$("#formulario input").prop("disabled", true);
+			$("#formulario select").prop("disabled", true);
+		}
+		
+		function nuevo() {
+			$('#btnGrabar').attr('disabled', false);
+			$('#btnNuevo').attr('disabled', true); 
+			
+			$("#formulario").trigger('reset');
+			$("#formulario input").prop("disabled", true);
+			$("#formulario select").prop("disabled", true);
+			
+			$("#formulario").trigger('reset');
+			$("#formulario input").prop("disabled", false);
+			$("#formulario select").prop("disabled", false);
+			
+			$("#formulario #idusuario").prop("disabled", true);
+			
+			$("#estado").prop('selectedIndex', 1);
+			
+			$("#usuario").focus();
+			
+		}
+	</script>
+
+</body>
+
+</html>

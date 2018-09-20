@@ -8,4 +8,4 @@ create table empresa (
 	estado boolean 
 );
 
-insert into empresa (descripcion, estado) values ('ADMINISTRADOR', true); 
+insert into empresa (descripcion, estado) values ('ENCOMIENDAS', true); 

@@ -7,7 +7,7 @@ create table menu (
 	posicion int4,
 	id_perfil int4,
 	id_pagina int4,
-	
+	estado boolean default true,
 	CONSTRAINT menu_perfil FOREIGN KEY (id_perfil)
       REFERENCES perfil (id_perfil) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -27,3 +27,17 @@ INSERT INTO menu(tipo_menu, posicion, id_perfil, id_pagina, descripcion, id_menu
 INSERT INTO menu(tipo_menu, posicion, id_perfil, id_pagina, descripcion, id_menu_anterior)
     VALUES ('S', 1, 1, 1, 'Usuarios', 1);
     
+INSERT INTO menu(tipo_menu, posicion, id_perfil, id_pagina, descripcion, id_menu_anterior)
+    VALUES ('S', 1, 1, 2, 'Menu', 1);
+    
+INSERT INTO menu(tipo_menu, posicion, id_perfil, id_pagina, descripcion, id_menu_anterior)
+    VALUES ('S', 1, 1, 3, 'Perfiles', 1);
+    
+INSERT INTO menu(tipo_menu, posicion, id_perfil, id_pagina, descripcion, id_menu_anterior)
+    VALUES ('S', 1, 1, 4, 'Perfiles Por Usuario', 1);
+
+INSERT INTO menu(tipo_menu, posicion, id_perfil, id_pagina, descripcion, id_menu_anterior)
+    VALUES ('S', 1, 1, 5, 'Paginas', 1);
+    
+INSERT INTO menu(tipo_menu, posicion, id_perfil, id_pagina, descripcion, id_menu_anterior)
+    VALUES ('M', 1, 1, null, 'Informes', null);

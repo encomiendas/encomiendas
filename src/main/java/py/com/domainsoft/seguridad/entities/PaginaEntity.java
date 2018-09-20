@@ -80,6 +80,7 @@ public class PaginaEntity {
         return MoreObjects.toStringHelper(this)
                 .add("idPagina", idPagina)
                 .add("descripcion", descripcion)
+                .add("url", url)
                 .toString();
     }  
     
