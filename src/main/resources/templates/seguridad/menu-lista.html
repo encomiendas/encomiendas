@@ -26,10 +26,10 @@
 
 			<section class="content-header">
 				<h1>
-					Menus <small>lista de menus</small>
+					Menu <small>lista de menu</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li class="active">Menu</li>
 				</ol>
 			</section>
@@ -101,7 +101,7 @@
 										</select>
 									</div>
 									
-									<div hidden id="selectMenuAnterior" class="form-group has-feedback">
+									<div class="form-group has-feedback">
 										<label>Menu anterior</label>
 
 										<select 
@@ -111,15 +111,14 @@
 												th:disabled="disabled"
 												th:object="${menu}"
 												th:field="${menu.menuAnterior.idMenu}" >
-											<option th:each="dropDownItem : ${menusList}"
-											    th:value="${dropDownItem.getIdMenu()}"
-											    th:text="${dropDownItem.getDescripcion()}" />
-										
+											<option th:each="menu : ${menusList}"
+											    th:value="${menu.getIdMenu()}"
+											    th:text="${menu.getDescripcion() + ' -> ' + menu.perfil.descripcion}" />
 										</select>
 										
 									</div>
 									
-									<div hidden id="selectPagina" class="form-group has-feedback">
+									<div class="form-group has-feedback">
 										<label>Pagina</label>
 
 										<select 
@@ -224,32 +223,40 @@
 												<table id="tablaMenu" class="table table-bordered table-hover ">
 													<thead>
 														<tr>
-														    <!-- <th>Login</th>
-														    <th>Persona</th>
-															<th>Sucursal</th>-->
 															<th>Tipo menu</th>
 															<th>Descripcion</th>
+															<th>Perfil</th>
+															<th>Estado</th>
 															<th>ID</th>
+															
+															<!-- <th>Posicion</th>
+															<th>Perfil</th>
+															<th>Pagina</th>
+															<th>Menu anterior</th> -->
+															
 														</tr>
 													</thead>
 													<tbody>
-														<tr th:each="person : ${menus}" class="selected">
-															<td th:text="${person.tipoMenu}"></td>
-															<td th:text="${person.descripcion}"></td>
-															<td th:text="${person.idMenu}"></td>
-															<!-- <td th:text="${person.sucursal.descripcion}"></td>
-															<td th:switch="${person.activo}"><span th:case="true" th:text="ACTIVO"></span> <span
-																th:case="false" th:text="INACTIVO"></span></td>
-															<td th:text="${person.idUsuario}"></td>
-															<td th:text="${person.persona.idPersona}"></td>
-															<td th:text="${person.sucursal.idSucursal}"></td> -->
+														<tr th:each="menu : ${menus}" class="selected">
+															<td th:text="${menu.tipoMenu}"></td>
+															<td th:text="${menu.descripcion}"></td>
+															<td th:text="${menu.perfil?.descripcion}"></td>
+															<td th:switch="${menu.estado}">
+																<span th:case="true" th:text="ACTIVO"></span> 
+																<span th:case="false" th:text="INACTIVO"></span>
+															</td>
+															<td th:text="${menu.idMenu}"></td>
+															
+															<!-- hide columns -->
+															<td th:text="${menu.posicion}"></td>															
+															<td th:text="${menu.perfil?.idPerfil}"></td>
+															<td th:text="${menu.pagina?.idPagina}"></td>
+															<td th:text="${menu.menuAnterior?.idMenu}"></td>
 														</tr>
 
 													</tbody>
 												</table>
-
 											</div>
-
 										</div>
 
 										<div class="row">
@@ -332,44 +339,60 @@
 			  console.log("data " + data);
 			  
 			  if(data=='S'){
-				  console.log(data);
 				  $( "#selectMenuAnterior" ).show();
-				  $( "#selectPagina" ).show();		  
+				  $( "#selectPagina" ).show();
 			  }else{
-				  console.log(data);
 				  $( "#selectMenuAnterior" ).hide();
 				  $( "#selectPagina" ).hide();
 			  }
 			  
-			});
+		});
 		
 
 		// se inserta los valores
 		function insertForm(fila) {
+			
+			$("#idmenu").val(fila.cells[4].innerHTML);
 
-			$("#idusuario").val(fila.cells[4].innerHTML);
-			$("#usuario").val(fila.cells[0].innerHTML);
+			$('#selectPerfil').val(fila.cells[6].innerHTML).trigger('change.select2');
+			
+			if ($.trim(fila.cells[0].innerHTML) == 'M') {
+				
+				$("#tipomenu").prop('selectedIndex', 1);
+				$( "#selectMenuAnterior" ).hide();
+				$( "#selectPagina" ).hide();
+				
+			} else {
+				$("#tipomenu").prop('selectedIndex', 2);
 
+				$( "#selectMenuAnterior" ).show();
+				$( "#selectPagina" ).show();
+				
+				console.log("pagina " + fila.cells[7].innerHTML);
+				
+				$('#selectPagina').val(fila.cells[7].innerHTML).trigger('change.select2');
+				$('#selectMenuAnterior').val(fila.cells[8].innerHTML).trigger('change.select2');
+				
+			}
+			
+			$("#descripcion").val(fila.cells[1].innerHTML);
+			
+			$("#posicion").val(fila.cells[5].innerHTML);
+			
+			
 			if ($.trim(fila.cells[3].innerHTML) == '<span>ACTIVO</span>') {
 				$("#estado").prop('selectedIndex', 1);
 			} else {
 				$("#estado").prop('selectedIndex', 2);
 			}
-			$('#selectPersona').val(fila.cells[5].innerHTML).trigger('change.select2');
-			$('#selectSucursal').val(fila.cells[6].innerHTML).trigger('change.select2');
 		}
 
 		function habilitarCampos() {
-			$('#usuario').attr('disabled', false);
-			$('#estado').attr('disabled', false);
-			$('#selectPersona').attr('disabled', false);
-			$('#selectSucursal').attr('disabled', false);
+			$("#formulario input").prop("disabled", false);
+			$("#formulario select").prop("disabled", false);
 			
 			$('#btnGrabar').attr('disabled', false);
 			$('#btnNuevo').attr('disabled', true);
-			
-			$("#usuario").focus();
-			$("#usuario").select();
 		}
 		
 		function cancelar() {
@@ -388,18 +411,13 @@
 			$('#btnNuevo').attr('disabled', true); 
 			
 			$("#formulario").trigger('reset');
-			$("#formulario input").prop("disabled", true);
-			$("#formulario select").prop("disabled", true);
 			
-			$("#formulario").trigger('reset');
 			$("#formulario input").prop("disabled", false);
 			$("#formulario select").prop("disabled", false);
 			
-			$("#formulario #idusuario").prop("disabled", true);
+			$("#formulario #idmenu").prop("disabled", true);
 			
 			$("#estado").prop('selectedIndex', 1);
-			
-			$("#usuario").focus();
 			
 		}
 	</script>

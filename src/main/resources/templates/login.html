@@ -36,7 +36,7 @@
 		<!-- /.login-logo -->
 		<div class="login-box-body">
 			<p class="login-box-msg">Inicia sesión para comenzar</p>
-			<p class="login-box-msg">Modo: Desarrollo (para produccion, deshabilitar el usuario y contraseña por defecto)</p>
+			<p class="login-box-msg" style="color: red;font-weight: bold;">Modo: Desarrollo (para produccion, deshabilitar el usuario y contraseña por defecto)</p>
 
 			<!-- /login?error=true -->
 			<div th:if="${#request.getParameter('error') == 'true'}" style="color: red; margin: 10px 0px;">

@@ -21,6 +21,7 @@ import py.com.domainsoft.common.Constantes;
 import py.com.domainsoft.common.domain.Pager;
 import py.com.domainsoft.entidad.services.SucursalService;
 import py.com.domainsoft.seguridad.dtos.MenuDTO;
+import py.com.domainsoft.seguridad.dtos.PerfilDTO;
 import py.com.domainsoft.seguridad.dtos.UserDetailsDTO;
 import py.com.domainsoft.seguridad.dtos.UsuarioDTO;
 import py.com.domainsoft.seguridad.services.PersonaService;
@@ -52,8 +53,6 @@ public class UsuarioViewController {
             @RequestParam("page") Optional<Integer> numeroPagina,
             HttpSession session) {
         
-        //ModelAndView modelAndView = new ModelAndView("seguridad/usuario-lista");
-
         /**
          * Evalua si es null, y muestra por defecto
          */
@@ -73,6 +72,9 @@ public class UsuarioViewController {
                 session.getAttribute(Constantes.SESSION_MENU));
         modelAndView.addAttribute(Constantes.SESSION_LOGIN_DATA, 
                 (UserDetailsDTO)session.getAttribute(Constantes.SESSION_LOGIN_DATA));
+        modelAndView.addAttribute("perfilesUsuarios", (List<PerfilDTO>)session.getAttribute("perfilesUsuarios"));
+        modelAndView.addAttribute("totalPerfiles", (Integer)session.getAttribute("totalPerfiles"));
+        
         modelAndView.addAttribute("listpersonasAll", personaService.findAll());
         modelAndView.addAttribute("listsucursalesAll", sucursalService.findAll());
         
