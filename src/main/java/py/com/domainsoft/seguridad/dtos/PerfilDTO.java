@@ -7,6 +7,13 @@ public class PerfilDTO {
     private Integer idPerfil;
     
     private String descripcion;
+    
+    public PerfilDTO(){};
+
+    public PerfilDTO(Integer idPerfil, String descripcion) {
+        this.idPerfil = idPerfil;
+        this.descripcion = descripcion;
+    }
 
     public Integer getIdPerfil() {
         return idPerfil;

@@ -67,10 +67,10 @@ public class MenuViewController extends BaseViewController{
 
         MenuDTO menu = new MenuDTO();
 
-        modelAndView.addObject(Constantes.MENU_LIST, (List<MenuDTO>) 
-                session.getAttribute(Constantes.SESSION_MENU));
-        modelAndView.addObject(Constantes.SESSION_LOGIN_DATA, 
-                (UserDetailsDTO)session.getAttribute(Constantes.SESSION_LOGIN_DATA));
+        modelAndView.addObject(Constantes.MENU_LIST, (List<MenuDTO>) session.getAttribute(Constantes.SESSION_MENU));
+        modelAndView.addObject(Constantes.SESSION_LOGIN_DATA, (UserDetailsDTO)session.getAttribute(Constantes.SESSION_LOGIN_DATA));
+        modelAndView.addObject("perfilesUsuarios", (List<PerfilDTO>)session.getAttribute("perfilesUsuarios"));
+        modelAndView.addObject("totalPerfiles", (Integer)session.getAttribute("totalPerfiles"));
         
         modelAndView.addObject("perfil", new PerfilDTO());
         modelAndView.addObject("perfiles", perfilService.findAll());
