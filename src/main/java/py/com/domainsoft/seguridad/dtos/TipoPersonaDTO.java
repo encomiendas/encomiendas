@@ -8,15 +8,17 @@ public class TipoPersonaDTO {
 
     private String descripcion;
 
-    public TipoPersonaDTO() {
-    }
-
+    
+    public TipoPersonaDTO() {}
+    
     public TipoPersonaDTO(Integer idTipoPersona, String descripcion) {
         this.idTipoPersona = idTipoPersona;
         this.descripcion = descripcion;
     }
-
+    
+    
     public static class Builder {
+
         private Integer idTipoPersona;
         private String descripcion;
 
@@ -30,14 +32,26 @@ public class TipoPersonaDTO {
             return this;
         }
 
+
+        
         public TipoPersonaDTO build() {
             return new TipoPersonaDTO(idTipoPersona, descripcion);
         }
 
     }
-
+    
     public static Builder builder() {
         return new Builder();
+    }
+
+    
+    
+    public Integer getIdTipoPersona() {
+        return idTipoPersona;
+    }
+
+    public void setIdTipoPersona(Integer idTipoPersona) {
+        this.idTipoPersona = idTipoPersona;
     }
 
     public String getDescripcion() {
@@ -50,9 +64,10 @@ public class TipoPersonaDTO {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("idTipoPersona", idTipoPersona)
-                .add("descripcion", descripcion).toString();
+       return MoreObjects.toStringHelper(this)
+              .add("idTipoPersona", idTipoPersona)
+              .add("descripcion", descripcion)
+              .toString();
     }
 
 }

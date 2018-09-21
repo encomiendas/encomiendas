@@ -19,6 +19,7 @@ public class Constantes {
     public static final String SESSION_MENU = "menu";
     public static final String SESSION_LOGIN_DATA = "logindata";
     
+    
     /**Vistas (nombres)*/
     public static final String HOME_VIEW = "home";
     public static final String PERFIL_SELECCION_VIEW = "seguridad/perfil-seleccion";

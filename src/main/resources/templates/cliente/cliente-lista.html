@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- STYLES IMPORTS -->
+<th:block th:replace="fragments/head :: head"></th:block>
+
+<!-- //TODO:Oculta dos columnas de la tabla --> 
+<style>
+  	#tablaCliente td:nth-child(n+6){
+	display: none;}
+</style>
+
+<body class="hold-transition skin-green sidebar-mini ">
+
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<th:block th:replace="fragments/header :: header"></th:block>
+		<!-- ASIDE MENU -->
+		<th:block th:replace="fragments/aside :: aside"></th:block>
+
+		<!-- =============================================== -->
+
+		<!-- CONTENIDO PRINCIPAL DE LA PAGINA -->
+		<div class="content-wrapper">
+
+			<section class="content-header">
+				<h1>
+					Clientes <small>lista de clientes</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">Clientes</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="box box-success">
+							<div class="register-box-body">
+							
+								<div th:if="${message != null}" th:text="${message}"
+						            style="color:red;margin:10px 0px;">
+						        </div>
+							
+								 <form action="#" 
+								      method="POST" 
+								      th:action="@{/cliente-lista}"
+									  id="formulario"
+									  th:object="${cliente}"
+									  class="form-horizontal"
+									  role="form">
+									  
+									<div style="color: red" class="requerido">
+										<label id="label"></label>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Identificador Cliente</label> 
+										<input 
+											type="text" 
+											value="" 
+											class="form-control"
+											id="idCliente" 
+											placeholder="Identificador"
+											readonly
+											th:field="*{idCliente}"
+											>
+									</div>
+									<div class="form-group has-feedback hidden">
+										<label>Id Persona</label> 
+										<input 
+											type="text" 
+											value="" 
+											class="form-control"
+											id="idPersona" 
+											placeholder="Identificador"
+											readonly
+											th:field="${cliente.persona.idPersona}"
+											>
+									</div>
+									
+									<div class="form-group has-feedback ">
+										<label>Documento</label> 
+										<input 
+											type="text" 
+											value="" 
+											class="form-control editable"
+											id="documento" 
+											placeholder="Identificador"
+											disabled
+											th:field="${cliente.persona.documento}"
+											>
+									</div>
+									
+
+									<div class="form-group has-feedback">
+										<label>Tipo Documento</label> 
+										<select class="form-control editable" 
+										        id="tipoDoc"
+										        th:object="${tipoDocumento}" 
+										        th:field="${cliente.persona.tipoDocumento.idTipoDocumento}"
+										        disabled
+										        >
+											<option th:each="dropDownItem : ${tiposDoc}"
+											    th:value="${dropDownItem.getIdTipoDocumento()}"
+											    th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+									
+									
+									
+									
+									<div class="form-group has-feedback">
+										<label>Nombres</label> 
+										<input 
+											type="text" 
+											class="form-control editable" 
+											id="nombres"
+											placeholder="Nombres del Cliente"
+											th:field="${cliente.persona.nombres}"
+											disabled required>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Apellidos</label> 
+										<input 
+											type="text" 
+											class="form-control editable" 
+											id="apellidos"
+											placeholder="Apellidos del Cliente"
+											th:field="${cliente.persona.apellidos}"
+											disabled required>
+									</div>
+									
+									 <div class="form-group has-feedback">
+										<label>Tipo Persona</label> 
+										<select class="form-control editable" 
+										        id="tipoPersona"
+										        th:field="${cliente.persona.tipoPersona.idTipoPersona}"
+										        disabled
+										        >
+											<option th:each="dropDownItem : ${tiposPersonas}"
+											    th:value="${dropDownItem.getIdTipoPersona()}"
+											    th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+									
+									 <div class="form-group has-feedback">
+										<label>Pais</label> 
+										<select class="form-control editable" 
+												id="idPais"
+										        th:field="${cliente.persona.pais.idPais}"
+										        disabled
+										        >
+											<option value="" selected >Seleccione</option>
+											<option value="1">Paraguay</option>
+										</select>
+									</div>
+									<div class="form-group has-feedback">
+										<label>Pais</label> 
+										<select class="form-control editable " 
+												id="idPais2"
+										        th:field="${cliente.persona.paisNacionalidad.idPais}"
+										        disabled
+										        >
+											<option value="" selected >Seleccione</option>
+											<option value="1">Paraguay</option>
+										</select>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Estado</label> 
+										<select class="form-control editable" 
+										        id="estado"
+										        th:field="*{estado}"
+										        th:placeholder="Hola"
+										        disabled>
+											 <option value="true" selected disabled>Estado</option> 
+											<option value="true">Activo</option>
+											<option value="false">Inactivo</option>
+										</select>
+									</div> 
+									
+									<div class="row">
+										<div class="col-xs-4">
+											<button type="button" class="btn btn-success btn-block btn-flat" id="btnNuevo" onclick="nuevo()">Nuevo</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="submit" class="btn btn-success btn-block btn-flat" id="btnGrabar" disabled>Grabar</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="button" class="btn btn-success btn-block btn-flat" id="btnCancelar" onclick="cancelar(this.form)">Cancelar</button>
+										</div>
+									</div> 
+								</form> 
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8">
+						<div class="box box-success">
+							<div class="box-header"></div>
+							<!-- /.box-header -->
+							<div class="box-body" id="divTabla">
+								<div class="table-responsive">
+
+									<div id="tablaMenu_wrapper"
+										class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+										<div class="row">
+
+											<div class="col-sm-6">
+												<div class="dataTables_length" id="tablaCliente_length">
+													<label>Mostrar <select name="tablaCliente_length"
+														aria-controls="tablaCliente" class="form-control input-sm">
+															<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
+																th:value="${pageSize}" th:selected="${pageSize} == ${selectedPageSize}"></option>
+													</select> registros
+													</label>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<div id="tablaCliente_filter" class="dataTables_filter">
+													<label>Buscar:<input type="search" class="form-control input-sm"
+														placeholder="su texto aqui" aria-controls="tablaCliente"></label>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="row">
+
+											<div class="col-sm-12">
+
+												<table id="tablaCliente" class="table table-bordered table-hover ">
+													<thead>
+														<tr>
+														    <th>Documento</th>
+														    <th>Nombres</th>
+															<th>Apellidos</th>
+															<th>Tipo Documento</th>
+															<th>Estado</th>
+															<td>ID Cliente</td>
+															<td>ID Persona</tD>
+															<td>ID Tipo Doc</td>
+															<td>ID Tipo Per</td>
+															<td>ID Pais</td>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="cliente : ${clientes}" class="selected">
+															<td th:text="${cliente.persona.documento}"></td>
+															<td th:text="${cliente.persona.nombres}"></td>
+															<td th:text="${cliente.persona.apellidos}"></td>
+															<td th:text="${cliente.persona.tipoDocumento.descripcion}"></td>
+															<td th:switch="${cliente.estado}"><span th:case="true" th:text="ACTIVO"></span> <span
+																th:case="false" th:text="INACTIVO"></span></td>
+															<td th:text="${cliente.idCliente}"></td>
+															<td th:text="${cliente.persona.idPersona}"></td>
+															<td th:text="${cliente.persona.tipoDocumento.idTipoDocumento}"></td> 
+															<td th:text="${cliente.persona.tipoPersona.idTipoPersona}"></td>
+															<td th:text="${cliente.persona.pais.idPais}"></td>
+														</tr>
+
+													</tbody>
+												</table>
+
+											</div>
+
+										</div>
+
+										<div class="row">
+
+											<div class="col-sm-5">
+												<div class="dataTables_info" id="tablaCliente_info" role="status" aria-live="polite">
+													Página <span th:text="${clientes.Number + 1}"></span> de <span
+														th:text="${clientes.TotalPages}"></span> de un total de <span
+														th:text="${clientes.TotalElements}"></span> registros
+												</div>
+											</div>
+
+											<div th:if="${clientes.totalPages != 1}" class="col-sm-7">
+
+												<div class="dataTables_paginate paging_simple_numbers" id="tablaCliente_paginate">
+
+													<ul class="pagination">
+														<li th:class="${cientes.number == 0} ? disabled"><a class="pageLink"
+															th:href="@{/cliente-lista(pageSize=${selectedPageSize}, page=1)}">&laquo;</a></li>
+														<li th:class="${clientes.number == 0} ? disabled"><a class="pageLink"
+															th:href="@{/cliente-lista(pageSize=${selectedPageSize}, page=${clentes.number})}">&larr;</a></li>
+														<li th:class="${clientes.number == (page - 1)} ? 'active pointer-disabled'"
+															th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}"><a
+															class="pageLink"
+															th:href="@{/cliente-lista(pageSize=${selectedPageSize}, page=${page})}"
+															th:text="${page}"></a></li>
+														<li th:class="${clientes.number + 1 == clentes.totalPages} ? disabled"><a
+															class="pageLink"
+															th:href="@{/cliente-lista(pageSize=${selectedPageSize}, page=${clentes.number + 2})}">&rarr;</a>
+														</li>
+														<li th:class="${clientes.number + 1 == clentes.totalPages} ? disabled"><a
+															class="pageLink"
+															th:href="@{/cliente-lista(pageSize=${selectedPageSize}, page=${clentes.totalPages})}">&raquo;</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<!-- =============================================== -->
+		<!-- FOOTER -->
+		<th:block th:replace="fragments/footer :: footer"></th:block>
+		<!-- =============================================== -->
+
+	</div>
+
+	<!-- SCRIPTS -->
+	<th:block th:replace="fragments/scripts :: scripts"></th:block>
+	<script src="../../plugins/select2/select2.full.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$(".select2").select2();
+			$('#idPais').change(function(){
+				  var data= $(this).val();
+				  
+				  $('#idPais2').val(data).trigger('change.select2');
+				  
+				});
+				
+			$('#tablaCliente tr').click(function(e) {
+				insertForm(this);
+				
+				$('#tablaCliente tr').removeClass('highlighted');
+				$(this).toggleClass('highlighted');
+			});
+		});
+		
+
+		
+
+		// se inserta los valores
+		function insertForm(fila) {
+
+			$("#idCliente").val(fila.cells[5].innerHTML);
+			$("#idPersona").val(fila.cells[6].innerHTML);
+			$("#documento").val(fila.cells[0].innerHTML);
+			$("#nombres").val(fila.cells[1].innerHTML);
+			$("#apellidos").val(fila.cells[2].innerHTML);
+
+			if ($.trim(fila.cells[4].innerHTML) == '<span>ACTIVO</span>') {
+				$("#estado").prop('selectedIndex', 1);
+			} else {
+				$("#estado").prop('selectedIndex', 2);
+			}
+			$('#tipoDoc').val(fila.cells[7].innerHTML).trigger('change.select2');
+			$('#tipoPersona').val(fila.cells[8].innerHTML).trigger('change.select2');
+			$('#idPais').val(fila.cells[9].innerHTML).trigger('change.select2');
+			$('#idPais2').val(fila.cells[9].innerHTML).trigger('change.select2');
+			$(".editable").attr('disabled', false)
+			
+			$("#documento").focus();
+			$('#btnGrabar').attr('disabled', false);
+		}
+		
+		function cancelar() {
+			$('#tablaCliente tr').removeClass('highlighted');
+			
+			$('#btnGrabar').attr('disabled', true);
+			$('#btnNuevo').attr('disabled', false); 
+			
+			$("#formulario").trigger('reset');
+			$(".editable").attr("disabled", true);
+		}
+		
+		function nuevo() {
+			$('#btnGrabar').attr('disabled', false);
+			$('#btnNuevo').attr('disabled', true); 
+			
+			$("#formulario").trigger('reset');
+			$(".editable").attr("disabled", false);
+			$("#estado").prop('selectedIndex', 1);
+			
+			$("#documento").focus();
+			
+		}
+	</script>
+
+</body>
+
+</html>
