@@ -2,6 +2,8 @@ package py.com.domainsoft.seguridad.services.impl;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import py.com.domainsoft.common.WebUtils;
@@ -35,6 +37,12 @@ public class PersonaSeviceImpl implements PersonaService {
     public PersonaEntity grabarPersona(PersonaDTO persona) {
         return personaRepo.save(personaMapper.dtoToEntity(persona));
         
+    }
+
+    @Override
+    public Page<PersonaDTO> findAllPageable(Pageable pageable) {
+        Page<PersonaEntity> pageResponse = personaRepo.findAll(pageable);
+        return pageResponse.map(personaMapper::entityToDto);
     }
 
 }
