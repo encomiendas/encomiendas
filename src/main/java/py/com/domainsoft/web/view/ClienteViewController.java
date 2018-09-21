@@ -23,8 +23,6 @@ import py.com.domainsoft.seguridad.dtos.MenuDTO;
 import py.com.domainsoft.seguridad.dtos.TipoDocumentoDTO;
 import py.com.domainsoft.seguridad.dtos.TipoPersonaDTO;
 import py.com.domainsoft.seguridad.dtos.UserDetailsDTO;
-import py.com.domainsoft.seguridad.services.MenuService;
-import py.com.domainsoft.seguridad.services.PerfilService;
 import py.com.domainsoft.seguridad.services.TipoDocumentoService;
 import py.com.domainsoft.seguridad.services.TipoPersonaService;
 import py.com.domainsoft.web.base.BaseViewController;
