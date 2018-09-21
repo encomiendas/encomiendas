@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import py.com.domainsoft.common.WebUtils;
 import py.com.domainsoft.seguridad.dtos.PersonaDTO;
+import py.com.domainsoft.seguridad.entities.PersonaEntity;
 import py.com.domainsoft.seguridad.mapper.PersonaMapper;
 import py.com.domainsoft.seguridad.repositories.PersonaRepository;
 import py.com.domainsoft.seguridad.services.PersonaService;
@@ -28,6 +29,12 @@ public class PersonaSeviceImpl implements PersonaService {
         return personaMapper.
                 entityListToDtoList(WebUtils.
                         toList(personaRepo.findAll()));
+    }
+
+    @Override
+    public PersonaEntity grabarPersona(PersonaDTO persona) {
+        return personaRepo.save(personaMapper.dtoToEntity(persona));
+        
     }
 
 }

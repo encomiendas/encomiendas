@@ -20,7 +20,7 @@ import py.com.domainsoft.entidad.entities.PaisEntity;
 public class TipoPersonaEntity {
 
     @Id
-    @GenericGenerator(name = "personaSequenceGenerator",
+    @GenericGenerator(name = "tipoPersonaSequenceGenerator",
     strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
     parameters = {
             @Parameter(name = SequenceStyleGenerator.SEQUENCE_PARAM,
@@ -29,7 +29,7 @@ public class TipoPersonaEntity {
             value = "1"),
             @Parameter(name = SequenceStyleGenerator.INCREMENT_PARAM,
             value = "1") })
-    @GeneratedValue(generator = "personaSequenceGenerator")
+    @GeneratedValue(generator = "tipoPersonaSequenceGenerator")
     @Column(name = "id_tipo_persona")
     private Integer idTipoPersona;
     
@@ -37,6 +37,14 @@ public class TipoPersonaEntity {
     @Column(name = "descripcion")
     private String descripcion;
 
+
+    public Integer getIdTipoPersona() {
+        return idTipoPersona;
+    }
+
+    public void setIdTipoPersona(Integer idTipoPersona) {
+        this.idTipoPersona = idTipoPersona;
+    }
 
     public String getDescripcion() {
         return descripcion;
