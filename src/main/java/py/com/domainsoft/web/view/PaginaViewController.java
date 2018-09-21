@@ -19,6 +19,7 @@ import py.com.domainsoft.common.Constantes;
 import py.com.domainsoft.common.domain.Pager;
 import py.com.domainsoft.seguridad.dtos.MenuDTO;
 import py.com.domainsoft.seguridad.dtos.PaginaDTO;
+import py.com.domainsoft.seguridad.dtos.PerfilDTO;
 import py.com.domainsoft.seguridad.dtos.UserDetailsDTO;
 import py.com.domainsoft.seguridad.services.PaginaService;
 import py.com.domainsoft.web.base.BaseViewController;
@@ -62,6 +63,8 @@ public class PaginaViewController extends BaseViewController{
                 session.getAttribute(Constantes.SESSION_MENU));
         modelAndView.addObject(Constantes.SESSION_LOGIN_DATA, 
                 (UserDetailsDTO)session.getAttribute(Constantes.SESSION_LOGIN_DATA));
+        modelAndView.addObject("perfilesUsuarios", (List<PerfilDTO>)session.getAttribute("perfilesUsuarios"));
+        modelAndView.addObject("totalPerfiles", (Integer)session.getAttribute("totalPerfiles"));
         
         modelAndView.addObject("pagina", user);
         modelAndView.addObject("persons", paginas);
