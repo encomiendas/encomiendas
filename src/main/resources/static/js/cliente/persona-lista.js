@@ -2,21 +2,23 @@ $(document).ready(function() {
 	$(".select2").select2();
 	$('#idPais').change(function() {
 		var data = $(this).val();
+
 		$('#idPais2').val(data).trigger('change.select2');
 
 	});
 
 	$('#tablaCliente tr').click(function(e) {
 		insertForm(this);
+
 		$('#tablaCliente tr').removeClass('highlighted');
 		$(this).toggleClass('highlighted');
 	});
 });
 
+// se inserta los valores
 function insertForm(fila) {
 
-	$("#idCliente").val(fila.cells[5].innerHTML);
-	$("#idPersona").val(fila.cells[6].innerHTML);
+	$("#idPersona").val(fila.cells[5].innerHTML);
 	$("#documento").val(fila.cells[0].innerHTML);
 	$("#nombres").val(fila.cells[1].innerHTML);
 	$("#apellidos").val(fila.cells[2].innerHTML);
@@ -26,10 +28,16 @@ function insertForm(fila) {
 	} else {
 		$("#estado").prop('selectedIndex', 2);
 	}
-	$('#tipoDoc').val(fila.cells[7].innerHTML).trigger('change.select2');
-	$('#tipoPersona').val(fila.cells[8].innerHTML).trigger('change.select2');
-	$('#idPais').val(fila.cells[9].innerHTML).trigger('change.select2');
+	$('#tipoDoc').val(fila.cells[6].innerHTML).trigger('change.select2');
+	$('#tipoPersona').val(fila.cells[7].innerHTML).trigger('change.select2');
+	$('#idPais').val(fila.cells[8].innerHTML).trigger('change.select2');
 	$('#idPais2').val(fila.cells[9].innerHTML).trigger('change.select2');
+	$('#sexo').val(fila.cells[10].innerHTML).trigger('change.select2');
+	$('#estadoCivil').val(fila.cells[11].innerHTML).trigger('change.select2');
+	$('#correo').val(fila.cells[12].innerHTML);
+	$('#telefono').val(fila.cells[13].innerHTML);
+	$('#direccion').val(fila.cells[14].innerHTML);
+	$('#fechaNacimiento').val(fila.cells[15].innerHTML);
 	$(".editable").attr('disabled', false)
 
 	$("#documento").focus();
