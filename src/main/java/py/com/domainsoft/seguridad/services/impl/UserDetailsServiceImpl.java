@@ -15,6 +15,7 @@ import py.com.domainsoft.seguridad.dao.UsuarioDAO;
 import py.com.domainsoft.seguridad.dao.UsuarioRoleDAO;
 import py.com.domainsoft.seguridad.dtos.UserDetailsDTO;
 import py.com.domainsoft.seguridad.entities.UsuarioEntity;
+import py.com.domainsoft.seguridad.mapper.PersonaMapper;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -24,6 +25,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
  
     @Autowired
     private UsuarioRoleDAO appRoleDAO;
+    
+    @Autowired
+    private PersonaMapper personaMapper;
+    
+    
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -46,11 +52,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         
         return UserDetailsDTO.builder()
+        .idUsuario(appUser.getId())
         .username(appUser.getLogin())
         .password(appUser.getPassword())
-        .enabled(appUser.isActivo())
+        .enabled(appUser.getActivo())
         .grantedAuthorities(this.getGrantedAuthorities(grantList))
-        .correo(appUser.getCorreo())
+        .expira(appUser.getExpira())
+        .fechaExpiracion(appUser.getFechaExpiracion())
+        .persona(personaMapper.entityToDto(appUser.getPersona()))
         .build();
         
     }

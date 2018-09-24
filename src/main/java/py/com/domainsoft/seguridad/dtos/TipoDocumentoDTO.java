@@ -25,7 +25,7 @@ public class TipoDocumentoDTO {
 		private String descripcion;
 		private boolean estado;
 
-		public Builder idPais(Integer idTipoDocumento) {
+		public Builder idTipoDocumento(Integer idTipoDocumento) {
 			this.idTipoDocumento = idTipoDocumento;
 			return this;
 		}
@@ -35,7 +35,7 @@ public class TipoDocumentoDTO {
 			return this;
 		}
 
-		public Builder gentilicio(boolean estado) {
+		public Builder estado(boolean estado) {
 			this.estado = estado;
 			return this;
 		}

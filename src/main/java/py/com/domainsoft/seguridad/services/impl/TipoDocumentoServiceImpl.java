@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import py.com.domainsoft.common.WebUtils;
 import py.com.domainsoft.seguridad.dtos.TipoDocumentoDTO;
 import py.com.domainsoft.seguridad.mapper.TipoDocumentoMapper;
 import py.com.domainsoft.seguridad.repositories.TipoDocumentoRepository;
@@ -31,6 +32,13 @@ public class TipoDocumentoServiceImpl implements TipoDocumentoService {
 		return tipoDocumentoMapper.entityListToDtoList(tipoDocumentoRepository.findAll());
 		
 	}
+
+
+    @Override
+    public List<TipoDocumentoDTO> findAll() {
+        return tipoDocumentoMapper
+                .entityListToDtoList(WebUtils.toList(tipoDocumentoRepository.findAll()));
+    }
 
 	
 	

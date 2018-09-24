@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<!-- STYLES IMPORTS -->
+<th:block th:replace="fragments/head :: head"></th:block>
+
+<body class="hold-transition login-page">
+	<!-- <c:url value="/j_spring_security_logout" var="logoutUrl" /> -->
+	<div class="login-box">
+		<!-- <div class="login-logo">
+			<a href="${pageContext.request.contextPath}/login"> <img src="img/logo.png" alt="Smiley face">
+			</a>
+		</div> -->
+		<div class="login-box-body">
+			<p class="login-box-msg">Por favor, seleccione su perfil</p>
+			<p class="login-box-msg">Cada perfil contiene una lista de paginas habilitas para su cuenta</p>
+
+			<form name='f' th:action="@{/perfiles-usuario}" th:object="${perfil}" method='POST'>
+				<div class="form-group ">
+					<select class="form-control"  
+					        th:field="*{perfil.idPerfil}">
+						<option th:each="listValue : ${perfiles}" 
+						        th:value="${listValue.perfil.idPerfil}"
+							    th:text="${listValue.perfil.descripcion}"/>
+					</select> <br>
+					<button type="submit" 
+					        value="button"
+						    data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Cargando.."
+						    class="btn btn-success btn-block btn-flat" 
+						    autofocus>Adelante
+				    </button>
+				</div>
+			</form>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<a th:href="@{/logout}" class="btn btn-danger btn-block btn-flat">Salir</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- <th:block th:replace="fragments/scripts :: scripts"></th:block> -->
+	
+</body>
+
+</html>

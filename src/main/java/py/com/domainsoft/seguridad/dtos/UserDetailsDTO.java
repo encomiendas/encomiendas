@@ -3,6 +3,9 @@ package py.com.domainsoft.seguridad.dtos;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import py.com.domainsoft.entidad.dtos.SucursalDTO;
+
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -11,29 +14,40 @@ import java.util.List;
  */
 public class UserDetailsDTO implements UserDetails {
 
+    private final Integer idUsuario;
     private final String password;
     private final  String username;
     private final boolean enabled;
     private final List<GrantedAuthority> grantedAuthorities;
-    private final String correo;
+    private final boolean expira;
+    private final LocalDate fechaExpiracion;
+    private final PersonaDTO persona;
+    private final SucursalDTO sucursal;
 
-
-    UserDetailsDTO(String username,
+    UserDetailsDTO(
+            Integer idUsuario,
+            String username,
             String password,
             boolean enabled,
             List<GrantedAuthority> grantedAuthorities,
-            String correo) {
+            boolean expira,
+            LocalDate fechaExpiracion,
+            PersonaDTO persona,
+            SucursalDTO sucursal) {
+        this.idUsuario = idUsuario;
         this.password = password;
         this.username = username;
         this.enabled = enabled;
         this.grantedAuthorities = grantedAuthorities;
-        this.correo = correo;
+        this.expira = expira;
+        this.fechaExpiracion = fechaExpiracion;
+        this.persona = persona;
+        this.sucursal = sucursal;
     }
 
     public static UserDetailsDTOBuilder builder() {
         return new UserDetailsDTOBuilder();
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -44,10 +58,34 @@ public class UserDetailsDTO implements UserDetails {
     public String getPassword() {
         return password;
     }
+    
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
 
     @Override
     public String getUsername() {
         return username;
+    }
+    
+    public List<GrantedAuthority> getGrantedAuthorities() {
+        return grantedAuthorities;
+    }
+
+    public boolean isExpira() {
+        return expira;
+    }
+
+    public LocalDate getFechaExpiracion() {
+        return fechaExpiracion;
+    }
+
+    public PersonaDTO getPersona() {
+        return persona;
+    }
+
+    public SucursalDTO getSucursal() {
+        return sucursal;
     }
 
     @Override
@@ -71,10 +109,5 @@ public class UserDetailsDTO implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
-
-    public String getCorreo() {
-        return correo;
-    }
-    
    
 }

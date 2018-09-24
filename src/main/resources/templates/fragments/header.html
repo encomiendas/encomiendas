@@ -17,44 +17,86 @@
       </a>
 
       <div class="navbar-custom-menu">
+        
         <ul class="nav navbar-nav">
           
-          <!-- Notifications: style can be found in dropdown.less -->
+          <!-- Perfiles -->
+          <li class="dropdown notifications-menu">
+          	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          	  <span>Seleccione su perfil &nbsp;&nbsp;</span>
+              <i class="fa fa-exchange"></i>
+              <span class="label label-primary" th:text="${totalPerfiles}"></span>
+            </a>
+            <ul class="dropdown-menu" id="perfil">
+              <li th:each="todoitem : ${perfilesUsuarios}">
+              	    
+			    <!-- <a th:href="${todoitem.descripcion}"> -->
+			    <a th:href="@{/reload-perfil-menu/{val}(val=${todoitem.idPerfil})}">
+			    
+			    <!-- <span th:text="${pet.petName}">Dapibus ac facilisis in</span>
+    			     <button class="badge" onclick="window.location.href='/'">Continue</button> -->
+			    
+                      <i class="fa fa-product-hunt text-green"></i> 
+                      <span th:text="${todoitem.descripcion}"></span>
+                </a>			    
+			  </li>
+            </ul>
+          </li>
+          
+          <!-- Notifications -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning"></span>
+              <span class="label label-warning">0</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">No tiene notificaciones</li>              
+              <li class="header">No tiene notificaciones</li>
               <li class="footer"><a href="#">Ver todos</a></li>
             </ul>
-          </li>          
+          </li>
           
-          <!-- User Account: style can be found in dropdown.less -->
+          <!-- User Account -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="../../dist/img/160160.png" class="user-image" alt="User Image">
-              <span class="hidden-xs" th:if="${userInfo != null}" th:utext="${userInfo}" ></span>              
+              <i class="fa fa-user"></i>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
                 <img src="../../dist/img/160160.png" class="img-circle" alt="User Image">
-                <p th:if="${userInfo != null}" th:utext="${userInfo}"></p>                
+                <p th:if="${logindata != null}" th:text="${logindata.persona.nombres}" ></p>
+                <p th:if="${logindata != null}" th:text="${logindata.persona.apellidos}"></p>
               </li>             
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a th:href="@{/perfil-usuario}" class="btn btn-default btn-flat">Mi perfil</a>
+                  <a th:href="@{/perfil-usuario}" class="btn btn-default btn-flat">Mis datos</a>
                 </div>
                 <div class="pull-right">
-                  <a  class="btn btn-default btn-flat" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
+                  <a  class="btn btn-default btn-flat" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Salir</a>
                 </div>
               </li>
             </ul>
-          </li>          
+          </li>
+          
+           <!-- Exit -->
+          <li class="dropdown notifications-menu">
+            <a th:href="@{/logout}" 
+               class="dropdown-toggle">
+              <i class="fa fa-sign-out"></i>              
+            </a>            
+          </li>
+          
         </ul>
       </div>
     </nav>
 </header>
+
+<script>
+
+			$(document).ready(function() {
+			    alert('hola');
+			});
+			
+		  </script>
+

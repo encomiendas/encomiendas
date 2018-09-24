@@ -34,7 +34,7 @@
 
 
 				<div class="callout callout-info">
-					<h4>Notificación!</h4>
+					<h4>Registro exitoso</h4>
 					<h3>El registro de usuario fue realizado correctamente</h3>
 					<a class='btn' href='/usuario-lista'>VOLVER A LA LISTA DE USUARIOS</a>
 				</div>
@@ -53,10 +53,9 @@
 	<th:block th:replace="fragments/scripts :: scripts"></th:block>
 
 	<script>
-	// Your delay in milliseconds
-	var delay = 3000; 
-	setTimeout(function(){ window.location = "/usuario-lista"; }, delay);
-	
+		// Your delay in milliseconds
+		var delay = 1800; 
+		setTimeout(function(){ window.location = "/usuario-lista"; }, delay);	
 	</script>
 
 </body>
