@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import com.google.common.base.MoreObjects;
 
+import py.com.domainsoft.entidad.dtos.ActividadEconomicaDTO;
+import py.com.domainsoft.entidad.dtos.CiudadDTO;
 import py.com.domainsoft.entidad.dtos.PaisDTO;
 
 public class PersonaDTO {
@@ -28,7 +30,7 @@ public class PersonaDTO {
     
     private String direccion;
     
-    private PaisDTO pais;
+    private PaisDTO paisResidencia;
     
     private PaisDTO paisNacionalidad;
 
@@ -41,6 +43,10 @@ public class PersonaDTO {
     private Boolean estado;
     
     private String correo;
+    
+    private ActividadEconomicaDTO actividadEconomica;
+    
+    private CiudadDTO ciudad;
     
     public Integer getIdPersona() {
         return idPersona;
@@ -122,15 +128,6 @@ public class PersonaDTO {
         this.direccion = direccion;
     }
 
-    
-
-    public PaisDTO getPais() {
-        return pais;
-    }
-
-    public void setPais(PaisDTO pais) {
-        this.pais = pais;
-    }
 
     public PaisDTO getPaisNacionalidad() {
         return paisNacionalidad;
@@ -164,8 +161,6 @@ public class PersonaDTO {
         this.genero = genero;
     }
 
-    
-
     public Boolean getEstado() {
         return estado;
     }
@@ -182,6 +177,31 @@ public class PersonaDTO {
         this.correo = correo;
     }
     
+    
+    public PaisDTO getPaisResidencia() {
+        return paisResidencia;
+    }
+
+    public void setPaisResidencia(PaisDTO paisResidencia) {
+        this.paisResidencia = paisResidencia;
+    }
+
+    public ActividadEconomicaDTO getActividadEconomica() {
+        return actividadEconomica;
+    }
+
+    public void setActividadEconomica(ActividadEconomicaDTO actividadEconomica) {
+        this.actividadEconomica = actividadEconomica;
+    }
+
+    public CiudadDTO getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(CiudadDTO ciudad) {
+        this.ciudad = ciudad;
+    }
+
     public String getFullName() {
         return this.nombres + " " + (this.apellidos == null ? "" : this.apellidos);
     }
@@ -202,10 +222,12 @@ public class PersonaDTO {
                 .add("tipoPersona", tipoPersona)
                 .add("tipoDocumento", tipoDocumento)
                 .add("tipoDocumento2", tipoDocumento2)
-                .add("pais", pais)
+                .add("paisResidencia", paisResidencia)
                 .add("paisNacionalidad", paisNacionalidad)
                 .add("estadoCivil", estadoCivil)
                 .add("correo", correo)
+                .add("ciudad", ciudad)
+                .add("actividadEconomica", actividadEconomica)
                 .toString();
     }
     
