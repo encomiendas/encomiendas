@@ -27,11 +27,11 @@
 
 			<section class="content-header">
 				<h1>
-					Clientes <small>lista de clientes</small>
+					Personas <small>lista de personas</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">Clientes</li>
+					<li class="active">Personas</li>
 				</ol>
 			</section>
 
@@ -46,8 +46,8 @@
 								<div th:if="${message != null}" th:text="${message}"
 									style="color: red; margin: 10px 0px;"></div>
 
-								<form action="#" method="POST" th:action="@{/cliente-lista}"
-									id="formulario" th:object="${cliente}" class="form-horizontal"
+								<form action="#" method="POST" th:action="@{/persona-lista}"
+									id="formulario" th:object="${persona}" class="form-horizontal"
 									role="form">
 
 									<div style="color: red" class="requerido">
@@ -55,22 +55,16 @@
 									</div>
 
 									<div class="form-group has-feedback">
-										<label>Identificador Cliente</label> <input type="text"
-											value="" class="form-control" id="idCliente"
-											placeholder="Identificador" readonly th:field="*{idCliente}">
-									</div>
-									<div class="form-group has-feedback hidden">
-										<label>Id Persona</label> <input type="text" value=""
+										<label>Identificador</label> <input type="text" value=""
 											class="form-control" id="idPersona"
-											placeholder="Identificador" readonly
-											th:field="${cliente.persona.idPersona}">
+											placeholder="Identificador" readonly th:field="*{idPersona}">
 									</div>
+
 
 									<div class="form-group has-feedback ">
 										<label>Documento</label> <input type="text" value=""
 											class="form-control editable" id="documento"
-											placeholder="Identificador" disabled
-											th:field="${cliente.persona.documento}">
+											placeholder="Identificador" disabled th:field="*{documento}">
 									</div>
 
 
@@ -78,8 +72,7 @@
 										<label>Tipo Documento</label> <select
 											class="form-control editable" id="tipoDoc"
 											th:object="${tipoDocumento}"
-											th:field="${cliente.persona.tipoDocumento.idTipoDocumento}"
-											disabled>
+											th:field="${persona.tipoDocumento.idTipoDocumento}" disabled>
 											<option th:each="dropDownItem : ${tiposDoc}"
 												th:value="${dropDownItem.getIdTipoDocumento()}"
 												th:text="${dropDownItem.getDescripcion()}" />
@@ -92,22 +85,69 @@
 									<div class="form-group has-feedback">
 										<label>Nombres</label> <input type="text"
 											class="form-control editable" id="nombres"
-											placeholder="Nombres del Cliente"
-											th:field="${cliente.persona.nombres}" disabled required>
+											placeholder="Nombres del Cliente" th:field="*{nombres}"
+											disabled required>
 									</div>
 
 									<div class="form-group has-feedback">
 										<label>Apellidos</label> <input type="text"
 											class="form-control editable" id="apellidos"
-											placeholder="Apellidos del Cliente"
-											th:field="${cliente.persona.apellidos}" disabled required>
+											placeholder="Apellidos del Cliente" th:field="*{apellidos}"
+											disabled required>
+									</div>
+									<div class="form-group has-feedback">
+										<label>Sexo</label> <select class="form-control editable "
+											id="sexo" th:field="*{genero}" disabled>
+											<option value="" selected>Seleccione</option>
+											<option value="M">MASCULINO</option>
+											<option value="F">FEMENINO</option>
+										</select>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Estado Civil</label> <select
+											class="form-control editable " id="estadoCivil"
+											th:field="${persona.estadoCivil.idEstadoCivil}" disabled>
+											<option value="" selected>Seleccione</option>
+											<option value="1">SOLTERO</option>
+											<option value="2">CASADO</option>
+											<option value="3">VIUDO</option>
+											<option value="4">DIVORCIADO</option>
+											<option value="5">SEPARADO</option>
+											<option value="6">COCUBINADO</option>
+										</select>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Correo</label> <input type="text"
+											class="form-control editable" id="correo"
+											placeholder="ejemplo@gmail.com" th:field="*{correo}" disabled>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Fecha Nacimiento</label> <input type="date"
+											class="form-control editable" id="fechaNacimiento"
+											placeholder="dd/mm/aaaa" th:field="*{fechaNacimiento}"
+											disabled>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Telefono</label> <input type="text"
+											class="form-control editable" id="telefono"
+											placeholder="xx xxx xxx" th:field="*{telefono}" disabled>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Direccion</label> <input type="text"
+											class="form-control editable" id="direccion"
+											placeholder="Ingrese la direccion" th:field="*{direccion}"
+											disabled>
 									</div>
 
 									<div class="form-group has-feedback">
 										<label>Tipo Persona</label> <select
 											class="form-control editable" id="tipoPersona"
-											th:field="${cliente.persona.tipoPersona.idTipoPersona}"
-											disabled>
+											th:field="${persona.tipoPersona.idTipoPersona}" disabled>
 											<option th:each="dropDownItem : ${tiposPersonas}"
 												th:value="${dropDownItem.getIdTipoPersona()}"
 												th:text="${dropDownItem.getDescripcion()}" />
@@ -116,16 +156,14 @@
 
 									<div class="form-group has-feedback">
 										<label>Pais</label> <select class="form-control editable"
-											id="idPais" th:field="${cliente.persona.pais.idPais}"
-											disabled>
+											id="idPais" th:field="${persona.pais.idPais}" disabled>
 											<option value="" selected>Seleccione</option>
 											<option value="1">Paraguay</option>
 										</select>
 									</div>
 									<div class="form-group has-feedback hidden">
 										<label>Pais</label> <select class="form-control editable "
-											id="idPais2"
-											th:field="${cliente.persona.paisNacionalidad.idPais}"
+											id="idPais2" th:field="${persona.paisNacionalidad.idPais}"
 											disabled>
 											<option value="" selected>Seleccione</option>
 											<option value="1">Paraguay</option>
@@ -209,30 +247,40 @@
 															<th>Apellidos</th>
 															<th>Tipo Documento</th>
 															<th>Estado</th>
-															<td>ID Cliente</td>
 															<td>ID Persona</tD>
 															<td>ID Tipo Doc</td>
 															<td>ID Tipo Per</td>
 															<td>ID Pais</td>
+															<td>ID Nacionalidad</td>
+															<td>Sexo</td>
+															<td>ID Estado civil</td>
+															<td>correo</td>
+															<td>telefono</td>
+															<td>direccion</td>
+															<td>fecha nacimiento</td>
 														</tr>
 													</thead>
 													<tbody>
-														<tr th:each="cliente : ${clientes}" class="selected">
-															<td th:text="${cliente.persona.documento}"></td>
-															<td th:text="${cliente.persona.nombres}"></td>
-															<td th:text="${cliente.persona.apellidos}"></td>
-															<td
-																th:text="${cliente.persona.tipoDocumento.descripcion}"></td>
-															<td th:switch="${cliente.estado}"><span
+														<tr th:each="persona : ${personas}" class="selected">
+															<td th:text="${persona.documento}"></td>
+															<td th:text="${persona.nombres}"></td>
+															<td th:text="${persona.apellidos}"></td>
+															<td th:text="${persona.tipoDocumento.descripcion}"></td>
+															<td th:switch="${persona.estado}"><span
 																th:case="true" th:text="ACTIVO"></span> <span
 																th:case="false" th:text="INACTIVO"></span></td>
-															<td th:text="${cliente.idCliente}"></td>
-															<td th:text="${cliente.persona.idPersona}"></td>
+															<td th:text="${persona.idPersona}"></td>
+															<td th:text="${persona.tipoDocumento.idTipoDocumento}"></td>
+															<td th:text="${persona.tipoPersona.idTipoPersona}"></td>
+															<td th:text="${persona.pais.idPais}"></td>
+															<td th:text="${persona.paisNacionalidad.idPais}"></td>
+															<td th:text="${persona.genero}"></td>
 															<td
-																th:text="${cliente.persona.tipoDocumento.idTipoDocumento}"></td>
-															<td
-																th:text="${cliente.persona.tipoPersona.idTipoPersona}"></td>
-															<td th:text="${cliente.persona.pais.idPais}"></td>
+																th:text="${persona.estadoCivil} ? ${persona.estadoCivil.idEstadoCivil} : null"></td>
+															<td th:text="${persona.correo}"></td>
+															<td th:text="${persona.telefono}"></td>
+															<td th:text="${persona.direccion}"></td>
+															<td th:text="${persona.fechaNacimiento}"></td>
 														</tr>
 
 													</tbody>
@@ -247,42 +295,41 @@
 											<div class="col-sm-5">
 												<div class="dataTables_info" id="tablaCliente_info"
 													role="status" aria-live="polite">
-													Página <span th:text="${clientes.Number + 1}"></span> de <span
-														th:text="${clientes.TotalPages}"></span> de un total de <span
-														th:text="${clientes.TotalElements}"></span> registros
+													Página <span th:text="${personas.Number + 1}"></span> de <span
+														th:text="${personas.TotalPages}"></span> de un total de <span
+														th:text="${personas.TotalElements}"></span> registros
 												</div>
 											</div>
 
-											<div th:if="${clientes.totalPages != 1}" class="col-sm-7">
+											<div th:if="${personas.totalPages != 1}" class="col-sm-7">
 
 												<div class="dataTables_paginate paging_simple_numbers"
 													id="tablaCliente_paginate">
 
 													<ul class="pagination">
-														<li th:class="${clientes.number == 0} ? disabled"><a
+														<li th:class="${personas.number == 0} ? disabled"><a
 															class="pageLink"
-															th:href="@{/cliente-lista(pageSize=${selectedPageSize}, page=1)}">&laquo;</a></li>
-														<li th:class="${clientes.number == 0} ? disabled"><a
+															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=1)}">&laquo;</a></li>
+														<li th:class="${personas.number == 0} ? disabled"><a
 															class="pageLink"
-															th:href="@{/cliente-lista(pageSize=${selectedPageSize}, page=${clientes.number})}">&larr;</a></li>
+															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${clentes.number})}">&larr;</a></li>
 														<li
-															th:class="${clientes.number == (page - 1)} ? 'active pointer-disabled'"
+															th:class="${personas.number == (page - 1)} ? 'active pointer-disabled'"
 															th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}"><a
 															class="pageLink"
-															th:href="@{/cliente-lista(pageSize=${selectedPageSize}, page=${page})}"
+															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${page})}"
 															th:text="${page}"></a></li>
 														<li
-															th:class="${clientes.number + 1 == clientes.totalPages} ? disabled"><a
+															th:class="${personas.number + 1 == clentes.totalPages} ? disabled"><a
 															class="pageLink"
-															th:href="@{/cliente-lista(pageSize=${selectedPageSize}, page=${clientes.number + 2})}">&rarr;</a>
+															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${clentes.number + 2})}">&rarr;</a>
 														</li>
 														<li
-															th:class="${clientes.number + 1 == clientes.totalPages} ? disabled"><a
+															th:class="${personas.number + 1 == clentes.totalPages} ? disabled"><a
 															class="pageLink"
-															th:href="@{/cliente-lista(pageSize=${selectedPageSize}, page=${clientes.totalPages})}">&raquo;</a>
+															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${clentes.totalPages})}">&raquo;</a>
 														</li>
 													</ul>
-
 												</div>
 											</div>
 										</div>
@@ -305,11 +352,8 @@
 	<!-- SCRIPTS -->
 	<th:block th:replace="fragments/scripts :: scripts"></th:block>
 	<script src="../../plugins/select2/select2.full.min.js"></script>
-	<script src="../../js/cliente/cliente-lista.js"></script>
+	<script src="../../js/cliente/persona-lista.js"></script>
 
-	<script>
-		
-	</script>
 
 </body>
 
