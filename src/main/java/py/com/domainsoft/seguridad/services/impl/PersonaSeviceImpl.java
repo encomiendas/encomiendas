@@ -35,6 +35,10 @@ public class PersonaSeviceImpl implements PersonaService {
 
     @Override
     public PersonaEntity grabarPersona(PersonaDTO persona) {
+        if(persona.getTipoDocumento2().getIdTipoDocumento() == null) persona.setTipoDocumento2(null);
+        persona.setNombres(persona.getNombres().toUpperCase());
+        persona.setApellidos(persona.getApellidos().toUpperCase());
+        persona.setCorreo(persona.getCorreo().toUpperCase());
         return personaRepo.save(personaMapper.dtoToEntity(persona));
         
     }

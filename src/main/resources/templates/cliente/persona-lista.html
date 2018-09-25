@@ -81,31 +81,45 @@
 											placeholder="Identificador" readonly th:field="*{idPersona}">
 									</div>
 
-
-									<div class="form-group has-feedback ">
-										<label>Documento</label> <input type="text" value=""
-											class="form-control editable" id="documento"
-											placeholder="Identificador" disabled th:field="*{documento}">
-									</div>
-
-
 									<div class="form-group has-feedback">
 										<label>Tipo Documento</label> <select
 											class="form-control editable" id="tipoDoc"
 											th:object="${tipoDocumento}"
-											th:field="${persona.tipoDocumento.idTipoDocumento}" disabled>
+											th:field="${persona.tipoDocumento.idTipoDocumento}" required disabled>
 											<option th:each="dropDownItem : ${tiposDoc}"
 												th:value="${dropDownItem.getIdTipoDocumento()}"
 												th:text="${dropDownItem.getDescripcion()}" />
 										</select>
 									</div>
 
+									<div class="form-group has-feedback ">
+										<label>Documento</label> <input type="text" value=""
+											class="form-control editable" id="documento" required
+											placeholder="Nro. Documento" disabled th:field="*{documento}">
+									</div>
 
+									<div class="form-group has-feedback">
+										<label>Tipo Documento 2</label> <select
+											class="form-control editable" id="tipoDoc2"
+											th:object="${tipoDocumento}"
+											th:field="${persona.tipoDocumento2.idTipoDocumento}" disabled>
+											<option value=null selected>Seleccione</option>
+											<option th:each="dropDownItem : ${tiposDoc}"
+												th:value="${dropDownItem.getIdTipoDocumento()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
 
+									<div class="form-group has-feedback ">
+										<label>Documento 2</label> <input type="text" value=""
+											class="form-control editable" id="documento2"
+											placeholder="Nro. Documento 2" disabled th:field="*{documento2}">
+									</div>
 
 									<div class="form-group has-feedback">
 										<label>Nombres</label> <input type="text"
 											class="form-control editable" id="nombres"
+											style="text-transform:uppercase"
 											placeholder="Nombres del Cliente" th:field="*{nombres}"
 											disabled required>
 									</div>
@@ -113,6 +127,7 @@
 									<div class="form-group has-feedback">
 										<label>Apellidos</label> <input type="text"
 											class="form-control editable" id="apellidos"
+											style="text-transform:uppercase"
 											placeholder="Apellidos del Cliente" th:field="*{apellidos}"
 											disabled required>
 									</div>
@@ -142,6 +157,7 @@
 									<div class="form-group has-feedback">
 										<label>Correo</label> <input type="text"
 											class="form-control editable" id="correo"
+											style="text-transform:uppercase"
 											placeholder="ejemplo@gmail.com" th:field="*{correo}"  disabled>
 									</div>
 
@@ -191,7 +207,7 @@
 											<option value="" selected>Seleccione</option>
 											<option th:each="dropDownItem : ${paises}"
 												th:value="${dropDownItem.getIdPais()}"
-												th:text="${dropDownItem.getDescripcion()}" />
+												th:text="${dropDownItem.getGentilicio()}" />
 										</select>
 									</div>
 									<div class="form-group has-feedback">
@@ -294,6 +310,8 @@
 															<td>Actividad</td>
 															<td>Ciudad</td>
 															<td>Distrito</td>
+															<td>Tipo doc 2</td>
+															<td>doc 2</td>
 														</tr>
 													</thead>
 													<tbody>
@@ -319,6 +337,8 @@
 															<td	th:text="${persona.actividadEconomica} ? ${persona.actividadEconomica.idActividadEconomica} : null"></td>
 															<td	th:text="${persona.ciudad} ? ${persona.ciudad.idCiudad} : null"></td>
 															<td	th:text="${persona.ciudad} ? ${persona.ciudad.divisionPolitica.idDivisionPolitica} : null"></td>
+															<td th:text="${persona.tipoDocumento2} ? ${persona.tipoDocumento2.idTipoDocumento} : null"></td>
+															<td th:text="${persona.documento2}"></td>
 														</tr>
 
 													</tbody>
@@ -350,7 +370,7 @@
 															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=1)}">&laquo;</a></li>
 														<li th:class="${personas.number == 0} ? disabled"><a
 															class="pageLink"
-															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${clentes.number})}">&larr;</a></li>
+															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${personas.number})}">&larr;</a></li>
 														<li
 															th:class="${personas.number == (page - 1)} ? 'active pointer-disabled'"
 															th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}"><a
@@ -358,14 +378,14 @@
 															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${page})}"
 															th:text="${page}"></a></li>
 														<li
-															th:class="${personas.number + 1 == clentes.totalPages} ? disabled"><a
+															th:class="${personas.number + 1 == personas.totalPages} ? disabled"><a
 															class="pageLink"
-															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${clentes.number + 2})}">&rarr;</a>
+															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${personas.number + 2})}">&rarr;</a>
 														</li>
 														<li
-															th:class="${personas.number + 1 == clentes.totalPages} ? disabled"><a
+															th:class="${personas.number + 1 == personas.totalPages} ? disabled"><a
 															class="pageLink"
-															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${clentes.totalPages})}">&raquo;</a>
+															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${personas.totalPages})}">&raquo;</a>
 														</li>
 													</ul>
 												</div>
