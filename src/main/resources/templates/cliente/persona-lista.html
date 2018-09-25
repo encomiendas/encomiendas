@@ -3,6 +3,7 @@
 
 <!-- STYLES IMPORTS -->
 <th:block th:replace="fragments/head :: head"></th:block>
+<link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
 
 <!-- //TODO:Oculta dos columnas de la tabla -->
 <style>
@@ -42,6 +43,8 @@
 					<div class="col-md-4">
 						<div class="box box-success">
 							<div class="register-box-body">
+							
+							
 
 								<div th:if="${message != null}" th:text="${message}"
 									style="color: red; margin: 10px 0px;"></div>
@@ -49,6 +52,24 @@
 								<form action="#" method="POST" th:action="@{/persona-lista}"
 									id="formulario" th:object="${persona}" class="form-horizontal"
 									role="form">
+									
+									<div class="row">
+										<div class="col-xs-4">
+											<button type="button"
+												class="btn btn-success btn-block btn-flat" id="btnNuevo"
+												onclick="nuevo()">Nuevo</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="submit"
+												class="btn btn-success btn-block btn-flat" id="btnGrabar"
+												disabled>Grabar</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="button"
+												class="btn btn-success btn-block btn-flat" id="btnCancelar"
+												onclick="cancelar(this.form)">Cancelar</button>
+										</div>
+									</div>
 
 									<div style="color: red" class="requerido">
 										<label id="label"></label>
@@ -97,7 +118,7 @@
 									</div>
 									<div class="form-group has-feedback">
 										<label>Sexo</label> <select class="form-control editable "
-											id="sexo" th:field="*{genero}" disabled>
+											id="sexo" th:field="*{genero}" disabled required>
 											<option value="" selected>Seleccione</option>
 											<option value="M">MASCULINO</option>
 											<option value="F">FEMENINO</option>
@@ -107,7 +128,7 @@
 									<div class="form-group has-feedback">
 										<label>Estado Civil</label> <select
 											class="form-control editable " id="estadoCivil"
-											th:field="${persona.estadoCivil.idEstadoCivil}" disabled>
+											th:field="${persona.estadoCivil.idEstadoCivil}" required disabled>
 											<option value="" selected>Seleccione</option>
 											<option value="1">SOLTERO</option>
 											<option value="2">CASADO</option>
@@ -121,7 +142,7 @@
 									<div class="form-group has-feedback">
 										<label>Correo</label> <input type="text"
 											class="form-control editable" id="correo"
-											placeholder="ejemplo@gmail.com" th:field="*{correo}" disabled>
+											placeholder="ejemplo@gmail.com" th:field="*{correo}"  disabled>
 									</div>
 
 									<div class="form-group has-feedback">
@@ -147,7 +168,7 @@
 									<div class="form-group has-feedback">
 										<label>Tipo Persona</label> <select
 											class="form-control editable" id="tipoPersona"
-											th:field="${persona.tipoPersona.idTipoPersona}" disabled>
+											th:field="${persona.tipoPersona.idTipoPersona}" required disabled>
 											<option th:each="dropDownItem : ${tiposPersonas}"
 												th:value="${dropDownItem.getIdTipoPersona()}"
 												th:text="${dropDownItem.getDescripcion()}" />
@@ -155,18 +176,46 @@
 									</div>
 
 									<div class="form-group has-feedback">
-										<label>Pais</label> <select class="form-control editable"
-											id="idPais" th:field="${persona.pais.idPais}" disabled>
+										<label>Pais de Residencia</label> <select class="form-control select2 editable"
+											id="idPais" th:field="${persona.paisResidencia.idPais}" disabled>
 											<option value="" selected>Seleccione</option>
-											<option value="1">Paraguay</option>
+											<option th:each="dropDownItem : ${paises}"
+												th:value="${dropDownItem.getIdPais()}"
+												th:text="${dropDownItem.getDescripcion()}" />
 										</select>
 									</div>
-									<div class="form-group has-feedback hidden">
-										<label>Pais</label> <select class="form-control editable "
+									<div class="form-group has-feedback ">
+										<label>Nacionalidad</label> <select class="form-control editable select2 "
 											id="idPais2" th:field="${persona.paisNacionalidad.idPais}"
-											disabled>
+											required disabled>
 											<option value="" selected>Seleccione</option>
-											<option value="1">Paraguay</option>
+											<option th:each="dropDownItem : ${paises}"
+												th:value="${dropDownItem.getIdPais()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+									<div class="form-group has-feedback">
+										<label>Actividad Economica</label> <select class="form-control select2 editable"
+											id="idActividadEconomica" th:field="${persona.actividadEconomica.idActividadEconomica}" required disabled>
+											<option value="" selected >Seleccione</option>
+											<option th:each="dropDownItem : ${actividadesEconomicas}"
+												th:value="${dropDownItem.getIdActividadEconomica()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Distrito/Localidad</label> <select class="form-control select2"
+											id="idDivisionPolitica" required disabled>
+											<option value="" selected >Seleccione</option>
+											
+										</select>
+									</div>
+									<div class="form-group has-feedback">
+										<label>Ciudad</label> <select class="form-control select2"
+											id="idCiudad" th:field="${persona.ciudad.idCiudad}" required disabled>
+											<option value="" selected>Seleccione</option>
+											
 										</select>
 									</div>
 
@@ -180,23 +229,7 @@
 										</select>
 									</div>
 
-									<div class="row">
-										<div class="col-xs-4">
-											<button type="button"
-												class="btn btn-success btn-block btn-flat" id="btnNuevo"
-												onclick="nuevo()">Nuevo</button>
-										</div>
-										<div class="col-xs-4">
-											<button type="submit"
-												class="btn btn-success btn-block btn-flat" id="btnGrabar"
-												disabled>Grabar</button>
-										</div>
-										<div class="col-xs-4">
-											<button type="button"
-												class="btn btn-success btn-block btn-flat" id="btnCancelar"
-												onclick="cancelar(this.form)">Cancelar</button>
-										</div>
-									</div>
+									
 								</form>
 							</div>
 						</div>
@@ -258,6 +291,9 @@
 															<td>telefono</td>
 															<td>direccion</td>
 															<td>fecha nacimiento</td>
+															<td>Actividad</td>
+															<td>Ciudad</td>
+															<td>Distrito</td>
 														</tr>
 													</thead>
 													<tbody>
@@ -272,15 +308,17 @@
 															<td th:text="${persona.idPersona}"></td>
 															<td th:text="${persona.tipoDocumento.idTipoDocumento}"></td>
 															<td th:text="${persona.tipoPersona.idTipoPersona}"></td>
-															<td th:text="${persona.pais.idPais}"></td>
+															<td th:text="${persona.paisResidencia.idPais}"></td>
 															<td th:text="${persona.paisNacionalidad.idPais}"></td>
 															<td th:text="${persona.genero}"></td>
-															<td
-																th:text="${persona.estadoCivil} ? ${persona.estadoCivil.idEstadoCivil} : null"></td>
+															<td	th:text="${persona.estadoCivil} ? ${persona.estadoCivil.idEstadoCivil} : null"></td>
 															<td th:text="${persona.correo}"></td>
 															<td th:text="${persona.telefono}"></td>
 															<td th:text="${persona.direccion}"></td>
 															<td th:text="${persona.fechaNacimiento}"></td>
+															<td	th:text="${persona.actividadEconomica} ? ${persona.actividadEconomica.idActividadEconomica} : null"></td>
+															<td	th:text="${persona.ciudad} ? ${persona.ciudad.idCiudad} : null"></td>
+															<td	th:text="${persona.ciudad} ? ${persona.ciudad.divisionPolitica.idDivisionPolitica} : null"></td>
 														</tr>
 
 													</tbody>
@@ -352,7 +390,10 @@
 	<!-- SCRIPTS -->
 	<th:block th:replace="fragments/scripts :: scripts"></th:block>
 	<script src="../../plugins/select2/select2.full.min.js"></script>
+	<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
+	<script src="../../plugins/datepicker/locales/bootstrap-datepicker.es.js"></script>
 	<script src="../../js/cliente/persona-lista.js"></script>
+	
 
 
 </body>

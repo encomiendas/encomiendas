@@ -16,20 +16,20 @@ import org.hibernate.id.enhanced.SequenceStyleGenerator;
 import com.google.common.base.MoreObjects;
 
 @Entity
-@Table(name = "actividad_economica")
+@Table(name = "division_politica")
 public class DivisionPoliticaEntity {
 
     @Id
-    @GenericGenerator(name = "actividadEconomicaSequenceGenerator",
+    @GenericGenerator(name = "divisionPoliticaSequenceGenerator",
     strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
     parameters = {
             @Parameter(name = SequenceStyleGenerator.SEQUENCE_PARAM,
-                    value = "actividad_economica_id_actividad_economica_seq"),
+                    value = "division_politica_id_division_politica_seq"),
             @Parameter(name = SequenceStyleGenerator.INITIAL_PARAM,
             value = "1"),
             @Parameter(name = SequenceStyleGenerator.INCREMENT_PARAM,
             value = "1") })
-    @GeneratedValue(generator = "actividadEconomicaSequenceGenerator")
+    @GeneratedValue(generator = "divisionPoliticaSequenceGenerator")
     @Column(name = "id_division_politica")
     private Integer idDivisionPolitica;
     

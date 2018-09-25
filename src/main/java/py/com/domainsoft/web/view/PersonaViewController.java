@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import py.com.domainsoft.common.Constantes;
 import py.com.domainsoft.common.domain.Pager;
+import py.com.domainsoft.entidad.services.ActividadEconomicaService;
+import py.com.domainsoft.entidad.services.PaisService;
 import py.com.domainsoft.seguridad.dtos.MenuDTO;
 import py.com.domainsoft.seguridad.dtos.PersonaDTO;
 import py.com.domainsoft.seguridad.dtos.TipoDocumentoDTO;
@@ -36,13 +38,19 @@ public class PersonaViewController extends BaseViewController{
     private final PersonaService personaService;
     private final TipoDocumentoService tipoDocumentoService;
     private final TipoPersonaService tipoPersonaService;
+    private final ActividadEconomicaService actividadEconomicaService;
+    private final PaisService paisService;
 
     public PersonaViewController(PersonaService personaService,
             TipoDocumentoService tipoDocumentoService,
-            TipoPersonaService tipoPersonaService) {
+            TipoPersonaService tipoPersonaService,
+            ActividadEconomicaService actividadEconomicaService,
+            PaisService paisService) {
         this.personaService = personaService;
         this.tipoDocumentoService = tipoDocumentoService;
         this.tipoPersonaService = tipoPersonaService;
+        this.actividadEconomicaService = actividadEconomicaService;
+        this.paisService = paisService;
     }
 
     @GetMapping(PERSONA_LISTA)
@@ -77,6 +85,8 @@ public class PersonaViewController extends BaseViewController{
         modelAndView.addObject("tipoPersona", new TipoPersonaDTO());
         modelAndView.addObject("tiposDoc", tipoDocumentoService.findAll());
         modelAndView.addObject("tiposPersonas", tipoPersonaService.findAll());
+        modelAndView.addObject("actividadesEconomicas", actividadEconomicaService.findAll());
+        modelAndView.addObject("paises", paisService.findAll());
        
         //Paginacion
         modelAndView.addObject("personas", personaPaginado);

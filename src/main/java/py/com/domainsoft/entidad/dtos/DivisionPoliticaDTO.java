@@ -102,7 +102,7 @@ public class DivisionPoliticaDTO {
     @Override
 	public String toString() {
 	   return MoreObjects.toStringHelper(this)
-	          .add("idActividadEconomica", idDivisionPolitica)
+	          .add("idDivisionPolitica", idDivisionPolitica)
 	          .add("descripcion", descripcion)
 	          .add("estado", estado)
 	          .add("pais", pais)

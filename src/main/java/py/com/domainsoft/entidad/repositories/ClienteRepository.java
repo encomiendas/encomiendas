@@ -17,6 +17,5 @@ public interface ClienteRepository extends JpaRepository<ClienteEntity, Integer>
 
     List<ClienteEntity> findByIdCliente(Integer idCliente);
     
-    List<ClienteEntity> findAll();
 
 }

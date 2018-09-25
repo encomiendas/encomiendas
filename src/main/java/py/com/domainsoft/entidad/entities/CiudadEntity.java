@@ -46,6 +46,38 @@ public class CiudadEntity {
 
     
     
+    public Integer getIdCiudad() {
+        return idCiudad;
+    }
+
+    public void setIdCiudad(Integer idCiudad) {
+        this.idCiudad = idCiudad;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public DivisionPoliticaEntity getDivisionPolitica() {
+        return divisionPolitica;
+    }
+
+    public void setDivisionPolitica(DivisionPoliticaEntity divisionPolitica) {
+        this.divisionPolitica = divisionPolitica;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

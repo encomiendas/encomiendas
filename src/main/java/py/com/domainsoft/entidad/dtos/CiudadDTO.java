@@ -31,7 +31,7 @@ public class CiudadDTO {
 	    private Boolean estado;
 	    private DivisionPoliticaDTO divisionPolitica;
 
-		public Builder idDivisionPolitica(Integer idCiudad) {
+		public Builder idCiudad(Integer idCiudad) {
 			this.idCiudad = idCiudad;
 			return this;
 		}
