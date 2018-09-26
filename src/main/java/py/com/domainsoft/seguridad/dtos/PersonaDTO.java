@@ -4,10 +4,7 @@ import java.time.LocalDate;
 
 import com.google.common.base.MoreObjects;
 
-import py.com.domainsoft.entidad.entities.PaisEntity;
-import py.com.domainsoft.seguridad.entities.EstadoCivilEntity;
-import py.com.domainsoft.seguridad.entities.TipoDocumentoEntity;
-import py.com.domainsoft.seguridad.entities.TipoPersonaEntity;
+import py.com.domainsoft.entidad.dtos.PaisDTO;
 
 public class PersonaDTO {
 
@@ -17,11 +14,11 @@ public class PersonaDTO {
     
     private String apellidos;
     
-    private TipoDocumentoEntity tipoDocumento;
+    private TipoDocumentoDTO tipoDocumento;
     
     private String documento;
 
-    private TipoDocumentoEntity tipoDocumento2;
+    private TipoDocumentoDTO tipoDocumento2;
     
     private String documento2;
     
@@ -31,15 +28,15 @@ public class PersonaDTO {
     
     private String direccion;
     
-    private PaisEntity pais;
+    private PaisDTO pais;
     
-    private PaisEntity paisNacionalidad;
+    private PaisDTO paisNacionalidad;
 
-    private TipoPersonaEntity tipoPersona;
+    private TipoPersonaDTO tipoPersona;
     
     private String genero;
     
-    private EstadoCivilEntity estadoCivil;
+    private EstadoCivilDTO estadoCivil;
     
     private Boolean estado;
     
@@ -69,11 +66,11 @@ public class PersonaDTO {
         this.apellidos = apellidos;
     }
 
-    public TipoDocumentoEntity getTipoDocumento() {
+    public TipoDocumentoDTO getTipoDocumento() {
         return tipoDocumento;
     }
 
-    public void setTipoDocumento(TipoDocumentoEntity tipoDocumento) {
+    public void setTipoDocumento(TipoDocumentoDTO tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
 
@@ -85,11 +82,11 @@ public class PersonaDTO {
         this.documento = documento;
     }
 
-    public TipoDocumentoEntity getTipoDocumento2() {
+    public TipoDocumentoDTO getTipoDocumento2() {
         return tipoDocumento2;
     }
 
-    public void setTipoDocumento2(TipoDocumentoEntity tipoDocumento2) {
+    public void setTipoDocumento2(TipoDocumentoDTO tipoDocumento2) {
         this.tipoDocumento2 = tipoDocumento2;
     }
 
@@ -125,28 +122,38 @@ public class PersonaDTO {
         this.direccion = direccion;
     }
 
-    public PaisEntity getPais() {
+    
+
+    public PaisDTO getPais() {
         return pais;
     }
 
-    public void setPais(PaisEntity pais) {
+    public void setPais(PaisDTO pais) {
         this.pais = pais;
     }
 
-    public PaisEntity getPaisNacionalidad() {
+    public PaisDTO getPaisNacionalidad() {
         return paisNacionalidad;
     }
 
-    public void setPaisNacionalidad(PaisEntity paisNacionalidad) {
+    public void setPaisNacionalidad(PaisDTO paisNacionalidad) {
         this.paisNacionalidad = paisNacionalidad;
     }
 
-    public TipoPersonaEntity getTipoPersona() {
+    public TipoPersonaDTO getTipoPersona() {
         return tipoPersona;
     }
 
-    public void setTipoPersona(TipoPersonaEntity tipoPersona) {
+    public void setTipoPersona(TipoPersonaDTO tipoPersona) {
         this.tipoPersona = tipoPersona;
+    }
+
+    public EstadoCivilDTO getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(EstadoCivilDTO estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
 
     public String getGenero() {
@@ -157,13 +164,7 @@ public class PersonaDTO {
         this.genero = genero;
     }
 
-    public EstadoCivilEntity getEstadoCivil() {
-        return estadoCivil;
-    }
-
-    public void setEstadoCivil(EstadoCivilEntity estadoCivil) {
-        this.estadoCivil = estadoCivil;
-    }
+    
 
     public Boolean getEstado() {
         return estado;

@@ -63,4 +63,9 @@
         <sqlFile path="sql/2018-09-07T12:38.sql" relativeToChangelogFile="true"/>
     </changeSet>
     
+    <!-- This script create the client table -->
+    <changeSet id="2018-09-21T08:00" author="jdferreira">
+        <sqlFile path="sql/2018-09-21T08:00.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    
 </databaseChangeLog>
