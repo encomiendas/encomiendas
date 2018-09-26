@@ -63,4 +63,13 @@
         <sqlFile path="sql/2018-09-21T08:00.sql" relativeToChangelogFile="true"/>
     </changeSet>
     
+    <!-- Se agrega las tablas que hace referencia en personas -->
+    <changeSet id="2018-09-24T16:00" author="jdferreira">
+        <sqlFile path="sql/2018-09-24T16:00.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    
+    <!-- Se inserta datos en las tablas; actvidad economica, ciudad, division politica -->
+    <changeSet id="2018-09-24T18:40" author="jdferreira">
+        <sqlFile path="sql/2018-09-24T18:40.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>

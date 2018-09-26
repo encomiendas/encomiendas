@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- STYLES IMPORTS -->
+<th:block th:replace="fragments/head :: head"></th:block>
+<link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
+
+<!-- //TODO:Oculta dos columnas de la tabla -->
+<style>
+#tablaCliente td:nth-child(n+6) {
+	display: none;
+}
+</style>
+
+<body class="hold-transition skin-green sidebar-mini ">
+
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<th:block th:replace="fragments/header :: header"></th:block>
+		<!-- ASIDE MENU -->
+		<th:block th:replace="fragments/aside :: aside"></th:block>
+
+		<!-- =============================================== -->
+
+		<!-- CONTENIDO PRINCIPAL DE LA PAGINA -->
+		<div class="content-wrapper">
+
+			<section class="content-header">
+				<h1>
+					Personas <small>lista de personas</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">Personas</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="box box-success">
+							<div class="register-box-body">
+							
+							
+
+								<div th:if="${message != null}" th:text="${message}"
+									style="color: red; margin: 10px 0px;"></div>
+
+								<form action="#" method="POST" th:action="@{/persona-lista}"
+									id="formulario" th:object="${persona}" class="form-horizontal"
+									role="form">
+									
+									<div class="row">
+										<div class="col-xs-4">
+											<button type="button"
+												class="btn btn-success btn-block btn-flat" id="btnNuevo"
+												onclick="nuevo()">Nuevo</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="submit"
+												class="btn btn-success btn-block btn-flat" id="btnGrabar"
+												disabled>Grabar</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="button"
+												class="btn btn-success btn-block btn-flat" id="btnCancelar"
+												onclick="cancelar(this.form)">Cancelar</button>
+										</div>
+									</div>
+
+									<div style="color: red" class="requerido">
+										<label id="label"></label>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Identificador</label> <input type="text" value=""
+											class="form-control" id="idPersona"
+											placeholder="Identificador" readonly th:field="*{idPersona}">
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Tipo Documento</label> <select
+											class="form-control editable" id="tipoDoc"
+											th:object="${tipoDocumento}"
+											th:field="${persona.tipoDocumento.idTipoDocumento}" required disabled>
+											<option th:each="dropDownItem : ${tiposDoc}"
+												th:value="${dropDownItem.getIdTipoDocumento()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+
+									<div class="form-group has-feedback ">
+										<label>Documento</label> <input type="text" value=""
+											class="form-control editable" id="documento" required
+											placeholder="Nro. Documento" disabled th:field="*{documento}">
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Tipo Documento 2</label> <select
+											class="form-control editable" id="tipoDoc2"
+											th:object="${tipoDocumento}"
+											th:field="${persona.tipoDocumento2.idTipoDocumento}" disabled>
+											<option value="" selected>Seleccione</option>
+											<option th:each="dropDownItem : ${tiposDoc}"
+												th:value="${dropDownItem.getIdTipoDocumento()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+
+									<div class="form-group has-feedback ">
+										<label>Documento 2</label> <input type="text" value=""
+											class="form-control editable" id="documento2"
+											placeholder="Nro. Documento 2" disabled th:field="*{documento2}">
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Nombres</label> <input type="text"
+											class="form-control editable" id="nombres"
+											style="text-transform:uppercase"
+											placeholder="Nombres del Cliente" th:field="*{nombres}"
+											disabled required>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Apellidos</label> <input type="text"
+											class="form-control editable" id="apellidos"
+											style="text-transform:uppercase"
+											placeholder="Apellidos del Cliente" th:field="*{apellidos}"
+											disabled required>
+									</div>
+									<div class="form-group has-feedback">
+										<label>Sexo</label> <select class="form-control editable "
+											id="sexo" th:field="*{genero}" disabled required>
+											<option value="" selected>Seleccione</option>
+											<option value="M">MASCULINO</option>
+											<option value="F">FEMENINO</option>
+										</select>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Estado Civil</label> <select
+											class="form-control editable " id="estadoCivil"
+											th:field="${persona.estadoCivil.idEstadoCivil}" required disabled>
+											<option value="" selected>Seleccione</option>
+											<option value="1">SOLTERO</option>
+											<option value="2">CASADO</option>
+											<option value="3">VIUDO</option>
+											<option value="4">DIVORCIADO</option>
+											<option value="5">SEPARADO</option>
+											<option value="6">COCUBINADO</option>
+										</select>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Correo</label> <input type="text"
+											class="form-control editable" id="correo"
+											style="text-transform:uppercase"
+											placeholder="ejemplo@gmail.com" th:field="*{correo}"  disabled>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Fecha Nacimiento</label> <input type="date"
+											class="form-control editable" id="fechaNacimiento"
+											placeholder="dd/mm/aaaa" th:field="*{fechaNacimiento}"
+											disabled>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Telefono</label> <input type="text"
+											class="form-control editable" id="telefono"
+											placeholder="xx xxx xxx" th:field="*{telefono}" disabled>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Direccion</label> <input type="text"
+											class="form-control editable" id="direccion"
+											placeholder="Ingrese la direccion" th:field="*{direccion}"
+											disabled>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Tipo Persona</label> <select
+											class="form-control editable" id="tipoPersona"
+											th:field="${persona.tipoPersona.idTipoPersona}" required disabled>
+											<option th:each="dropDownItem : ${tiposPersonas}"
+												th:value="${dropDownItem.getIdTipoPersona()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Pais de Residencia</label> <select class="form-control select2 editable"
+											id="idPais" th:field="${persona.paisResidencia.idPais}" disabled>
+											<option value="" selected>Seleccione</option>
+											<option th:each="dropDownItem : ${paises}"
+												th:value="${dropDownItem.getIdPais()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+									<div class="form-group has-feedback ">
+										<label>Nacionalidad</label> <select class="form-control editable select2 "
+											id="idPais2" th:field="${persona.paisNacionalidad.idPais}"
+											required disabled>
+											<option value="" selected>Seleccione</option>
+											<option th:each="dropDownItem : ${paises}"
+												th:value="${dropDownItem.getIdPais()}"
+												th:text="${dropDownItem.getGentilicio()}" />
+										</select>
+									</div>
+									<div class="form-group has-feedback">
+										<label>Actividad Economica</label> <select class="form-control select2 editable"
+											id="idActividadEconomica" th:field="${persona.actividadEconomica.idActividadEconomica}" required disabled>
+											<option value="" selected >Seleccione</option>
+											<option th:each="dropDownItem : ${actividadesEconomicas}"
+												th:value="${dropDownItem.getIdActividadEconomica()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Distrito/Localidad</label> <select class="form-control select2"
+											id="idDivisionPolitica" required disabled>
+											<option value="" selected >Seleccione</option>
+											
+										</select>
+									</div>
+									<div class="form-group has-feedback">
+										<label>Ciudad</label> <select class="form-control select2"
+											id="idCiudad" th:field="${persona.ciudad.idCiudad}" required disabled>
+											<option value="" selected>Seleccione</option>
+											
+										</select>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Estado</label> <select class="form-control editable"
+											id="estado" th:field="*{estado}" th:placeholder="Hola"
+											disabled>
+											<option value="true" selected disabled>Estado</option>
+											<option value="true">Activo</option>
+											<option value="false">Inactivo</option>
+										</select>
+									</div>
+
+									
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8">
+						<div class="box box-success">
+							<div class="box-header"></div>
+							<!-- /.box-header -->
+							<div class="box-body" id="divTabla">
+								<div class="table-responsive">
+
+									<div id="tablaMenu_wrapper"
+										class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+										<div class="row">
+
+											<div class="col-sm-6">
+												<div class="dataTables_length" id="tablaCliente_length">
+													<label>Mostrar <select name="tablaCliente_length"
+														aria-controls="tablaCliente" class="form-control input-sm">
+															<option th:each="pageSize : ${pageSizes}"
+																th:text="${pageSize}" th:value="${pageSize}"
+																th:selected="${pageSize} == ${selectedPageSize}"></option>
+													</select> registros
+													</label>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<div id="tablaCliente_filter" class="dataTables_filter">
+													<label>Buscar:<input type="search"
+														class="form-control input-sm" placeholder="su texto aqui"
+														aria-controls="tablaCliente"></label>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="row">
+
+											<div class="col-sm-12">
+
+												<table id="tablaCliente"
+													class="table table-bordered table-hover ">
+													<thead>
+														<tr>
+															<th>Documento</th>
+															<th>Nombres</th>
+															<th>Apellidos</th>
+															<th>Tipo Documento</th>
+															<th>Estado</th>
+															<td>ID Persona</tD>
+															<td>ID Tipo Doc</td>
+															<td>ID Tipo Per</td>
+															<td>ID Pais</td>
+															<td>ID Nacionalidad</td>
+															<td>Sexo</td>
+															<td>ID Estado civil</td>
+															<td>correo</td>
+															<td>telefono</td>
+															<td>direccion</td>
+															<td>fecha nacimiento</td>
+															<td>Actividad</td>
+															<td>Ciudad</td>
+															<td>Distrito</td>
+															<td>Tipo doc 2</td>
+															<td>doc 2</td>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="persona : ${personas}" class="selected">
+															<td th:text="${persona.documento}"></td>
+															<td th:text="${persona.nombres}"></td>
+															<td th:text="${persona.apellidos}"></td>
+															<td th:text="${persona.tipoDocumento.descripcion}"></td>
+															<td th:switch="${persona.estado}"><span
+																th:case="true" th:text="ACTIVO"></span> <span
+																th:case="false" th:text="INACTIVO"></span></td>
+															<td th:text="${persona.idPersona}"></td>
+															<td th:text="${persona.tipoDocumento.idTipoDocumento}"></td>
+															<td th:text="${persona.tipoPersona.idTipoPersona}"></td>
+															<td th:text="${persona.paisResidencia.idPais}"></td>
+															<td th:text="${persona.paisNacionalidad.idPais}"></td>
+															<td th:text="${persona.genero}"></td>
+															<td	th:text="${persona.estadoCivil} ? ${persona.estadoCivil.idEstadoCivil} : null"></td>
+															<td th:text="${persona.correo}"></td>
+															<td th:text="${persona.telefono}"></td>
+															<td th:text="${persona.direccion}"></td>
+															<td th:text="${persona.fechaNacimiento}"></td>
+															<td	th:text="${persona.actividadEconomica} ? ${persona.actividadEconomica.idActividadEconomica} : null"></td>
+															<td	th:text="${persona.ciudad} ? ${persona.ciudad.idCiudad} : null"></td>
+															<td	th:text="${persona.ciudad} ? ${persona.ciudad.divisionPolitica.idDivisionPolitica} : null"></td>
+															<td th:text="${persona.tipoDocumento2} ? ${persona.tipoDocumento2.idTipoDocumento} : null"></td>
+															<td th:text="${persona.documento2}"></td>
+														</tr>
+
+													</tbody>
+												</table>
+
+											</div>
+
+										</div>
+
+										<div class="row">
+
+											<div class="col-sm-5">
+												<div class="dataTables_info" id="tablaCliente_info"
+													role="status" aria-live="polite">
+													Página <span th:text="${personas.Number + 1}"></span> de <span
+														th:text="${personas.TotalPages}"></span> de un total de <span
+														th:text="${personas.TotalElements}"></span> registros
+												</div>
+											</div>
+
+											<div th:if="${personas.totalPages != 1}" class="col-sm-7">
+
+												<div class="dataTables_paginate paging_simple_numbers"
+													id="tablaCliente_paginate">
+
+													<ul class="pagination">
+														<li th:class="${personas.number == 0} ? disabled"><a
+															class="pageLink"
+															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=1)}">&laquo;</a></li>
+														<li th:class="${personas.number == 0} ? disabled"><a
+															class="pageLink"
+															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${personas.number})}">&larr;</a></li>
+														<li
+															th:class="${personas.number == (page - 1)} ? 'active pointer-disabled'"
+															th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}"><a
+															class="pageLink"
+															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${page})}"
+															th:text="${page}"></a></li>
+														<li
+															th:class="${personas.number + 1 == personas.totalPages} ? disabled"><a
+															class="pageLink"
+															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${personas.number + 2})}">&rarr;</a>
+														</li>
+														<li
+															th:class="${personas.number + 1 == personas.totalPages} ? disabled"><a
+															class="pageLink"
+															th:href="@{/persona-lista(pageSize=${selectedPageSize}, page=${personas.totalPages})}">&raquo;</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<!-- =============================================== -->
+		<!-- FOOTER -->
+		<th:block th:replace="fragments/footer :: footer"></th:block>
+		<!-- =============================================== -->
+
+	</div>
+
+	<!-- SCRIPTS -->
+	<th:block th:replace="fragments/scripts :: scripts"></th:block>
+	<script src="../../plugins/select2/select2.full.min.js"></script>
+	<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
+	<script src="../../plugins/datepicker/locales/bootstrap-datepicker.es.js"></script>
+	<script src="../../js/cliente/persona-lista.js"></script>
+	
+
+
+</body>
+
+</html>

@@ -8,6 +8,7 @@ public class Constantes {
     public static final int BUTTONS_TO_SHOW = 5;
     public static final int INITIAL_PAGE = 0;
     public static final int INITIAL_PAGE_SIZE = 5;
+    public static final int PEOPLE_INITIAL_PAGE_SIZE = 10;
     public static final int[] PAGE_SIZES = { 5, 10, 20 };
     
     /**Aside - head - footers*/
