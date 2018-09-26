@@ -20,6 +20,7 @@ import py.com.domainsoft.common.domain.Pager;
 import py.com.domainsoft.entidad.services.ActividadEconomicaService;
 import py.com.domainsoft.entidad.services.PaisService;
 import py.com.domainsoft.seguridad.dtos.MenuDTO;
+import py.com.domainsoft.seguridad.dtos.PerfilDTO;
 import py.com.domainsoft.seguridad.dtos.PersonaDTO;
 import py.com.domainsoft.seguridad.dtos.TipoDocumentoDTO;
 import py.com.domainsoft.seguridad.dtos.TipoPersonaDTO;
@@ -79,6 +80,8 @@ public class PersonaViewController extends BaseViewController{
                 session.getAttribute(Constantes.SESSION_MENU));
         modelAndView.addObject(Constantes.SESSION_LOGIN_DATA, 
                 (UserDetailsDTO)session.getAttribute(Constantes.SESSION_LOGIN_DATA));
+        modelAndView.addObject("perfilesUsuarios", (List<PerfilDTO>)session.getAttribute("perfilesUsuarios"));
+        modelAndView.addObject("totalPerfiles", (Integer)session.getAttribute("totalPerfiles"));
         
         modelAndView.addObject("persona", new PersonaDTO());
         modelAndView.addObject("tipoDocumento", new TipoDocumentoDTO());
