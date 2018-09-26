@@ -103,7 +103,7 @@
 											class="form-control editable" id="tipoDoc2"
 											th:object="${tipoDocumento}"
 											th:field="${persona.tipoDocumento2.idTipoDocumento}" disabled>
-											<option value=null selected>Seleccione</option>
+											<option value="" selected>Seleccione</option>
 											<option th:each="dropDownItem : ${tiposDoc}"
 												th:value="${dropDownItem.getIdTipoDocumento()}"
 												th:text="${dropDownItem.getDescripcion()}" />

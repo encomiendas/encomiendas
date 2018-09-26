@@ -64,7 +64,7 @@ public class PersonaViewController extends BaseViewController{
         /**
          * Evalua si es null, y muestra por defecto
          */
-        int evalPageSize = tamanhoPagina.orElse(Constantes.INITIAL_PAGE_SIZE);
+        int evalPageSize = tamanhoPagina.orElse(Constantes.PEOPLE_INITIAL_PAGE_SIZE);
         int evalPage = (numeroPagina.orElse(0) < 1) ? Constantes.INITIAL_PAGE
                 : numeroPagina.get() - 1;
 

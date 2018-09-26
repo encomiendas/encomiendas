@@ -99,7 +99,7 @@ function insertForm(fila) {
 	$('#idActividadEconomica').val(fila.cells[16].innerHTML).trigger('change');
 	$('#idCiudad').val(fila.cells[17].innerHTML).trigger('change');
 	$('#idDivisionPolitica').val(fila.cells[18].innerHTML).trigger('change');
-	$('#tipoDoc').val(fila.cells[19].innerHTML).trigger('change');
+	$('#tipoDoc2').val(fila.cells[19].innerHTML).trigger('change');
 	$("#documento2").val(fila.cells[20].innerHTML);
 	$(".editable").attr('disabled', false)
 	$('#idCiudad').attr('disabled', false).trigger('change');

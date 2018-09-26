@@ -39,6 +39,7 @@ public class PersonaSeviceImpl implements PersonaService {
         persona.setNombres(persona.getNombres().toUpperCase());
         persona.setApellidos(persona.getApellidos().toUpperCase());
         persona.setCorreo(persona.getCorreo().toUpperCase());
+        persona.setDireccion(persona.getDireccion().toUpperCase());
         return personaRepo.save(personaMapper.dtoToEntity(persona));
         
     }
