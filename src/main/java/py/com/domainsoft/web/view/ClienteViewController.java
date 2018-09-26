@@ -18,8 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 import py.com.domainsoft.common.Constantes;
 import py.com.domainsoft.common.domain.Pager;
 import py.com.domainsoft.entidad.dtos.ClienteDTO;
+import py.com.domainsoft.entidad.services.ActividadEconomicaService;
 import py.com.domainsoft.entidad.services.ClienteService;
+import py.com.domainsoft.entidad.services.PaisService;
 import py.com.domainsoft.seguridad.dtos.MenuDTO;
+import py.com.domainsoft.seguridad.dtos.PerfilDTO;
 import py.com.domainsoft.seguridad.dtos.TipoDocumentoDTO;
 import py.com.domainsoft.seguridad.dtos.TipoPersonaDTO;
 import py.com.domainsoft.seguridad.dtos.UserDetailsDTO;
@@ -36,13 +39,19 @@ public class ClienteViewController extends BaseViewController{
     private final ClienteService clienteService;
     private final TipoDocumentoService tipoDocumentoService;
     private final TipoPersonaService tipoPersonaService;
+    private final ActividadEconomicaService actividadEconomicaService;
+    private final PaisService paisService;
 
     public ClienteViewController(ClienteService clienteService,
             TipoDocumentoService tipoDocumentoService,
-            TipoPersonaService tipoPersonaService) {
+            TipoPersonaService tipoPersonaService,
+            ActividadEconomicaService actividadEconomicaService,
+            PaisService paisService) {
         this.clienteService = clienteService;
         this.tipoDocumentoService = tipoDocumentoService;
         this.tipoPersonaService = tipoPersonaService;
+        this.actividadEconomicaService = actividadEconomicaService;
+        this.paisService = paisService;
     }
 
     @GetMapping(CLIENTE_LISTA)
@@ -56,7 +65,7 @@ public class ClienteViewController extends BaseViewController{
         /**
          * Evalua si es null, y muestra por defecto
          */
-        int evalPageSize = tamanhoPagina.orElse(Constantes.INITIAL_PAGE_SIZE);
+        int evalPageSize = tamanhoPagina.orElse(Constantes.PEOPLE_INITIAL_PAGE_SIZE);
         int evalPage = (numeroPagina.orElse(0) < 1) ? Constantes.INITIAL_PAGE
                 : numeroPagina.get() - 1;
 
@@ -71,12 +80,16 @@ public class ClienteViewController extends BaseViewController{
                 session.getAttribute(Constantes.SESSION_MENU));
         modelAndView.addObject(Constantes.SESSION_LOGIN_DATA, 
                 (UserDetailsDTO)session.getAttribute(Constantes.SESSION_LOGIN_DATA));
+        modelAndView.addObject("perfilesUsuarios", (List<PerfilDTO>)session.getAttribute("perfilesUsuarios"));
+        modelAndView.addObject("totalPerfiles", (Integer)session.getAttribute("totalPerfiles"));
         
         modelAndView.addObject("cliente", new ClienteDTO());
         modelAndView.addObject("tipoDocumento", new TipoDocumentoDTO());
         modelAndView.addObject("tipoPersona", new TipoPersonaDTO());
         modelAndView.addObject("tiposDoc", tipoDocumentoService.findAll());
         modelAndView.addObject("tiposPersonas", tipoPersonaService.findAll());
+        modelAndView.addObject("actividadesEconomicas", actividadEconomicaService.findAll());
+        modelAndView.addObject("paises", paisService.findAll());
        
         //Paginacion
         modelAndView.addObject("clientes", clientePaginado);

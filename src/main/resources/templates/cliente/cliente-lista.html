@@ -3,6 +3,7 @@
 
 <!-- STYLES IMPORTS -->
 <th:block th:replace="fragments/head :: head"></th:block>
+<link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
 
 <!-- //TODO:Oculta dos columnas de la tabla -->
 <style>
@@ -42,6 +43,8 @@
 					<div class="col-md-4">
 						<div class="box box-success">
 							<div class="register-box-body">
+							
+							
 
 								<div th:if="${message != null}" th:text="${message}"
 									style="color: red; margin: 10px 0px;"></div>
@@ -49,99 +52,7 @@
 								<form action="#" method="POST" th:action="@{/cliente-lista}"
 									id="formulario" th:object="${cliente}" class="form-horizontal"
 									role="form">
-
-									<div style="color: red" class="requerido">
-										<label id="label"></label>
-									</div>
-
-									<div class="form-group has-feedback">
-										<label>Identificador Cliente</label> <input type="text"
-											value="" class="form-control" id="idCliente"
-											placeholder="Identificador" readonly th:field="*{idCliente}">
-									</div>
-									<div class="form-group has-feedback hidden">
-										<label>Id Persona</label> <input type="text" value=""
-											class="form-control" id="idPersona"
-											placeholder="Identificador" readonly
-											th:field="${cliente.persona.idPersona}">
-									</div>
-
-									<div class="form-group has-feedback ">
-										<label>Documento</label> <input type="text" value=""
-											class="form-control editable" id="documento"
-											placeholder="Identificador" disabled
-											th:field="${cliente.persona.documento}">
-									</div>
-
-
-									<div class="form-group has-feedback">
-										<label>Tipo Documento</label> <select
-											class="form-control editable" id="tipoDoc"
-											th:object="${tipoDocumento}"
-											th:field="${cliente.persona.tipoDocumento.idTipoDocumento}"
-											disabled>
-											<option th:each="dropDownItem : ${tiposDoc}"
-												th:value="${dropDownItem.getIdTipoDocumento()}"
-												th:text="${dropDownItem.getDescripcion()}" />
-										</select>
-									</div>
-
-
-
-
-									<div class="form-group has-feedback">
-										<label>Nombres</label> <input type="text"
-											class="form-control editable" id="nombres"
-											placeholder="Nombres del Cliente"
-											th:field="${cliente.persona.nombres}" disabled required>
-									</div>
-
-									<div class="form-group has-feedback">
-										<label>Apellidos</label> <input type="text"
-											class="form-control editable" id="apellidos"
-											placeholder="Apellidos del Cliente"
-											th:field="${cliente.persona.apellidos}" disabled required>
-									</div>
-
-									<div class="form-group has-feedback">
-										<label>Tipo Persona</label> <select
-											class="form-control editable" id="tipoPersona"
-											th:field="${cliente.persona.tipoPersona.idTipoPersona}"
-											disabled>
-											<option th:each="dropDownItem : ${tiposPersonas}"
-												th:value="${dropDownItem.getIdTipoPersona()}"
-												th:text="${dropDownItem.getDescripcion()}" />
-										</select>
-									</div>
-
-									<div class="form-group has-feedback">
-										<label>Pais</label> <select class="form-control editable"
-											id="idPais" th:field="${cliente.persona.pais.idPais}"
-											disabled>
-											<option value="" selected>Seleccione</option>
-											<option value="1">Paraguay</option>
-										</select>
-									</div>
-									<div class="form-group has-feedback hidden">
-										<label>Pais</label> <select class="form-control editable "
-											id="idPais2"
-											th:field="${cliente.persona.paisNacionalidad.idPais}"
-											disabled>
-											<option value="" selected>Seleccione</option>
-											<option value="1">Paraguay</option>
-										</select>
-									</div>
-
-									<div class="form-group has-feedback">
-										<label>Estado</label> <select class="form-control editable"
-											id="estado" th:field="*{estado}" th:placeholder="Hola"
-											disabled>
-											<option value="true" selected disabled>Estado</option>
-											<option value="true">Activo</option>
-											<option value="false">Inactivo</option>
-										</select>
-									</div>
-
+									
 									<div class="row">
 										<div class="col-xs-4">
 											<button type="button"
@@ -159,6 +70,187 @@
 												onclick="cancelar(this.form)">Cancelar</button>
 										</div>
 									</div>
+
+									<div style="color: red" class="requerido">
+										<label id="label"></label>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Identificador</label> <input type="text" value=""
+											class="form-control" id="idCliente"
+											placeholder="Identificador" readonly th:field="*{idCliente}">
+									</div>
+									<div class="form-group has-feedback hidden">
+										<label>Identificador</label> <input type="text" value=""
+											class="form-control" id="idPersona"
+											placeholder="Identificador" readonly th:field="${cliente.persona.idPersona}">
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Tipo Documento</label> <select
+											class="form-control editable" id="tipoDoc"
+											th:object="${tipoDocumento}"
+											th:field="${cliente.persona.tipoDocumento.idTipoDocumento}" required disabled>
+											<option th:each="dropDownItem : ${tiposDoc}"
+												th:value="${dropDownItem.getIdTipoDocumento()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+
+									<div class="form-group has-feedback ">
+										<label>Documento</label> <input type="text" value=""
+											class="form-control editable" id="documento" required
+											placeholder="Nro. Documento" disabled th:field="${cliente.persona.documento}">
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Tipo Documento 2</label> <select
+											class="form-control editable" id="tipoDoc2"
+											th:object="${tipoDocumento}"
+											th:field="${cliente.persona.tipoDocumento2.idTipoDocumento}" disabled>
+											<option value="" selected>Seleccione</option>
+											<option th:each="dropDownItem : ${tiposDoc}"
+												th:value="${dropDownItem.getIdTipoDocumento()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+
+									<div class="form-group has-feedback ">
+										<label>Documento 2</label> <input type="text" value=""
+											class="form-control editable" id="documento2"
+											placeholder="Nro. Documento 2" disabled th:field="${cliente.persona.documento2}">
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Nombres</label> <input type="text"
+											class="form-control editable" id="nombres"
+											style="text-transform:uppercase"
+											placeholder="Nombres del Cliente" th:field="${cliente.persona.nombres}"
+											disabled required>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Apellidos</label> <input type="text"
+											class="form-control editable" id="apellidos"
+											style="text-transform:uppercase"
+											placeholder="Apellidos del Cliente" th:field="${cliente.persona.apellidos}"
+											disabled required>
+									</div>
+									<div class="form-group has-feedback">
+										<label>Sexo</label> <select class="form-control editable "
+											id="sexo" th:field="${cliente.persona.genero}" disabled required>
+											<option value="" selected>Seleccione</option>
+											<option value="M">MASCULINO</option>
+											<option value="F">FEMENINO</option>
+										</select>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Estado Civil</label> <select
+											class="form-control editable " id="estadoCivil"
+											th:field="${cliente.persona.estadoCivil.idEstadoCivil}" required disabled>
+											<option value="" selected>Seleccione</option>
+											<option value="1">SOLTERO</option>
+											<option value="2">CASADO</option>
+											<option value="3">VIUDO</option>
+											<option value="4">DIVORCIADO</option>
+											<option value="5">SEPARADO</option>
+											<option value="6">COCUBINADO</option>
+										</select>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Correo</label> <input type="text"
+											class="form-control editable" id="correo"
+											style="text-transform:uppercase"
+											placeholder="ejemplo@gmail.com" th:field="${cliente.persona.correo}"  disabled>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Fecha Nacimiento</label> <input type="date"
+											class="form-control editable" id="fechaNacimiento"
+											placeholder="dd/mm/aaaa" th:field="${cliente.persona.fechaNacimiento}"
+											disabled>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Telefono</label> <input type="text"
+											class="form-control editable" id="telefono"
+											placeholder="xx xxx xxx" th:field="${cliente.persona.telefono}" disabled>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Direccion</label> <input type="text"
+											class="form-control editable" id="direccion"
+											placeholder="Ingrese la direccion" th:field="${cliente.persona.direccion}"
+											disabled>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Tipo Persona</label> <select
+											class="form-control editable" id="tipoPersona"
+											th:field="${cliente.persona.tipoPersona.idTipoPersona}" required disabled>
+											<option th:each="dropDownItem : ${tiposPersonas}"
+												th:value="${dropDownItem.getIdTipoPersona()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Pais de Residencia</label> <select class="form-control select2 editable"
+											id="idPais" th:field="${cliente.persona.paisResidencia.idPais}" disabled>
+											<option value="" selected>Seleccione</option>
+											<option th:each="dropDownItem : ${paises}"
+												th:value="${dropDownItem.getIdPais()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+									<div class="form-group has-feedback ">
+										<label>Nacionalidad</label> <select class="form-control editable select2 "
+											id="idPais2" th:field="${cliente.persona.paisNacionalidad.idPais}"
+											required disabled>
+											<option value="" selected>Seleccione</option>
+											<option th:each="dropDownItem : ${paises}"
+												th:value="${dropDownItem.getIdPais()}"
+												th:text="${dropDownItem.getGentilicio()}" />
+										</select>
+									</div>
+									<div class="form-group has-feedback">
+										<label>Actividad Economica</label> <select class="form-control select2 editable"
+											id="idActividadEconomica" th:field="${cliente.persona.actividadEconomica.idActividadEconomica}" required disabled>
+											<option value="" selected >Seleccione</option>
+											<option th:each="dropDownItem : ${actividadesEconomicas}"
+												th:value="${dropDownItem.getIdActividadEconomica()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Distrito/Localidad</label> <select class="form-control select2"
+											id="idDivisionPolitica" required disabled>
+											<option value="" selected >Seleccione</option>
+											
+										</select>
+									</div>
+									<div class="form-group has-feedback">
+										<label>Ciudad</label> <select class="form-control select2"
+											id="idCiudad" th:field="${cliente.persona.ciudad.idCiudad}" required disabled>
+											<option value="" selected>Seleccione</option>
+											
+										</select>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Estado</label> <select class="form-control editable"
+											id="estado" th:field="*{estado}" th:placeholder="Hola"
+											disabled>
+											<option value="true" selected disabled>Estado</option>
+											<option value="true">Activo</option>
+											<option value="false">Inactivo</option>
+										</select>
+									</div>
+
+									
 								</form>
 							</div>
 						</div>
@@ -209,11 +301,23 @@
 															<th>Apellidos</th>
 															<th>Tipo Documento</th>
 															<th>Estado</th>
-															<td>ID Cliente</td>
 															<td>ID Persona</tD>
 															<td>ID Tipo Doc</td>
 															<td>ID Tipo Per</td>
 															<td>ID Pais</td>
+															<td>ID Nacionalidad</td>
+															<td>Sexo</td>
+															<td>ID Estado civil</td>
+															<td>correo</td>
+															<td>telefono</td>
+															<td>direccion</td>
+															<td>fecha nacimiento</td>
+															<td>Actividad</td>
+															<td>Ciudad</td>
+															<td>Distrito</td>
+															<td>Tipo doc 2</td>
+															<td>doc 2</td>
+															<td>Id cliente</td>
 														</tr>
 													</thead>
 													<tbody>
@@ -221,18 +325,27 @@
 															<td th:text="${cliente.persona.documento}"></td>
 															<td th:text="${cliente.persona.nombres}"></td>
 															<td th:text="${cliente.persona.apellidos}"></td>
-															<td
-																th:text="${cliente.persona.tipoDocumento.descripcion}"></td>
+															<td th:text="${cliente.persona.tipoDocumento.descripcion}"></td>
 															<td th:switch="${cliente.estado}"><span
 																th:case="true" th:text="ACTIVO"></span> <span
 																th:case="false" th:text="INACTIVO"></span></td>
-															<td th:text="${cliente.idCliente}"></td>
 															<td th:text="${cliente.persona.idPersona}"></td>
-															<td
-																th:text="${cliente.persona.tipoDocumento.idTipoDocumento}"></td>
-															<td
-																th:text="${cliente.persona.tipoPersona.idTipoPersona}"></td>
-															<td th:text="${cliente.persona.pais.idPais}"></td>
+															<td th:text="${cliente.persona.tipoDocumento.idTipoDocumento}"></td>
+															<td th:text="${cliente.persona.tipoPersona.idTipoPersona}"></td>
+															<td th:text="${cliente.persona.paisResidencia.idPais}"></td>
+															<td th:text="${cliente.persona.paisNacionalidad.idPais}"></td>
+															<td th:text="${cliente.persona.genero}"></td>
+															<td	th:text="${cliente.persona.estadoCivil} ? ${cliente.persona.estadoCivil.idEstadoCivil} : null"></td>
+															<td th:text="${cliente.persona.correo}"></td>
+															<td th:text="${cliente.persona.telefono}"></td>
+															<td th:text="${cliente.persona.direccion}"></td>
+															<td th:text="${cliente.persona.fechaNacimiento}"></td>
+															<td	th:text="${cliente.persona.actividadEconomica} ? ${cliente.persona.actividadEconomica.idActividadEconomica} : null"></td>
+															<td	th:text="${cliente.persona.ciudad} ? ${cliente.persona.ciudad.idCiudad} : null"></td>
+															<td	th:text="${cliente.persona.ciudad} ? ${cliente.persona.ciudad.divisionPolitica.idDivisionPolitica} : null"></td>
+															<td th:text="${cliente.persona.tipoDocumento2} ? ${cliente.persona.tipoDocumento2.idTipoDocumento} : null"></td>
+															<td th:text="${cliente.persona.documento2}"></td>
+															<td th:text="${cliente.idCliente}"></td>
 														</tr>
 
 													</tbody>
@@ -282,7 +395,6 @@
 															th:href="@{/cliente-lista(pageSize=${selectedPageSize}, page=${clientes.totalPages})}">&raquo;</a>
 														</li>
 													</ul>
-
 												</div>
 											</div>
 										</div>
@@ -305,11 +417,11 @@
 	<!-- SCRIPTS -->
 	<th:block th:replace="fragments/scripts :: scripts"></th:block>
 	<script src="../../plugins/select2/select2.full.min.js"></script>
+	<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
+	<script src="../../plugins/datepicker/locales/bootstrap-datepicker.es.js"></script>
 	<script src="../../js/cliente/cliente-lista.js"></script>
+	
 
-	<script>
-		
-	</script>
 
 </body>
 
