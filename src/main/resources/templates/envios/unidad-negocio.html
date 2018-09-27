@@ -46,19 +46,16 @@
 									<div style="color: red" class="requerido">
 										<label id="label"></label>
 									</div>
-									
+
 									<div class="form-group has-feedback">
-										<label>Identificador</label> 
-										<input 
-											type="text" 
-											value="" 
-											class="form-control"
-											id="idUnidadNegocio" 
-											placeholder="Identificador"
-											readonly
-											th:field="*{idUnidadNegocio}"
-											>
+										<label>Identificador</label> <input 
+										 	type="text" value=""
+											class="form-control" 
+											id="idUnidadNegocio"
+											placeholder="Identificador" readonly
+											th:field="*{idUnidadNegocio}">
 									</div>
+
 
 									<div class="form-group has-feedback">
 										<label>Descripcion</label> 
@@ -77,11 +74,13 @@
 										        id="estado"
 										        th:field="*{estado}"
 										        disabled>
-<!-- 											<option value="" selected disabled>Estado</option> -->
+											<option value="" selected disabled>Estado</option>
 											<option value="true">Activo</option>
 											<option value="false">Inactivo</option>
 										</select>
 									</div>
+									
+
 
 									<div class="row">
 										<div class="col-xs-4">
@@ -102,7 +101,7 @@
 					<div class="col-md-8">
 						<div class="box box-success">
 							<div class="box-header"></div>
-							/.box-header
+							<!-- /.box-header -->
 							<div class="box-body" id="divTabla">
 								<div class="table-responsive">
 
