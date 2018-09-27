@@ -17,50 +17,50 @@ import org.springframework.web.servlet.ModelAndView;
 
 import py.com.domainsoft.common.Constantes;
 import py.com.domainsoft.common.domain.Pager;
-import py.com.domainsoft.entidad.dtos.ClienteDTO;
 import py.com.domainsoft.entidad.services.ActividadEconomicaService;
-import py.com.domainsoft.entidad.services.ClienteService;
 import py.com.domainsoft.entidad.services.PaisService;
 import py.com.domainsoft.seguridad.dtos.MenuDTO;
 import py.com.domainsoft.seguridad.dtos.PerfilDTO;
+import py.com.domainsoft.seguridad.dtos.PersonaDTO;
 import py.com.domainsoft.seguridad.dtos.TipoDocumentoDTO;
 import py.com.domainsoft.seguridad.dtos.TipoPersonaDTO;
 import py.com.domainsoft.seguridad.dtos.UserDetailsDTO;
+import py.com.domainsoft.seguridad.services.PersonaService;
 import py.com.domainsoft.seguridad.services.TipoDocumentoService;
 import py.com.domainsoft.seguridad.services.TipoPersonaService;
 import py.com.domainsoft.web.base.BaseViewController;
 
 @Controller
-public class ClienteViewController extends BaseViewController{
+public class PersonaViewController extends BaseViewController{
     
-    private static final String CLIENTE_LISTA = "/cliente-lista";
-    private static final String CLIENTE_EXITOSO = "/cliente-exitoso";
+    private static final String PERSONA_LISTA = "/persona-lista";
+    private static final String PERSONA_EXITOSO = "/persona-exitoso";
     
-    private final ClienteService clienteService;
+    private final PersonaService personaService;
     private final TipoDocumentoService tipoDocumentoService;
     private final TipoPersonaService tipoPersonaService;
     private final ActividadEconomicaService actividadEconomicaService;
     private final PaisService paisService;
 
-    public ClienteViewController(ClienteService clienteService,
+    public PersonaViewController(PersonaService personaService,
             TipoDocumentoService tipoDocumentoService,
             TipoPersonaService tipoPersonaService,
             ActividadEconomicaService actividadEconomicaService,
             PaisService paisService) {
-        this.clienteService = clienteService;
+        this.personaService = personaService;
         this.tipoDocumentoService = tipoDocumentoService;
         this.tipoPersonaService = tipoPersonaService;
         this.actividadEconomicaService = actividadEconomicaService;
         this.paisService = paisService;
     }
 
-    @GetMapping(CLIENTE_LISTA)
+    @GetMapping(PERSONA_LISTA)
     public ModelAndView paginaLista(
             @RequestParam("pageSize") Optional<Integer> tamanhoPagina,
             @RequestParam("page") Optional<Integer> numeroPagina,
             HttpSession session) {
         
-        ModelAndView modelAndView = new ModelAndView("cliente/cliente-lista");
+        ModelAndView modelAndView = new ModelAndView("cliente/persona-lista");
 
         /**
          * Evalua si es null, y muestra por defecto
@@ -69,10 +69,10 @@ public class ClienteViewController extends BaseViewController{
         int evalPage = (numeroPagina.orElse(0) < 1) ? Constantes.INITIAL_PAGE
                 : numeroPagina.get() - 1;
 
-        Page<ClienteDTO> clientePaginado = clienteService
+        Page<PersonaDTO> personaPaginado = personaService
                 .findAllPageable(PageRequest.of(evalPage, evalPageSize));
 
-        Pager pager = new Pager(clientePaginado.getTotalPages(), clientePaginado.getNumber(),
+        Pager pager = new Pager(personaPaginado.getTotalPages(), personaPaginado.getNumber(),
                 Constantes.BUTTONS_TO_SHOW);
 
 
@@ -83,7 +83,7 @@ public class ClienteViewController extends BaseViewController{
         modelAndView.addObject("perfilesUsuarios", (List<PerfilDTO>)session.getAttribute("perfilesUsuarios"));
         modelAndView.addObject("totalPerfiles", (Integer)session.getAttribute("totalPerfiles"));
         
-        modelAndView.addObject("cliente", new ClienteDTO());
+        modelAndView.addObject("persona", new PersonaDTO());
         modelAndView.addObject("tipoDocumento", new TipoDocumentoDTO());
         modelAndView.addObject("tipoPersona", new TipoPersonaDTO());
         modelAndView.addObject("tiposDoc", tipoDocumentoService.findAll());
@@ -92,7 +92,7 @@ public class ClienteViewController extends BaseViewController{
         modelAndView.addObject("paises", paisService.findAll());
        
         //Paginacion
-        modelAndView.addObject("clientes", clientePaginado);
+        modelAndView.addObject("personas", personaPaginado);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", Constantes.PAGE_SIZES);
         modelAndView.addObject("pager", pager);
@@ -101,19 +101,19 @@ public class ClienteViewController extends BaseViewController{
         return modelAndView;
     }
 
-    @PostMapping(CLIENTE_LISTA)
-    public ModelAndView grabarPagina(@Valid ClienteDTO cliente,
+    @PostMapping(PERSONA_LISTA)
+    public ModelAndView grabarPagina(@Valid PersonaDTO persona,
             BindingResult bindingResult) {
 
-        clienteService.grabarCliente(cliente);
+        personaService.grabarPersona(persona);
 
-        return new ModelAndView("redirect:/cliente-exitoso");
+        return new ModelAndView("redirect:/persona-exitoso");
     }
 
-    @GetMapping(CLIENTE_EXITOSO)
+    @GetMapping(PERSONA_EXITOSO)
     public ModelAndView paginaExitoso() {
         ModelAndView modelAndView = new ModelAndView(
-                "cliente/cliente-exitoso");
+                "cliente/persona-exitoso");
 
         return modelAndView;
     }

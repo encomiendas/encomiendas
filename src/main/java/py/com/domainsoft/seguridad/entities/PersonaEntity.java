@@ -16,6 +16,8 @@ import org.hibernate.id.enhanced.SequenceStyleGenerator;
 
 import com.google.common.base.MoreObjects;
 
+import py.com.domainsoft.entidad.entities.ActividadEconomicaEntity;
+import py.com.domainsoft.entidad.entities.CiudadEntity;
 import py.com.domainsoft.entidad.entities.PaisEntity;
 
 @Entity
@@ -61,8 +63,8 @@ public class PersonaEntity {
     private String correo;
     
     @ManyToOne(targetEntity = PaisEntity.class)
-    @JoinColumn(name = "id_pais")
-    private PaisEntity pais;
+    @JoinColumn(name = "id_pais_residencia")
+    private PaisEntity paisResidencia;
     
     @ManyToOne(targetEntity = PaisEntity.class)
     @JoinColumn(name = "id_pais_nacionalidad")
@@ -80,6 +82,14 @@ public class PersonaEntity {
     private EstadoCivilEntity estadoCivil;
     
     private Boolean estado;
+    
+    @ManyToOne(targetEntity = ActividadEconomicaEntity.class)
+    @JoinColumn(name = "id_actividad_economica")
+    private ActividadEconomicaEntity actividadEconomica;
+    
+    @ManyToOne(targetEntity = CiudadEntity.class)
+    @JoinColumn(name = "id_ciudad_residencia")
+    private CiudadEntity ciudad;
     
     public String getNombres() {
         return nombres;
@@ -148,12 +158,7 @@ public class PersonaEntity {
     public void setTipoDocumento2(TipoDocumentoEntity tipoDocumento2) {
         this.tipoDocumento2 = tipoDocumento2;
     }
-    public PaisEntity getPais() {
-        return pais;
-    }
-    public void setPais(PaisEntity pais) {
-        this.pais = pais;
-    }
+   
     public PaisEntity getPaisNacionalidad() {
         return paisNacionalidad;
     }
@@ -183,6 +188,26 @@ public class PersonaEntity {
     }
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+    
+    
+    public PaisEntity getPaisResidencia() {
+        return paisResidencia;
+    }
+    public void setPaisResidencia(PaisEntity paisResidencia) {
+        this.paisResidencia = paisResidencia;
+    }
+    public ActividadEconomicaEntity getActividadEconomica() {
+        return actividadEconomica;
+    }
+    public void setActividadEconomica(ActividadEconomicaEntity actividadEconomica) {
+        this.actividadEconomica = actividadEconomica;
+    }
+    public CiudadEntity getCiudad() {
+        return ciudad;
+    }
+    public void setCiudad(CiudadEntity ciudad) {
+        this.ciudad = ciudad;
     }
     @Override
     public boolean equals(Object obj) {
@@ -217,10 +242,12 @@ public class PersonaEntity {
                 .add("tipoPersona", tipoPersona)
                 .add("tipoDocumento", tipoDocumento)
                 .add("tipoDocumento2", tipoDocumento2)
-                .add("pais", pais)
+                .add("paisResidencia", paisResidencia)
                 .add("paisNacionalidad", paisNacionalidad)
                 .add("estadoCivil", estadoCivil)
                 .add("correo", correo)
+                .add("ciudad", ciudad)
+                .add("actividadEconomica", actividadEconomica)
                 .toString();
     }
 
