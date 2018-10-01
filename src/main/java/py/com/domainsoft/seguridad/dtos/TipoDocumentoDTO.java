@@ -10,12 +10,15 @@ public class TipoDocumentoDTO {
 
 	private boolean estado;
 	
+	private String abreviatura;
+	
 	public TipoDocumentoDTO() {}
 	
-	public TipoDocumentoDTO(Integer idTipoDocumento, String descripcion, boolean estado) {
+	public TipoDocumentoDTO(Integer idTipoDocumento, String descripcion, boolean estado, String abreviatura) {
 		this.idTipoDocumento = idTipoDocumento;
 		this.descripcion = descripcion;
 		this.estado = estado;
+		this.abreviatura = abreviatura;
 	}
 	
 	
@@ -24,6 +27,7 @@ public class TipoDocumentoDTO {
 		private Integer idTipoDocumento;
 		private String descripcion;
 		private boolean estado;
+		private String abreviatura;
 
 		public Builder idTipoDocumento(Integer idTipoDocumento) {
 			this.idTipoDocumento = idTipoDocumento;
@@ -39,10 +43,15 @@ public class TipoDocumentoDTO {
 			this.estado = estado;
 			return this;
 		}
+		
+		public Builder abreviatura(String abreviatura) {
+            this.abreviatura = abreviatura;
+            return this;
+        }
 
 		
 		public TipoDocumentoDTO build() {
-			return new TipoDocumentoDTO(idTipoDocumento, descripcion, estado);
+			return new TipoDocumentoDTO(idTipoDocumento, descripcion, estado, abreviatura);
 		}
 
 	}
@@ -75,12 +84,23 @@ public class TipoDocumentoDTO {
 		this.estado = estado;
 	}
 	
-	@Override
+	
+	
+	public String getAbreviatura() {
+        return abreviatura;
+    }
+
+    public void setAbreviatura(String abreviatura) {
+        this.abreviatura = abreviatura;
+    }
+
+    @Override
 	public String toString() {
 	   return MoreObjects.toStringHelper(this)
 	          .add("idTipoDocumento", idTipoDocumento)
 	          .add("descripcion", descripcion)
 	          .add("estado", estado)
+	          .add("abreviatura", abreviatura)
 	          .toString();
 	}
 
