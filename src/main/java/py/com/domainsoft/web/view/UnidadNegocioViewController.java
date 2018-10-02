@@ -51,6 +51,7 @@ public class UnidadNegocioViewController {
         UnidadNegocioDTO unidadNegDto = new UnidadNegocioDTO();
 
         modelAndView.addObject("unidadNegDto", unidadNegDto);
+        //Paginacion
         modelAndView.addObject("listobj", listobj);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", Constantes.PAGE_SIZES);
