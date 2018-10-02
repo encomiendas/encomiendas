@@ -72,4 +72,8 @@
     <changeSet id="2018-09-24T18:40" author="jdferreira">
         <sqlFile path="sql/2018-09-24T18:40.sql" relativeToChangelogFile="true"/>
     </changeSet>
+    <!-- Se agrega la columna abreviatura a tipo_documento-->
+    <changeSet id="2018-10-01T10:15" author="jdferreira">
+        <sqlFile path="sql/2018-10-01T10:15.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>

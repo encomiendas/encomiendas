@@ -10,6 +10,18 @@
 #tablaCliente td:nth-child(n+6) {
 	display: none;
 }
+/* BUSCADOR  */
+#tablaPersonas tr:first-child {
+	background-color: #A3A8AB;
+	color: white;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+ #tablaPersonas td:nth-child(n+5) {
+	 display: none; 
+} 
+
 </style>
 
 <body class="hold-transition skin-green sidebar-mini ">
@@ -54,17 +66,22 @@
 									role="form">
 									
 									<div class="row">
-										<div class="col-xs-4">
+										<div class="col-md-3" style="padding-right: 7px; padding-left: 7px;">
 											<button type="button"
 												class="btn btn-success btn-block btn-flat" id="btnNuevo"
 												onclick="nuevo()">Nuevo</button>
 										</div>
-										<div class="col-xs-4">
+										<div class="col-md-3" style="padding-right: 7px; padding-left: 7px;">
 											<button type="submit"
 												class="btn btn-success btn-block btn-flat" id="btnGrabar"
 												disabled>Grabar</button>
 										</div>
-										<div class="col-xs-4">
+										<div class="col-md-3" style="padding-right: 7px; padding-left: 7px;">
+											<button type="button"
+												class="btn btn-success btn-block btn-flat" id="btnBuscar" data-toggle="modal" data-target="#modalBusacadorPersona"
+												>Buscar</button>
+										</div>
+										<div class="col-md-3" style="padding-right: 7px; padding-left: 7px;">
 											<button type="button"
 												class="btn btn-success btn-block btn-flat" id="btnCancelar"
 												onclick="cancelar(this.form)">Cancelar</button>
@@ -400,6 +417,8 @@
 			</section>
 		</div>
 
+		<!-- BUSCADOR PERSONAS -->
+		<th:block th:replace="fragments/buscador-persona :: buscador-persona"></th:block>
 		<!-- =============================================== -->
 		<!-- FOOTER -->
 		<th:block th:replace="fragments/footer :: footer"></th:block>
