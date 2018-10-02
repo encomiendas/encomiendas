@@ -16,4 +16,6 @@ public interface PersonaService {
     
     Page<PersonaDTO> findAllPageable(Pageable pageable);
     
+    List<PersonaDTO> findPersonaByParams(String json);
+    
 }

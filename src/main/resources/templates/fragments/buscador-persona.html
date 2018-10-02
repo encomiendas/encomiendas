@@ -1,0 +1,266 @@
+
+<div th:fragment="buscador-persona">
+
+<div class="modal fade" id="modalBusacadorPersona" role="dialog"
+	aria-labelledby="myModalLabel">
+
+	<div class="modal-dialog" role="document"
+		style="width: 70% !important;">
+		<div class="modal-content">
+			<div class="box box-success">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Buscador de Personas</h4>
+				</div>
+				<div class="modal-body">
+					<div class="overlay" id="ajax-loader">
+						<i class="fa fa-refresh fa-spin"></i>
+					</div>
+					<!--- Fila 1-->
+					<div class="row">
+						<form id="formBuscador">
+							<div style="color: red" class="requerido">
+								<label id="label"></label>
+							</div>
+							<div class="col-md-12" >							
+								<div class="col-md-1">
+									<label for="inputTotal">Documento</label>
+								</div>
+								<div class="col-md-1">
+									<select class="form-control" id="docSelectBuscador" style="width: 75px">
+											<option th:each="dropDownItem : ${tiposDoc}"
+												th:value="${dropDownItem.getIdTipoDocumento()}"
+												th:text="${dropDownItem.getAbreviatura()}" />																
+										</select>
+								</div>
+								<div class="col-md-2">
+									<input type="text" id="buscador-documento" placeholder="Nro. de documento" class="form-control" autofocus>
+								</div>
+								<div class="col-md-1">
+									<label for="inputTotal">Nombres</label>
+								</div>
+								<div class="col-md-3">
+									<input type="text" id="buscador-nombres" placeholder="Ingrese el nombre " class="form-control">
+								</div>
+								<div class="col-md-1">
+									<label for="inputTotal">Apellidos</label>
+								</div>
+								<div class="col-md-3">
+									<input type="text" id="buscador-apellidos" placeholder="Ingrese el apellido " class="form-control">
+								</div>
+								<!-- <div class="col-md-2">
+									<span class="input-group-btn ">
+										<button type="button" class="btn btn-success btn-flat" id="botonagregar"
+											onclick="addFromBuscador()">
+											<i class="ion-plus-round">  Agregar Nuevo Cliente</i>
+										</button>
+									</span>
+								</div> -->
+							</div>
+							
+						</form>
+
+					</div>
+					<br>
+					<!-- fila 2-->
+
+					<br>
+					<!-- /.box-header -->
+					<div class="box-body table-responsive no-padding"
+						style="overflow: auto; height: 180px;">
+
+						<table class="table table-hover" id="tablaPersonas">
+							<tr style="background-color: #A3A8AB;">
+								<th id="select">Select</th>
+								<th>Documento</th>
+								<th>Nombres</th>
+								<th>Apellidos</th>
+								<td >Id</td>
+								<td >json</td>
+								
+							</tr>
+						</table>
+					</div>
+					<br>
+				</div>
+
+				<div class="modal-footer">
+					<div class="row">
+						<div class="col-md-12 col-md-offset-2">
+							
+								<button type="button" class="btn btn-success col-md-2" id='btnBuscarp'
+									onclick="getData();"><i class="ion-search">  Buscar</i></button>
+							
+						
+								<button type="button" class="btn btn-success col-md-2"
+									onclick="insertarDataDelBuscador();" id="btnAceptap" disabled>
+									Aceptar</button>
+						
+						
+								<button type="button" class="btn btn-success col-md-2" id='limpiar'
+									onclick="limpiarBuscador();">Limpiar</button>
+						
+								<button type="button" class="btn btn-success col-md-2"
+									onclick="limpiarBuscador();" data-dismiss="modal">Cerrar</button>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script>
+
+$(document).ready(function() {
+	$("#ajax-loader").hide();
+});
+	function limpiarBuscador() {
+		$('#btnAceptap').attr('disabled', true);	
+		document.getElementById('documento').value = "";
+		document.getElementById('nombres').value = "";
+		document.getElementById('apellidos').value = "";
+		// Obtenemos el total de columnas (tr) del id "tabla"R
+		var trs = $("#tablaPersonas tr").length;
+		for (var i = 1; trs > i; i++) {
+			// Eliminamos la ultima columna
+			$("#tablaPersonas  tr:last").remove();
+		}
+		document.getElementById('label').innerHTML = "";
+		$(document.getElementById('documento')).css({
+			'border' : '1px solid #d2d6de'
+		});
+		$(document.getElementById('nombres')).css({
+			'border' : '1px solid #d2d6de'
+		});
+		$(document.getElementById('apellidos')).css({
+			'border' : '1px solid #d2d6de'
+		});
+		
+	}
+	
+	
+	function getData() {
+		
+		var documento = $('#buscador-documento').val();
+		//validarRUC(documento);
+		var nombres = $('#buscador-nombres').val();
+		var apellidos = $('#buscador-apellidos').val();
+		var tipodoc= $("#docSelectBuscador").val();
+		var persona = {};
+		var tipoDocumento = {};
+		tipoDocumento.idTipoDocumento = tipodoc;
+		persona.tipoDocumento = tipoDocumento;
+		persona.nombres = nombres;
+		persona.apellidos = apellidos;
+		persona.documento = documento;
+		console.log(JSON.stringify(persona))
+		if (validarVacio(documento) || validarVacio(nombres) || validarVacio(apellidos)) {
+			$("#ajax-loader").show();		
+			$.ajax({
+				url: "/api/v1/personas/find-by-params",
+			    data: { persona: JSON.stringify(persona) },
+		
+			    timeout: 600000,
+				success : function(data) {
+					limpiarBuscador() ;
+					if(data.length == 0){
+						$("#ajax-loader").hide();
+						alertify.alert("Atenci&oacute;n","No se encontraron coincidencias" , function(){});
+						return;
+					}
+					var table = document.getElementById("tablaPersonas");
+					var l = 0;
+					$.each(data, function(index, element) {
+
+						l++;
+						var row = table.insertRow(-1);
+						var cell0 = row.insertCell(0);
+						var cell1 = row.insertCell(1);
+						var cell2 = row.insertCell(2);
+						var cell3 = row.insertCell(3);
+						var cell4 = row.insertCell(4);
+						var cell5 = row.insertCell(5);
+						var element0 = document.createElement("input");
+						element0.type = "checkbox";
+						element0.onclick = function() {
+							compCHK(this, index, l, table);
+							
+						}
+						if(data.length == 1){
+							element0.checked = true;
+						}
+						cell0.appendChild(element0);
+						cell1.innerHTML = element.documento;
+						cell2.innerHTML = element.nombres;
+						cell3.innerHTML = element.apellidos;
+						cell4.innerHTML = element.idPersona;
+						cell5.innerHTML = JSON.stringify(element);
+					});
+					$('#btnAceptap').attr('disabled', false);	
+					function compCHK(c, index, l, t){
+						if (c.checked==true){ 
+							for (var i = l-1; i >= 0; i--) {	
+								
+								var chks = t.rows[i+1].cells[0].childNodes[0];
+								if(i != index){
+									
+									chks.checked = false;
+								}
+							}
+						}
+					}
+					
+					$("#ajax-loader").hide();
+					
+				},
+				error : function(e) {
+					console.log("ERROR")
+				},
+				done : function(e) {
+					console.log("DONE");
+				}
+			});
+			
+			
+		}else {
+			alert("Complete los campos")
+		}
+		 $('#buscador-documento').val("");
+		 $('#buscador-nombres').val("");
+		$('#buscador-apellidos').val("");
+		
+	}
+	//inserta el numero de cedula de la persona desde el buscador
+	function parseData() {
+		var ban = false;
+		var table = document.getElementById('tablaPersonas');
+		var rowLength = table.rows.length;
+		
+		for (var i = 1; i < rowLength; i += 1) {
+			var row = table.rows[i];
+			var chkbox = row.cells[0].childNodes[0];
+
+			if (true == chkbox.checked) {
+				ban = true;
+				var data = JSON.parse(row.cells[5].innerHTML)
+				limpiarBuscador();
+				return data
+			}
+		}
+
+		if (!ban) {
+			alertify.alert("Atenci&oacute;n", "Debe seleccionar al menos una persona", function(){});
+			return null;
+		} 
+	}
+	
+	
+</script>
+</div>

@@ -32,6 +32,8 @@ public class TipoDocumentoEntity {
     
     private String descripcion;
     
+    private String abreviatura;
+    
     private Boolean estado;
 
     public Integer getIdTipoDocumento() {
@@ -58,6 +60,15 @@ public class TipoDocumentoEntity {
         this.estado = estado;
     }
     
+    
+    public String getAbreviatura() {
+        return abreviatura;
+    }
+
+    public void setAbreviatura(String abreviatura) {
+        this.abreviatura = abreviatura;
+    }
+
     @Override
     public int hashCode() {
         return idTipoDocumento == null ? 0 : idTipoDocumento.hashCode();
@@ -69,6 +80,7 @@ public class TipoDocumentoEntity {
                 .add("idTipoDocumento", idTipoDocumento)
                 .add("descripcion", descripcion)
                 .add("estado", estado)
+                .add("abreviatura", abreviatura)
                 .toString();
     }
     
