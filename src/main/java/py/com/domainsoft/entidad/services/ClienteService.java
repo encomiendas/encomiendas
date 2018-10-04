@@ -17,4 +17,6 @@ public interface ClienteService {
     
     ClienteDTO findByIdCliente(Integer idCliente);
     
+    List<ClienteDTO> findClienteByParams(String json);
+    
 }

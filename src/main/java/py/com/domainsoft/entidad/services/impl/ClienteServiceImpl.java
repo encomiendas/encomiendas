@@ -9,6 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import py.com.domainsoft.common.WebUtils;
 import py.com.domainsoft.entidad.dtos.ClienteDTO;
 import py.com.domainsoft.entidad.entities.ClienteEntity;
@@ -67,6 +70,33 @@ public class ClienteServiceImpl implements ClienteService{
     @Override
     public ClienteDTO findByIdCliente(Integer idCliente) {
         return clienteMapper.entityToDto(clienteRepo.getOne(idCliente));
+    }
+
+    @Override
+    public List<ClienteDTO> findClienteByParams(String json) {
+        Gson gson =  new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
+        ClienteDTO cliente = gson.fromJson(json, ClienteDTO.class);
+        
+        if (cliente.getPersona().getDocumento() == null || cliente.getPersona().getDocumento().equals("")) {
+            if(cliente.getPersona().getNombres() == null || cliente.getPersona().getNombres().equals("")){
+                
+                return clienteMapper.entityListToDtoList(WebUtils.toList(
+                        clienteRepo.findByPersonaApellidosIgnoreCaseContaining(
+                                cliente.getPersona().getApellidos())));
+            }else if(cliente.getPersona().getApellidos() == null || cliente.getPersona().getApellidos().equals("")){
+                return clienteMapper.entityListToDtoList(WebUtils.toList(
+                        clienteRepo.findByPersonaNombresIgnoreCaseContaining(
+                                cliente.getPersona().getNombres())));
+            }else{                
+                return clienteMapper.entityListToDtoList(WebUtils.toList(
+                        clienteRepo.findByPersonaNombresOrPersonaApellidosIgnoreCaseContaining(
+                                cliente.getPersona().getNombres(), cliente.getPersona().getApellidos())));
+            }
+        }else{
+            return clienteMapper.entityListToDtoList(WebUtils.toList(
+                    clienteRepo.findByPersonaTipoDocumentoIdTipoDocumentoAndPersonaDocumento(
+                            cliente.getPersona().getTipoDocumento().getIdTipoDocumento(), cliente.getPersona().getDocumento())));
+        }
     }
 
 }
