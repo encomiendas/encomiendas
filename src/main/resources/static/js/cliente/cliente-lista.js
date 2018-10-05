@@ -163,7 +163,7 @@ function insertarDataDelBuscador(){
 		$('#tipoPersona').val(data.persona.tipoPersona.idTipoPersona).trigger('change');
 		
 		$('#sexo').val(data.persona.genero).trigger('change');
-		if(data.estadoCivil != null)
+		if(data.persona.estadoCivil != null)
 		$('#estadoCivil').val(data.persona.estadoCivil.idEstadoCivil).trigger('change');
 		$('#correo').val(data.persona.correo);
 		$('#telefono').val(data.persona.telefono);
