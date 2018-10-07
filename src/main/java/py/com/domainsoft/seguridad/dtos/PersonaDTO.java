@@ -2,6 +2,8 @@ package py.com.domainsoft.seguridad.dtos;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.base.MoreObjects;
 
@@ -25,6 +27,7 @@ public class PersonaDTO {
     
     private String documento2;
     
+    @DateTimeFormat(pattern = "yyyy-MM-dd")  
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate fechaNacimiento;
     

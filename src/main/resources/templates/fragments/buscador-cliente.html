@@ -127,10 +127,10 @@ $(document).ready(function() {
 		document.getElementById('nombres').value = "";
 		document.getElementById('apellidos').value = "";
 		// Obtenemos el total de columnas (tr) del id "tabla"R
-		var trs = $("#tablaPersonas tr").length;
+		var trs = $("#tablaClientes tr").length;
 		for (var i = 1; trs > i; i++) {
 			// Eliminamos la ultima columna
-			$("#tablaPersonas  tr:last").remove();
+			$("#tablaClientes  tr:last").remove();
 		}
 		document.getElementById('label').innerHTML = "";
 		$(document.getElementById('documento')).css({
