@@ -6,6 +6,7 @@ $(document).ready(function() {
 	      autoclose: true
 	    })*/
 
+	
 	$('#tablaCliente tr').click(function(e) {
 		insertForm(this);
 
@@ -15,6 +16,7 @@ $(document).ready(function() {
 	
 	//pais de residencia
 	$('#idPais').change(function() {
+		
 		$('#idDivisionPolitica').empty();
 		var idpais = $('#idPais').val();
 		
@@ -138,4 +140,59 @@ function nuevo() {
 
 	$("#documento").focus();
 
+}
+
+
+function insertarDataDelBuscador(){
+	var data = parseData();
+	console.log(data)
+	if(data != null){
+		$('#modalBusacadorCliente').modal('toggle');	
+		$("#idCliente").val(data.idCliente);
+		$("#idPersona").val(data.persona.idPersona);
+		$("#documento").val(data.persona.documento);
+		$("#nombres").val(data.persona.nombres);
+		$("#apellidos").val(data.persona.apellidos);
+		
+		if (data.estado) {
+			$("#estado").prop('selectedIndex', 1);
+		} else {
+			$("#estado").prop('selectedIndex', 2);
+		}
+		$('#tipoDoc').val(data.persona.tipoDocumento.idTipoDocumento).trigger('change');
+		$('#tipoPersona').val(data.persona.tipoPersona.idTipoPersona).trigger('change');
+		
+		$('#sexo').val(data.persona.genero).trigger('change');
+		if(data.persona.estadoCivil != null)
+		$('#estadoCivil').val(data.persona.estadoCivil.idEstadoCivil).trigger('change');
+		$('#correo').val(data.persona.correo);
+		$('#telefono').val(data.persona.telefono);
+		$('#direccion').val(data.persona.direccion);
+		$('#fechaNacimiento').val(data.persona.fechaNacimiento);
+		if(data.persona.actividadEconomica != null)
+		$('#idActividadEconomica').val(data.persona.actividadEconomica.idActividadEconomica).trigger('change');
+		
+		if(data.persona.paisNacionalidad != null)
+			$('#idPais2').val(data.persona.paisNacionalidad.idPais).trigger('change');
+		if(data.persona.paisResidencia != null)
+			$('#idPais').val(data.persona.paisResidencia.idPais).trigger('change');	
+		if(data.persona.ciudad != null){
+			$('#idCiudad').val(data.persona.ciudad.idCiudad).trigger('change');
+			idciudad = data.persona.ciudad.idCiudad;	
+			if(data.persona.ciudad.divisionPolitica != null){
+				iddistrito = data.persona.ciudad.divisionPolitica.idDivisionPolitica ;
+				$('#idDivisionPolitica').val(iddistrito).trigger('change');
+			}
+		}
+		if(data.persona.tipoDocumento2 != null)
+		$('#tipoDoc2').val(data.persona.tipoDocumento2.idTipoDocumento).trigger('change');
+		$("#documento2").val(data.persona.documento2);
+		$(".editable").attr('disabled', false)
+		$('#idCiudad').attr('disabled', false).trigger('change');
+		$('#idDivisionPolitica').attr('disabled', false).trigger('change');
+		$("#documento").focus();
+		$('#btnGrabar').attr('disabled', false);
+		
+		
+	}
 }
