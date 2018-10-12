@@ -43,7 +43,7 @@ public class GrupoConceptoViewController {
 			@RequestParam("page") Optional<Integer> numeroPagina, HttpSession session) {
 		
 		
-		ModelAndView modelAndView = new ModelAndView("seguridad/grupo-concepto-lista");
+		ModelAndView modelAndView = new ModelAndView("envios/grupo-concepto-lista");
 		
 		/**
          * Evalua si es null, y muestra por defecto
@@ -89,7 +89,13 @@ public class GrupoConceptoViewController {
 
 	@GetMapping(GRUPO_CONCEPTO_EXITOSO)
 	public ModelAndView paginaExitoso() {
-		ModelAndView modelAndView = new ModelAndView("seguridad/menu-exitoso");
+		
+		String htmlpadre = GRUPO_CONCEPTO_LISTA;
+    	String msgexitoso = "Se aplicaron exitosamento los datos de Grupo Concepto";
+    	
+    	ModelAndView modelAndView = new ModelAndView(Constantes.MSG_EXITOSO_URL);
+    	modelAndView.addObject("htmlpadre",htmlpadre);
+    	modelAndView.addObject("msgexitoso",msgexitoso);
 
 		return modelAndView;
 	}	

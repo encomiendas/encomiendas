@@ -33,7 +33,15 @@ public class UnidadNegocioEntity {
 	
 	private String descripcion;
 	
-	private boolean estado;
+	private Boolean estado;
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
 
 	public Integer getIdUnidadNegocio() {
 		return idUnidadNegocio;
@@ -49,14 +57,6 @@ public class UnidadNegocioEntity {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-	public boolean isEstado() {
-		return estado;
-	}
-
-	public void setEstado(boolean estado) {
-		this.estado = estado;
 	}
 	
 	@Override

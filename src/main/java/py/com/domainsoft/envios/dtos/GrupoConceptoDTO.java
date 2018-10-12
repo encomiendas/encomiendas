@@ -4,11 +4,11 @@ import com.google.common.base.MoreObjects;
 
 public class GrupoConceptoDTO {
 	
-	Integer idGrupoConcepto;
+	private Integer idGrupoConcepto;
 	
-	String descripcion;
+	private String descripcion;
 	
-	boolean estado;
+	private Boolean estado;
 
 	public Integer getIdGrupoConcepto() {
 		return idGrupoConcepto;
@@ -26,15 +26,14 @@ public class GrupoConceptoDTO {
 		this.descripcion = descripcion;
 	}
 
-	public boolean isEstado() {
+	public Boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(boolean estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
-	
-	
+
 	@Override
     public String toString() {
         return MoreObjects.toStringHelper(this)

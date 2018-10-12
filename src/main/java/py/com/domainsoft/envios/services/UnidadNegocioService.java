@@ -12,8 +12,5 @@ public interface UnidadNegocioService {
 	
 	public void grabarUnidadNegocio(UnidadNegocioDTO unidadNegocio);
 	
-	default void probarDefauld(Integer p) {
-		
-	}
 
 }

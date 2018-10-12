@@ -32,7 +32,7 @@ public class GrupoConceptoEntity {
 	
 	private String descripcion;
 	
-	private boolean estado;
+	private Boolean estado;
 
 	public Integer getIdGrupoConcepto() {
 		return idGrupoConcepto;
@@ -50,14 +50,14 @@ public class GrupoConceptoEntity {
 		this.descripcion = descripcion;
 	}
 
-	public boolean isEstado() {
+	public Boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(boolean estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
-	
+
 	@Override
     public boolean equals(Object obj) {
         if (this == obj) {

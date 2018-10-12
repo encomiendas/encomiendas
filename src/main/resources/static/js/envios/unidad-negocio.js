@@ -17,41 +17,16 @@ $(document).ready(function() {
 });
 
 
-// se inserta los valores
 function insertForm(fila) {
 	
-	console.log(fila.cells[0].innerHTML);
-	console.log($.trim(fila.cells[1].innerHTML));
-	console.log(fila.cells[2].innerHTML);
-	
-	
 	$("#descripcion").val(fila.cells[0].innerHTML);
-	
-//	if ($.trim(fila.cells[1].innerHTML) == '<span>ACTIVO</span>') {
-//		$("#estado").prop('selectedIndex', 1);
-//		console.log("ingreso ACTIVO");
-//	} else {
-//		$("#estado").prop('selectedIndex', 2);
-//		console.log("ingreso INACTIVO");
-//	}
-	
 	
 	if ($.trim(fila.cells[1].innerHTML) == '<span>ACTIVO</span>') {
 		$("#estado").prop('selectedIndex', 1);
 	} else {
 		$("#estado").prop('selectedIndex', 2);
 	}
-	
-	
 	$("#idUnidadNegocio").val(fila.cells[2].innerHTML);
-	
-	
-//	
-//	if ($.trim(fila.cells[3].innerHTML) == '<span>ACTIVO</span>') {
-//		$("#estado").prop('selectedIndex', 1);
-//	} else {
-//		$("#estado").prop('selectedIndex', 2);
-	
 	
 }
 

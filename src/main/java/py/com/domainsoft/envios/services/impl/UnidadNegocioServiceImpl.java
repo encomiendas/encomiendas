@@ -9,7 +9,6 @@ import py.com.domainsoft.envios.entities.UnidadNegocioEntity;
 import py.com.domainsoft.envios.mapper.UnidadNegocioMapper;
 import py.com.domainsoft.envios.repositories.UnidadNegocioRepository;
 import py.com.domainsoft.envios.services.UnidadNegocioService;
-import py.com.domainsoft.seguridad.entities.UsuarioEntity;
 
 @Service
 public class UnidadNegocioServiceImpl implements UnidadNegocioService {

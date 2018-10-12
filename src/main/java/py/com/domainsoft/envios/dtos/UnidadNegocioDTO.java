@@ -8,7 +8,7 @@ public class UnidadNegocioDTO {
 
 	private String descripcion;
 
-	private boolean estado;
+	private Boolean estado;
 
 	public UnidadNegocioDTO() {
 
@@ -30,21 +30,17 @@ public class UnidadNegocioDTO {
 		this.descripcion = descripcion;
 	}
 
-	public boolean isEstado() {
+	public Boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(boolean estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
 
-
-
-
-
 	public UnidadNegocioDTO(Integer idUnidadNegocio,
 	        String descripcion,
-	        boolean estado) {
+	        Boolean estado) {
 		this.idUnidadNegocio = idUnidadNegocio;
 		this.descripcion = descripcion;
 		this.estado = estado;
@@ -57,7 +53,7 @@ public class UnidadNegocioDTO {
 
 		private String descripcion;
 
-		private boolean estado;
+		private Boolean estado;
 
 		public Builder idUnidadNegocio(Integer idUnidadNegocio) {
 			this.idUnidadNegocio = idUnidadNegocio;
@@ -69,7 +65,7 @@ public class UnidadNegocioDTO {
 			return this;
 		}
 
-		public Builder estado(boolean estado) {
+		public Builder estado(Boolean estado) {
 			this.estado = estado;
 			return this;
 		}

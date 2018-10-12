@@ -1,7 +1,9 @@
 package py.com.domainsoft.web.view;
 
+import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
@@ -17,21 +19,28 @@ import py.com.domainsoft.common.Constantes;
 import py.com.domainsoft.common.domain.Pager;
 import py.com.domainsoft.envios.dtos.UnidadNegocioDTO;
 import py.com.domainsoft.envios.services.UnidadNegocioService;
+import py.com.domainsoft.seguridad.dtos.MenuDTO;
+import py.com.domainsoft.seguridad.dtos.PerfilDTO;
+import py.com.domainsoft.seguridad.dtos.UserDetailsDTO;
 
 @Controller
 public class UnidadNegocioViewController {
     
-    private final UnidadNegocioService unidadNegocioService;
+	private static final String UNIDAD_NEGOCIO_LISTA = "/unidad-negocio-lista";
+	private static final String UNIDAD_NEGOCIO_EXITOSO = "/unidad-negocio-exitoso";
+	
+	
+	private final UnidadNegocioService unidadNegocioService;
 
     public UnidadNegocioViewController(UnidadNegocioService unidadNegocioService) {
         this.unidadNegocioService = unidadNegocioService;
     }
 
     
-    @GetMapping("/unidad-negocio-lista")
+    @GetMapping(UNIDAD_NEGOCIO_LISTA)
     public ModelAndView unidadNegocioLista(
             @RequestParam("pageSize") Optional<Integer> tamanhoPagina,
-            @RequestParam("page") Optional<Integer> numeroPagina) {
+            @RequestParam("page") Optional<Integer> numeroPagina,HttpSession session) {
 
         ModelAndView modelAndView = new ModelAndView("envios/unidad-negocio");
 
@@ -49,6 +58,12 @@ public class UnidadNegocioViewController {
                 Constantes.BUTTONS_TO_SHOW);
 
         UnidadNegocioDTO unidadNegDto = new UnidadNegocioDTO();
+        
+        modelAndView.addObject(Constantes.MENU_LIST, (List<MenuDTO>) session.getAttribute(Constantes.SESSION_MENU));
+        modelAndView.addObject(Constantes.SESSION_LOGIN_DATA, (UserDetailsDTO)session.getAttribute(Constantes.SESSION_LOGIN_DATA));
+        modelAndView.addObject("perfilesUsuarios", (List<PerfilDTO>)session.getAttribute("perfilesUsuarios"));
+        modelAndView.addObject("totalPerfiles", (Integer)session.getAttribute("totalPerfiles"));
+        
 
         modelAndView.addObject("unidadNegDto", unidadNegDto);
         //Paginacion
@@ -60,22 +75,22 @@ public class UnidadNegocioViewController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/unidad-negocio-lista")
+    @PostMapping(value = UNIDAD_NEGOCIO_LISTA)
     public ModelAndView createNewUnidadNegocio(@Valid UnidadNegocioDTO unidadNegocioDto,
             BindingResult bindingResult) {
     	unidadNegocioService.grabarUnidadNegocio(unidadNegocioDto);
-        return new ModelAndView("redirect:/unidad-negocio-exitoso");
+        return new ModelAndView("redirect:"+UNIDAD_NEGOCIO_EXITOSO);
     }
 
     
     
-    @GetMapping(value = "/unidad-negocio-exitoso")
+    @GetMapping(value = UNIDAD_NEGOCIO_EXITOSO)
     public ModelAndView usuarioExitoso() {
         
-    	String htmlpadre = "/unidad-negocio-lista";
+    	String htmlpadre = UNIDAD_NEGOCIO_LISTA;
     	String msgexitoso = "Se aplicaron exitosamento los datos de Unidad de Negocio";
     	
-    	ModelAndView modelAndView = new ModelAndView("seguridad/usuario-exitoso");
+    	ModelAndView modelAndView = new ModelAndView(Constantes.MSG_EXITOSO_URL);
     	modelAndView.addObject("htmlpadre",htmlpadre);
     	modelAndView.addObject("msgexitoso",msgexitoso);
     	
