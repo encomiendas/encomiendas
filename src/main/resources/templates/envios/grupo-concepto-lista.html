@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- STYLES IMPORTS -->
+<th:block th:replace="fragments/head :: head"></th:block>
+
+<!-- //TODO:Oculta dos columnas de la tabla --> 
+<style>
+  	#tabla-datos td:nth-child(n+6){
+	display: none;}
+</style>
+
+<body class="hold-transition skin-green sidebar-mini ">
+
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<th:block th:replace="fragments/header :: header"></th:block>
+		<!-- ASIDE MENU -->
+		<th:block th:replace="fragments/aside :: aside"></th:block>
+
+		<!-- =============================================== -->
+
+		<!-- CONTENIDO PRINCIPAL DE LA PAGINA -->
+		<div class="content-wrapper">
+
+			<section class="content-header">
+				<h1>
+					Grupo Concepto <small>lista de Grupo Concepto</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">Menu</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="box box-success">
+							<div class="register-box-body">
+							
+								<div th:if="${message != null}" th:text="${message}"
+						            style="color:red;margin:10px 0px;">
+						        </div>
+							
+								<form action="#" 
+								      method="POST" 
+								      th:action="@{/grupo-concepto-lista}"
+									  id="formulario"
+									  th:object="${grupoConcepto}"
+									  class="form-horizontal"
+									  role="form">
+									  
+									<div style="color: red" class="requerido">
+										<label id="label"></label>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Identificador</label> 
+										<input 
+											type="text" 
+											value="" 
+											class="form-control"
+											id="idGrupoConcepto" 
+											placeholder="Identificador"
+											readonly
+											th:field="*{idGrupoConcepto}"
+											>
+									</div>
+									
+									
+									<div class="form-group has-feedback">
+										<label>Descripcion</label> 
+										<input 
+											type="text" 
+											class="form-control" 
+											id="descripcion"
+											placeholder="nombre descriptivo del grupo concepto"
+											th:field="*{descripcion}"
+											disabled required>
+									</div>
+									
+									
+									<div class="form-group has-feedback">
+										<label>Estado</label> 
+										<select class="form-control" 
+										        id="estado"
+										        th:field="*{estado}"
+										        disabled>
+											<option value="" selected disabled>Estado</option>
+											<option value="true">Activo</option>
+											<option value="false">Inactivo</option>
+										</select>
+									</div>
+									
+									<div class="row">
+										<div class="col-xs-4">
+											<button type="button" class="btn btn-success btn-block btn-flat" id="btnNuevo" onclick="nuevo()">Nuevo</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="submit" class="btn btn-success btn-block btn-flat" id="btnGrabar" disabled>Grabar</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="button" class="btn btn-success btn-block btn-flat" id="btnCancelar" onclick="cancelar(this.form)">Cancelar</button>
+										</div>
+									</div> 
+								</form>
+							</div>
+						</div>
+					</div>
+					
+					
+					<div class="col-md-8">
+						<div class="box box-success">
+							<div class="box-header"></div>
+							<!-- /.box-header -->
+							<div class="box-body" id="divTabla">
+								<div class="table-responsive">
+
+									<div id="tabladatos_wrapper"
+										class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+										<div class="row">
+
+											<div class="col-sm-6">
+												<div class="datatables_length" id="tabladatos_length">
+													<label>mostrar <select name="tabladatos_length"
+														aria-controls="tabladatos" class="form-control input-sm">
+															<option th:each="pagesize : ${pagesizes}" th:text="${pagesize}"
+																th:value="${pagesize}" th:selected="${pagesize} == ${selectedpagesize}"></option>
+													</select> registros
+													</label>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<div id="tabladatos_filter" class="datatables_filter">
+													<label>buscar:<input type="search" class="form-control input-sm"
+														placeholder="su texto aqui" aria-controls="tablagrupoconcepto"></label>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="row">
+
+											<div class="col-sm-12">
+
+												<table id="tabla-datos" class="table table-bordered table-hover ">
+													<thead>
+														<tr>
+															<th>descripcion</th>
+															<th>estado</th>
+															<th>id</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="grupoConcepto : ${grupoConceptos}" class="selected">
+															<td th:text="${grupoConcepto.descripcion}"></td>
+															<td th:switch="${grupoConcepto.estado}">
+																<span th:case="true" th:text="ACTIVO"></span> 
+																<span th:case="false" th:text="INACTIVO"></span>
+															</td>
+															<td th:text="${grupoConcepto.idGrupoConcepto}"></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+
+										<div class="row">
+
+											<div class="col-sm-5">
+												<div class="dataTables_info" id="tabladatos_info" role="status" aria-live="polite">
+													Página <span th:text="${grupoConceptos.Number + 1}"></span> de <span
+														th:text="${grupoConceptos.TotalPages}"></span> de un total de <span
+														th:text="${grupoConceptos.TotalElements}"></span> registros
+												</div>
+											</div>
+
+											<div th:if="${grupoConceptos.totalPages != 1}" class="col-sm-7">
+
+												<div class="dataTables_paginate paging_simple_numbers" id="tablaGrupoConcepto_paginate">
+
+													<ul class="pagination">
+														<li th:class="${grupoConceptos.number == 0} ? disabled"><a class="pageLink"
+															th:href="@{/grupo-concepto-lista(pageSize=${selectedPageSize}, page=1)}">&laquo;</a></li>
+														<li th:class="${grupoConceptos.number == 0} ? disabled"><a class="pageLink"
+															th:href="@{/grupo-concepto-lista(pageSize=${selectedPageSize}, page=${menus.number})}">&larr;</a></li>
+														<li th:class="${menus.number == (page - 1)} ? 'active pointer-disabled'"
+															th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}"><a
+															class="pageLink"
+															th:href="@{/grupo-concepto-lista(pageSize=${selectedPageSize}, page=${page})}"
+															th:text="${page}"></a></li>
+														<li th:class="${grupoConceptos.number + 1 == grupoConceptos.totalPages} ? disabled"><a
+															class="pageLink"
+															th:href="@{/grupo-concepto-lista(pageSize=${selectedPageSize}, page=${grupoConceptos.number + 2})}">&rarr;</a>
+														</li>
+														<li th:class="${grupoConceptos.number + 1 == grupoConceptos.totalPages} ? disabled"><a
+															class="pageLink"
+															th:href="@{/grupoConceptos-lista(pageSize=${selectedPageSize}, page=${grupoConceptos.totalPages})}">&raquo;</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+			</section>
+		</div>
+
+		<!-- =============================================== -->
+		<!-- FOOTER -->
+		<th:block th:replace="fragments/footer :: footer"></th:block>
+		<!-- =============================================== -->
+
+	</div>
+
+	<!-- SCRIPTS -->
+	<th:block th:replace="fragments/scripts :: scripts"></th:block>
+	<script src="../../plugins/select2/select2.full.min.js"></script>
+	<script src="../../js/envios/grupo-concepto-lista.js"></script>
+
+	<script>
+		
+	</script>
+
+</body>
+
+</html>

@@ -29,6 +29,7 @@ public class Constantes {
     
     /**URL*/
     public static final String USUARIO_EXITOSO_URL = "/usuario-exitoso";
+    public static final String MSG_EXITOSO_URL = "seguridad/msg-exitoso";
     
     /**Devuelve el password temporal encriptado con bcrypt*/
     public static final String getTemporalPass() {

@@ -58,6 +58,11 @@
         <sqlFile path="sql/2018-08-29T15:03.sql" relativeToChangelogFile="true"/>
     </changeSet>
     
+    <!-- This script create the unidad_negocio table -->
+    <changeSet id="2018-09-07T12:38" author="lbareiro">
+        <sqlFile path="sql/2018-09-07T12:38.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    
     <!-- This script create the client table -->
     <changeSet id="2018-09-21T08:00" author="jdferreira">
         <sqlFile path="sql/2018-09-21T08:00.sql" relativeToChangelogFile="true"/>
@@ -72,8 +77,15 @@
     <changeSet id="2018-09-24T18:40" author="jdferreira">
         <sqlFile path="sql/2018-09-24T18:40.sql" relativeToChangelogFile="true"/>
     </changeSet>
+    
+     <!-- Se agrega tabla y datos de grupo_concepto -->
+    <changeSet id="2018-09-28T15:00" author="lbareiro">
+        <sqlFile path="sql/2018-09-28T15:00.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
     <!-- Se agrega la columna abreviatura a tipo_documento-->
     <changeSet id="2018-10-01T10:15" author="jdferreira">
         <sqlFile path="sql/2018-10-01T10:15.sql" relativeToChangelogFile="true"/>
     </changeSet>
+
 </databaseChangeLog>
