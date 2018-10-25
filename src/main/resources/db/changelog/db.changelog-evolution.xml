@@ -87,5 +87,26 @@
     <changeSet id="2018-10-01T10:15" author="jdferreira">
         <sqlFile path="sql/2018-10-01T10:15.sql" relativeToChangelogFile="true"/>
     </changeSet>
+    
+    <!-- Se agrega la tabla moneda-->
+    <changeSet id="2018-10-25T15:50" author="lbareiro">
+        <sqlFile path="sql/2018-10-25T15:50.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    
+    <!-- Se agrega la tabla tipo_impuesto-->
+    <changeSet id="2018-10-25T16:00" author="lbareiro">
+        <sqlFile path="sql/2018-10-25T16:00.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    
+    <!-- Se agrega la tabla concepto-->
+    <changeSet id="2018-10-25T16:10" author="lbareiro">
+        <sqlFile path="sql/2018-10-25T16:10.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    
+    <!-- Se agrega la tablas envio y envio_det-->
+    <changeSet id="2018-10-25T16:20" author="lbareiro">
+        <sqlFile path="sql/2018-10-25T16:20.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    
 
 </databaseChangeLog>
