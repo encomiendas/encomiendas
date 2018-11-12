@@ -1,9 +1,13 @@
 package py.com.domainsoft.envios.services.impl;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import py.com.domainsoft.common.WebUtils;
+import py.com.domainsoft.entidad.dtos.PaisDTO;
 import py.com.domainsoft.envios.dtos.GrupoConceptoDTO;
 import py.com.domainsoft.envios.entities.GrupoConceptoEntity;
 import py.com.domainsoft.envios.mapper.GrupoConceptoMapper;
@@ -34,9 +38,14 @@ public class GrupoConceptoServiceImpl implements GrupoConceptoService {
 
 	@Override
 	public void grabarGrupoConcepto(GrupoConceptoDTO grupoConcepto) {
-		
 		grupoConceptoRepo.save(grupoConceptoMapper.dtoToEntity(grupoConcepto));
 		
+	}
+	
+		
+	@Override
+	public List<GrupoConceptoDTO> findAll() {
+		return grupoConceptoMapper.entityListToDtoList(WebUtils.toList(grupoConceptoRepo.findAll()));
 	}
 
 	
