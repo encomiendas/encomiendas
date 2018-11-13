@@ -40,7 +40,7 @@ public class PersonaSeviceImpl implements PersonaService {
             persona.setTipoDocumento2(null);
         persona.setNombres(persona.getNombres().toUpperCase());
         persona.setApellidos(persona.getApellidos().toUpperCase());
-        persona.setCorreo(persona.getCorreo().toUpperCase());
+        persona.setCorreo(persona.getCorreo());
         persona.setDireccion(persona.getDireccion().toUpperCase());
         if (persona.getDocumento2().equals(""))
             persona.setDocumento2(null);

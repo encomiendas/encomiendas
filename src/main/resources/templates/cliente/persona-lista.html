@@ -97,7 +97,28 @@
 											class="form-control" id="idPersona"
 											placeholder="Identificador" readonly th:field="*{idPersona}">
 									</div>
+									
+									<div class="form-group has-feedback ">
+										<label>Nacionalidad</label> <select class="form-control editable select2 "
+											id="idPais2" th:field="${persona.paisNacionalidad.idPais}"
+											required disabled>
+											<option value="" selected>Seleccione</option>
+											<option th:each="dropDownItem : ${paises}"
+												th:value="${dropDownItem.getIdPais()}"
+												th:text="${dropDownItem.getGentilicio()}" />
+										</select>
+									</div>
 
+									<div class="form-group has-feedback">
+										<label>Tipo Persona</label> <select
+											class="form-control editable" id="tipoPersona"
+											th:field="${persona.tipoPersona.idTipoPersona}" required disabled>
+											<option th:each="dropDownItem : ${tiposPersonas}"
+												th:value="${dropDownItem.getIdTipoPersona()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+									
 									<div class="form-group has-feedback">
 										<label>Tipo Documento</label> <select
 											class="form-control editable" id="tipoDoc"
@@ -194,19 +215,12 @@
 									<div class="form-group has-feedback">
 										<label>Direccion</label> <input type="text"
 											class="form-control editable" id="direccion"
+											style="text-transform:uppercase"
 											placeholder="Ingrese la direccion" th:field="*{direccion}"
 											disabled>
 									</div>
 
-									<div class="form-group has-feedback">
-										<label>Tipo Persona</label> <select
-											class="form-control editable" id="tipoPersona"
-											th:field="${persona.tipoPersona.idTipoPersona}" required disabled>
-											<option th:each="dropDownItem : ${tiposPersonas}"
-												th:value="${dropDownItem.getIdTipoPersona()}"
-												th:text="${dropDownItem.getDescripcion()}" />
-										</select>
-									</div>
+									
 
 									<div class="form-group has-feedback">
 										<label>Pais de Residencia</label> <select class="form-control select2 editable"
@@ -217,16 +231,7 @@
 												th:text="${dropDownItem.getDescripcion()}" />
 										</select>
 									</div>
-									<div class="form-group has-feedback ">
-										<label>Nacionalidad</label> <select class="form-control editable select2 "
-											id="idPais2" th:field="${persona.paisNacionalidad.idPais}"
-											required disabled>
-											<option value="" selected>Seleccione</option>
-											<option th:each="dropDownItem : ${paises}"
-												th:value="${dropDownItem.getIdPais()}"
-												th:text="${dropDownItem.getGentilicio()}" />
-										</select>
-									</div>
+									
 									<div class="form-group has-feedback">
 										<label>Actividad Economica</label> <select class="form-control select2 editable"
 											id="idActividadEconomica" th:field="${persona.actividadEconomica.idActividadEconomica}" required disabled>
