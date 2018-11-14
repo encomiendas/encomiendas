@@ -107,5 +107,11 @@
     <changeSet id="2018-10-25T16:20" author="lbareiro">
         <sqlFile path="sql/2018-10-25T16:20.sql" relativeToChangelogFile="true"/>
     </changeSet>    
+    
+    
+    <!-- Se modifica el contraint entregado de la tabla envio-->
+    <changeSet id="2018-11-14T16:25" author="jdferreira">
+        <sqlFile path="sql/2018-11-14T16:25.sql" relativeToChangelogFile="true"/>
+    </changeSet>   
 
 </databaseChangeLog>

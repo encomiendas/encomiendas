@@ -1,6 +1,7 @@
 package py.com.domainsoft.entidad.dtos;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import py.com.domainsoft.envios.dtos.UnidadNegocioDTO;
 import py.com.domainsoft.seguridad.dtos.UsuarioDTO;
@@ -33,6 +34,8 @@ public class EnvioDTO {
 
     private SucursalDTO sucursalDestino;
     
+    private List<EnvioDetDTO> detalles;
+    
     public EnvioDTO(){};
     
     public EnvioDTO(  Integer idEnvio,
@@ -47,7 +50,8 @@ public class EnvioDTO {
      UsuarioDTO usuarioLog,
      LocalDateTime fechaLog,
      PaisDTO paisDestino,
-     SucursalDTO sucursalDestino) {
+     SucursalDTO sucursalDestino,
+     List<EnvioDetDTO> detalles) {
         this.idEnvio = idEnvio;
         this.fechaEnvio = fechaEnvio;
         this.sucursal = sucursal;
@@ -61,6 +65,7 @@ public class EnvioDTO {
         this.fechaLog = fechaLog;
         this.paisDestino = paisDestino;
         this.sucursalDestino = sucursalDestino;
+        this.detalles = detalles;
     }
 
     public static class Builder {
@@ -78,6 +83,7 @@ public class EnvioDTO {
         private LocalDateTime fechaLog;
         private PaisDTO paisDestino;
         private SucursalDTO sucursalDestino;
+        private List<EnvioDetDTO> detalles;
 
         public Builder idEnvio(Integer idEnvio) {
             this.idEnvio = idEnvio;
@@ -143,6 +149,10 @@ public class EnvioDTO {
             this.sucursalDestino = sucursalDestino;
             return this;
         }
+        public Builder detalles(List<EnvioDetDTO> detalles) {
+            this.detalles = detalles;
+            return this;
+        }
 
         public EnvioDTO build() {
             return new EnvioDTO(  idEnvio,
@@ -157,7 +167,8 @@ public class EnvioDTO {
                      usuarioLog,
                      fechaLog,
                      paisDestino,
-                     sucursalDestino);
+                     sucursalDestino,
+                     detalles);
         }
 
     }
@@ -268,6 +279,27 @@ public class EnvioDTO {
 
     public void setSucursalDestino(SucursalDTO sucursalDestino) {
         this.sucursalDestino = sucursalDestino;
+    }
+
+    public List<EnvioDetDTO> getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(List<EnvioDetDTO> detalles) {
+        this.detalles = detalles;
+    }
+
+    @Override
+    public String toString() {
+        return "EnvioDTO [idEnvio=" + idEnvio + ", fechaEnvio=" + fechaEnvio
+                + ", sucursal=" + sucursal + ", clienteRemitente="
+                + clienteRemitente + ", clienteDestinatario="
+                + clienteDestinatario + ", estado=" + estado
+                + ", unidadNegocio=" + unidadNegocio + ", entregado="
+                + entregado + ", usuario=" + usuario + ", usuarioLog="
+                + usuarioLog + ", fechaLog=" + fechaLog + ", paisDestino="
+                + paisDestino + ", sucursalDestino=" + sucursalDestino
+                + ", detalles=" + detalles + "]";
     }
 
     

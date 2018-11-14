@@ -239,6 +239,16 @@ public class EnvioDetDTO {
     public void setMonedaEntrega(MonedaDTO monedaEntrega) {
         this.monedaEntrega = monedaEntrega;
     }
+
+    @Override
+    public String toString() {
+        return "EnvioDetDTO [idEnvioDet=" + idEnvioDet + ", idEnvio=" + idEnvio
+                + ", item=" + item + ", concepto=" + concepto + ", comentario="
+                + comentario + ", cantidad=" + cantidad + ", montoTarifa="
+                + montoTarifa + ", montoTotal=" + montoTotal + ", montoEnvio="
+                + montoEnvio + ", moneda=" + moneda + ", monedaEntrega="
+                + monedaEntrega + "]";
+    }
     
     
 }

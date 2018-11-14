@@ -1,5 +1,6 @@
 package py.com.domainsoft.entidad.entities;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -197,5 +199,11 @@ public class EnvioEntity {
     public int hashCode() {
         return idEnvio == null ? 0 : idEnvio.hashCode();
     }
+    
+    
+    @PrePersist
+    public void preSave() {
+        this.fechaLog = LocalDateTime.now();
+    }  
     
 }

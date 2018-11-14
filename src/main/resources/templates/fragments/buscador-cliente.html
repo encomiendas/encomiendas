@@ -90,8 +90,11 @@
 
 				<div class="modal-footer">
 					<div class="row">
-						<div class="col-md-12 col-md-offset-2">
+						<div class="col-md-12 col-md-offset-1">
 							
+							<a href="/cliente-lista" class="btn btn-success col-md-2" 
+									><i class="ion-plus">  Agregar Nuevo</i></a>
+									
 								<button type="button" class="btn btn-success col-md-2" id='btnBuscarp'
 									onclick="getData();"><i class="ion-search">  Buscar</i></button>
 							
@@ -123,9 +126,9 @@ $(document).ready(function() {
 });
 	function limpiarBuscador() {
 		$('#btnAceptap').attr('disabled', true);	
-		document.getElementById('documento').value = "";
-		document.getElementById('nombres').value = "";
-		document.getElementById('apellidos').value = "";
+		$('#buscador-documento').val("");
+		$('#buscador-nombres').val("");
+		$('#buscador-apellidos').val("");
 		// Obtenemos el total de columnas (tr) del id "tabla"R
 		var trs = $("#tablaClientes tr").length;
 		for (var i = 1; trs > i; i++) {

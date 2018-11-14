@@ -99,4 +99,9 @@ public class ClienteServiceImpl implements ClienteService{
         }
     }
 
+    @Override
+    public ClienteDTO findByDocumento(String documento) {
+        return clienteMapper.entityToDto(clienteRepo.findByPersonaDocumento(documento));
+    }
+
 }
