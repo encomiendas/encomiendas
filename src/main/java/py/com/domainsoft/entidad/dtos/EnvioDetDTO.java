@@ -30,8 +30,8 @@ public class EnvioDetDTO {
     public EnvioDetDTO() {
     };
 
-    public EnvioDetDTO(Integer idEnvioDet, 
-            Integer idEnvio, Integer item,
+  //CHECKSTYLE:OFF
+    public EnvioDetDTO(Integer idEnvioDet, Integer idEnvio, Integer item,
             ConceptoDTO concepto, String comentario, Double cantidad,
             Double montoTarifa, Double montoTotal, Double montoEnvio,
             MonedaDTO moneda, MonedaDTO monedaEntrega) {
@@ -47,7 +47,7 @@ public class EnvioDetDTO {
         this.moneda = moneda;
         this.monedaEntrega = monedaEntrega;
     }
-
+  //CHECKSTYLE:ON
     public static class Builder {
 
         private Integer idEnvioDet;

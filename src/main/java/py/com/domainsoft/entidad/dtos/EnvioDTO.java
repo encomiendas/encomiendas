@@ -38,7 +38,8 @@ public class EnvioDTO {
 
     public EnvioDTO() {
     };
-
+    
+  //CHECKSTYLE:OFF
     public EnvioDTO(Integer idEnvio, 
             LocalDateTime fechaEnvio,
             SucursalDTO sucursal, ClienteDTO clienteRemitente,
@@ -62,6 +63,7 @@ public class EnvioDTO {
         this.sucursalDestino = sucursalDestino;
         this.detalles = detalles;
     }
+  //CHECKSTYLE:ON
 
     public static class Builder {
 
