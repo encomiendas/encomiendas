@@ -7,51 +7,45 @@ import py.com.domainsoft.envios.dtos.UnidadNegocioDTO;
 import py.com.domainsoft.seguridad.dtos.UsuarioDTO;
 
 public class EnvioDTO {
-    
+
     private Integer idEnvio;
-    
+
     private LocalDateTime fechaEnvio;
-    
+
     private SucursalDTO sucursal;
-    
+
     private ClienteDTO clienteRemitente;
- 
+
     private ClienteDTO clienteDestinatario;
-    
+
     private String estado;
-    
+
     private UnidadNegocioDTO unidadNegocio;
-    
+
     private String entregado;
-    
+
     private UsuarioDTO usuario;
 
     private UsuarioDTO usuarioLog;
-    
+
     private LocalDateTime fechaLog;
 
     private PaisDTO paisDestino;
 
     private SucursalDTO sucursalDestino;
-    
+
     private List<EnvioDetDTO> detalles;
-    
-    public EnvioDTO(){};
-    
-    public EnvioDTO(  Integer idEnvio,
-     LocalDateTime fechaEnvio,
-     SucursalDTO sucursal,
-     ClienteDTO clienteRemitente,
-     ClienteDTO clienteDestinatario,
-     String estado,
-     UnidadNegocioDTO unidadNegocio,
-     String entregado,
-     UsuarioDTO usuario,
-     UsuarioDTO usuarioLog,
-     LocalDateTime fechaLog,
-     PaisDTO paisDestino,
-     SucursalDTO sucursalDestino,
-     List<EnvioDetDTO> detalles) {
+
+    public EnvioDTO() {
+    };
+
+    public EnvioDTO(Integer idEnvio, LocalDateTime fechaEnvio,
+            SucursalDTO sucursal, ClienteDTO clienteRemitente,
+            ClienteDTO clienteDestinatario, String estado,
+            UnidadNegocioDTO unidadNegocio, String entregado,
+            UsuarioDTO usuario, UsuarioDTO usuarioLog, LocalDateTime fechaLog,
+            PaisDTO paisDestino, SucursalDTO sucursalDestino,
+            List<EnvioDetDTO> detalles) {
         this.idEnvio = idEnvio;
         this.fechaEnvio = fechaEnvio;
         this.sucursal = sucursal;
@@ -104,71 +98,62 @@ public class EnvioDTO {
             this.clienteRemitente = clienteRemitente;
             return this;
         }
-        
+
         public Builder clienteDestinatario(ClienteDTO clienteRemitente) {
             this.clienteRemitente = clienteRemitente;
             return this;
         }
-        
+
         public Builder estado(String estado) {
             this.estado = estado;
             return this;
         }
-        
+
         public Builder unidadNegocio(UnidadNegocioDTO unidadNegocio) {
             this.unidadNegocio = unidadNegocio;
             return this;
         }
-        
+
         public Builder entregado(String entregado) {
             this.entregado = entregado;
             return this;
         }
-        
+
         public Builder usuario(UsuarioDTO usuario) {
             this.usuario = usuario;
             return this;
         }
-        
+
         public Builder usuarioLog(UsuarioDTO usuarioLog) {
             this.usuarioLog = usuarioLog;
             return this;
         }
-        
+
         public Builder fechaLog(LocalDateTime fechaLog) {
             this.fechaLog = fechaLog;
             return this;
         }
-        
+
         public Builder paisDestino(PaisDTO paisDestino) {
             this.paisDestino = paisDestino;
             return this;
         }
-        
+
         public Builder sucursalDestino(SucursalDTO sucursalDestino) {
             this.sucursalDestino = sucursalDestino;
             return this;
         }
+
         public Builder detalles(List<EnvioDetDTO> detalles) {
             this.detalles = detalles;
             return this;
         }
 
         public EnvioDTO build() {
-            return new EnvioDTO(  idEnvio,
-                     fechaEnvio,
-                     sucursal,
-                     clienteRemitente,
-                     clienteDestinatario,
-                     estado,
-                     unidadNegocio,
-                     entregado,
-                     usuario,
-                     usuarioLog,
-                     fechaLog,
-                     paisDestino,
-                     sucursalDestino,
-                     detalles);
+            return new EnvioDTO(idEnvio, fechaEnvio, sucursal, clienteRemitente,
+                    clienteDestinatario, estado, unidadNegocio, entregado,
+                    usuario, usuarioLog, fechaLog, paisDestino, sucursalDestino,
+                    detalles);
         }
 
     }
@@ -302,8 +287,4 @@ public class EnvioDTO {
                 + ", detalles=" + detalles + "]";
     }
 
-    
-    
-    
 }
-

@@ -1,6 +1,5 @@
 package py.com.domainsoft.entidad.entities;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -24,55 +23,50 @@ import py.com.domainsoft.seguridad.entities.UsuarioEntity;
 public class EnvioEntity {
 
     @Id
-    @GenericGenerator(name = "envioSequenceGenerator",
-    strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-    parameters = {
-            @Parameter(name = SequenceStyleGenerator.SEQUENCE_PARAM,
-                    value = "envio_id_envio_seq"),
-            @Parameter(name = SequenceStyleGenerator.INITIAL_PARAM,
-            value = "1"),
-            @Parameter(name = SequenceStyleGenerator.INCREMENT_PARAM,
-            value = "1") })
+    @GenericGenerator(name = "envioSequenceGenerator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
+            @Parameter(name = SequenceStyleGenerator.SEQUENCE_PARAM, value = "envio_id_envio_seq"),
+            @Parameter(name = SequenceStyleGenerator.INITIAL_PARAM, value = "1"),
+            @Parameter(name = SequenceStyleGenerator.INCREMENT_PARAM, value = "1") })
     @GeneratedValue(generator = "envioSequenceGenerator")
     @Column(name = "id_envio")
     private Integer idEnvio;
-    
+
     private LocalDateTime fechaEnvio;
-    
+
     @ManyToOne(targetEntity = SucursalEntity.class)
     @JoinColumn(name = "id_sucursal")
     private SucursalEntity sucursal;
-    
+
     @ManyToOne(targetEntity = ClienteEntity.class)
     @JoinColumn(name = "id_cliente_remitente")
     private ClienteEntity clienteRemitente;
-    
+
     @ManyToOne(targetEntity = ClienteEntity.class)
     @JoinColumn(name = "id_cliente_destinatario")
     private ClienteEntity clienteDestinatario;
-    
+
     private String estado;
-    
+
     @ManyToOne(targetEntity = UnidadNegocioEntity.class)
     @JoinColumn(name = "id_unidad_negocio")
     private UnidadNegocioEntity unidadNegocio;
-    
+
     private String entregado;
-    
+
     @ManyToOne(targetEntity = UsuarioEntity.class)
     @JoinColumn(name = "id_usuario")
     private UsuarioEntity usuario;
-    
+
     @ManyToOne(targetEntity = UsuarioEntity.class)
     @JoinColumn(name = "id_usuario_log")
     private UsuarioEntity usuarioLog;
-    
+
     private LocalDateTime fechaLog;
-    
+
     @ManyToOne(targetEntity = PaisEntity.class)
     @JoinColumn(name = "id_pais_destino")
     private PaisEntity paisDestino;
-    
+
     @ManyToOne(targetEntity = SucursalEntity.class)
     @JoinColumn(name = "id_sucursal_destino")
     private SucursalEntity sucursalDestino;
@@ -141,8 +135,6 @@ public class EnvioEntity {
         this.entregado = entregado;
     }
 
-    
-
     public UsuarioEntity getUsuario() {
         return usuario;
     }
@@ -182,7 +174,7 @@ public class EnvioEntity {
     public void setSucursalDestino(SucursalEntity sucursalDestino) {
         this.sucursalDestino = sucursalDestino;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -199,11 +191,10 @@ public class EnvioEntity {
     public int hashCode() {
         return idEnvio == null ? 0 : idEnvio.hashCode();
     }
-    
-    
+
     @PrePersist
     public void preSave() {
         this.fechaLog = LocalDateTime.now();
-    }  
-    
+    }
+
 }

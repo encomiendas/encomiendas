@@ -6,40 +6,34 @@ import py.com.domainsoft.envios.dtos.MonedaDTO;
 public class EnvioDetDTO {
 
     private Integer idEnvioDet;
-    
+
     private Integer idEnvio;
-    
+
     private Integer item;
-    
+
     private ConceptoDTO concepto;
-    
+
     private String comentario;
-    
+
     private Double cantidad;
-    
+
     private Double montoTarifa;
-    
+
     private Double montoTotal;
-    
+
     private Double montoEnvio;
-    
+
     private MonedaDTO moneda;
-    
+
     private MonedaDTO monedaEntrega;
-    
-    public EnvioDetDTO(){};
-    
-    public EnvioDetDTO( Integer idEnvioDet,
-     Integer idEnvio,
-     Integer item,
-     ConceptoDTO concepto,
-     String comentario,
-     Double cantidad,
-     Double montoTarifa,
-     Double montoTotal,
-     Double montoEnvio,
-     MonedaDTO moneda,
-     MonedaDTO monedaEntrega) {
+
+    public EnvioDetDTO() {
+    };
+
+    public EnvioDetDTO(Integer idEnvioDet, Integer idEnvio, Integer item,
+            ConceptoDTO concepto, String comentario, Double cantidad,
+            Double montoTarifa, Double montoTotal, Double montoEnvio,
+            MonedaDTO moneda, MonedaDTO monedaEntrega) {
         this.idEnvioDet = idEnvioDet;
         this.idEnvio = idEnvio;
         this.item = item;
@@ -56,25 +50,25 @@ public class EnvioDetDTO {
     public static class Builder {
 
         private Integer idEnvioDet;
-        
+
         private Integer idEnvio;
-        
+
         private Integer item;
-        
+
         private ConceptoDTO concepto;
-        
+
         private String comentario;
-        
+
         private Double cantidad;
-        
+
         private Double montoTarifa;
-        
+
         private Double montoTotal;
-        
+
         private Double montoEnvio;
-        
+
         private MonedaDTO moneda;
-        
+
         private MonedaDTO monedaEntrega;
 
         public Builder idEnvioDet(Integer idEnvioDet) {
@@ -101,49 +95,41 @@ public class EnvioDetDTO {
             this.comentario = comentario;
             return this;
         }
-        
+
         public Builder cantidad(Double cantidad) {
             this.cantidad = cantidad;
             return this;
         }
-        
+
         public Builder montoTarifa(Double montoTarifa) {
             this.montoTarifa = montoTarifa;
             return this;
         }
-        
+
         public Builder montoTotal(Double montoTotal) {
             this.montoTotal = montoTotal;
             return this;
         }
-        
+
         public Builder montoEnvio(Double montoEnvio) {
             this.montoEnvio = montoEnvio;
             return this;
         }
-        
+
         public Builder moneda(MonedaDTO moneda) {
             this.moneda = moneda;
             return this;
         }
-        
+
         public Builder monedaEntrega(MonedaDTO monedaEntrega) {
             this.monedaEntrega = monedaEntrega;
             return this;
         }
 
         public EnvioDetDTO build() {
-            return new EnvioDetDTO( idEnvioDet,
-                    idEnvio,
-                    item,
-                    concepto,
-                    comentario,
-                    cantidad,
-                    montoTarifa,
-                    montoTotal,
-                    montoEnvio,
-                    moneda,
-                    monedaEntrega);
+            return new EnvioDetDTO(idEnvioDet, idEnvio, item, concepto,
+                    comentario, cantidad, montoTarifa, montoTotal, montoEnvio,
+                    moneda, monedaEntrega);
         }
 
     }
@@ -249,7 +235,5 @@ public class EnvioDetDTO {
                 + montoEnvio + ", moneda=" + moneda + ", monedaEntrega="
                 + monedaEntrega + "]";
     }
-    
-    
-}
 
+}
