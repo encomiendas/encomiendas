@@ -30,7 +30,8 @@ public class EnvioDetDTO {
     public EnvioDetDTO() {
     };
 
-    public EnvioDetDTO(Integer idEnvioDet, Integer idEnvio, Integer item,
+    public EnvioDetDTO(Integer idEnvioDet, 
+            Integer idEnvio, Integer item,
             ConceptoDTO concepto, String comentario, Double cantidad,
             Double montoTarifa, Double montoTotal, Double montoEnvio,
             MonedaDTO moneda, MonedaDTO monedaEntrega) {

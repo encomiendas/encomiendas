@@ -39,7 +39,8 @@ public class EnvioDTO {
     public EnvioDTO() {
     };
 
-    public EnvioDTO(Integer idEnvio, LocalDateTime fechaEnvio,
+    public EnvioDTO(Integer idEnvio, 
+            LocalDateTime fechaEnvio,
             SucursalDTO sucursal, ClienteDTO clienteRemitente,
             ClienteDTO clienteDestinatario, String estado,
             UnidadNegocioDTO unidadNegocio, String entregado,
