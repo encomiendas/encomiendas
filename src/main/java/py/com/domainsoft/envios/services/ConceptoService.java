@@ -15,4 +15,6 @@ public interface ConceptoService {
 	public Page<ConceptoDTO> findAllPageable(Pageable pageable);
 
 	public List<ConceptoDTO> findAll();	
+	
+	public List<ConceptoDTO> findByGrupoConcepto(Integer idGrupoConcepto);    
 }

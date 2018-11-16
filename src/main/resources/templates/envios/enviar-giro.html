@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="fragments/head :: head"></th:block>
+<style>
+#tablaDetalle td:last-child {
+	 display: none; 
+}
+/* BUSCADOR  */
+#tablaClientes tr:first-child {
+	background-color: #A3A8AB;
+	color: white;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+ #tablaClientes td:nth-child(n+5) {
+	 display: none; 
+} 
+</style>
+
+<body class="hold-transition skin-green sidebar-mini ">
+
+	<div class="wrapper">
+
+		<th:block th:replace="fragments/header :: header"></th:block>
+		<th:block th:replace="fragments/aside :: aside"></th:block>
+
+		<!-- =============================================== -->
+
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Envios <small>Enviar giro</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="home"><i class="fa fa-dashboard active"></i>
+							Home</a></li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<!-- Default box -->
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="box ">
+							<div class="box-header with-border">
+								<h3 class="box-title">Cabecera</h3>
+							</div>
+							<!-- /.box-header -->
+							<!-- form start -->
+							<form class="form-horizontal">
+								<div class="box-body">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Destinatario</label>
+
+										<div class="col-sm-1">
+											<input type="text" class="form-control" id="idCliente"
+												placeholder="Cod." disabled="disabled">
+										</div>
+										<div class="col-sm-2">
+											<input type="text" class="form-control editable" id="nrodoc" onkeypress="buscarClienteByDoc(event)"
+												placeholder="Documento">
+										</div>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" id="cliente"
+												placeholder="Nombre del Clientes" disabled="disabled">
+										</div>
+										<div class="col-sm-2">
+											<button type="button"
+												class="btn btn-success btn-block btn-flat editable" id="btnBuscar" onclick="modalCliente(1)">Buscar</button>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Remitente</label>
+
+										<div class="col-sm-1">
+											<input type="text" class="form-control" id="idCliente1"
+												placeholder="Cod." disabled="disabled">
+										</div>
+										<div class="col-sm-2">
+											<input type="text" class="form-control editable" id="nrodoc1"  onkeypress="buscarClienteByDoc(event)"
+												placeholder="Documento">
+										</div>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" id="cliente1"
+												placeholder="Nombre del Clientes" disabled="disabled">
+										</div>
+										<div class="col-sm-2">
+											<button type="button"
+												class="btn btn-success btn-block btn-flat editable" id="btnBuscar1" onclick="modalCliente(2)">Buscar</button>
+										</div>
+									</div>
+
+									<!-- <div class="form-group">
+										<label class="col-sm-2 control-label">Fecha</label>
+
+										<div class="col-sm-4">
+											<input type="text" data-date-format="dd/mm/yyyy"
+												class="form-control datepicker editable" id="inputPassword3"
+												placeholder="dd/mm/aaaa">
+										</div>
+									</div> -->
+									<div class="form-group ">
+										<label class="col-sm-2 control-label">Sucursal</label>
+										<div class="col-sm-4">
+											<select class="form-control select2 editable" id="selectSucursal">
+												<option value="" selected>Seleccione</option>
+												<option th:each="dropDownItem : ${sucursales}"
+													th:value="${dropDownItem.getIdSucursal()}"
+													th:text="${dropDownItem.getDescripcion()}" />
+											</select>
+										</div>
+										
+										<label class="col-sm-2 control-label">Pais Destino</label>
+										<div class="col-sm-4">
+											<select class="form-control select2 editable" id="selectPais">
+												<option value="" selected>Seleccione</option>
+												<option th:each="dropDownItem : ${paises}"
+													th:value="${dropDownItem.getIdPais()}"
+													th:text="${dropDownItem.getDescripcion()}" />
+											</select>
+										</div>
+										
+									</div>
+									<div class="form-group ">
+										
+									</div>
+							</form>
+						</div>
+						<!-- /.box -->
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="box ">
+								<div class="box-header with-border">
+									<h3 class="box-title">Detalle</h3>
+								</div>
+								<!-- /.box-header -->
+								<!-- form start -->
+								<form role="form" class="form-horizontal">
+									<div class="box-body">
+										<div class="form-group">
+											<div class="col-sm-4">
+												<label>Concepto</label> <select
+													class="form-control select2 editable" id="selectConcepto">
+													<option value="" selected>Seleccione</option>
+													<option th:each="dropDownItem : ${conceptos}"
+														th:value="${dropDownItem.getIdConcepto()}"
+														th:text="${dropDownItem.getDescripcion()}" />
+												</select>
+											</div>
+
+											<div class="col-sm-2">
+												<label>Importe envio</label> <input type="text"
+													class="form-control numerico editable" id="importe"
+													placeholder="0.00">
+											</div>
+											<div class="col-sm-2">
+												<label>Monto tarifa</label> <input type="text"
+													class="form-control numerico editable" id="monto"
+													placeholder="0.00">
+											</div>
+											<div class="col-sm-4">
+												<label>Comentarios</label>
+												<textarea class="form-control editable" rows="2" id="comentario"
+													placeholder="Escriba algun comentario.."></textarea>
+											</div>
+											
+										</div>
+
+										<div class="form-group">
+										<div class="col-md-2 pull-right"><span class="input-group-btn">
+													<button type="button" class="btn btn-success btn-flat editable" id="btnAdd" onclick="insertarDetalle()">
+														<i class="ion-plus-round"> Agregar Detalle</i>
+													</button>
+											</span></div>
+										</div>
+										
+										<div class="form-group table-responsive">
+										<div class="col-sm-12">
+										<table id="tablaDetalle" class="table table-striped">
+											<thead>
+												<tr>
+													<th>Item</th>
+													<th class="col-sm-2" style="min-width: 300px;">Concepto</th>
+													<th>Importe_Envio</th>
+													<th>Monto_Tarifa</th>
+													<th>Comentario</th>
+													<th>Borrar</th>
+													<td>id</td>
+
+											</thead>
+										</table>
+										</div>
+									</div>
+									</div>
+
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- BOTONOES -->
+					<div class="box ">
+						<div class="box-body">
+							<div class="row">
+								<div class="col-md-2">
+									<button type="button"
+										class="btn btn-success btn-block btn-flat" id="btnNuevo" >Nuevo</button>
+								</div>
+								<div class="col-md-2">
+									<button type="button"
+										class="btn btn-success btn-block btn-flat" id="btnGrabar"
+										disabled>Grabar</button>
+								</div>
+								<div class="col-md-2">
+									<button type="button"
+										class="btn btn-success btn-block btn-flat" id="btnCancelar"
+										onclick="cancelar(this.form)">Cancelar</button>
+								</div>
+								<div class="col-md-2">
+									<button type="button"
+										class="btn btn-success btn-block btn-flat" id="btnBuscar" disabled>Liquidar</button>
+								</div>
+								<div class="col-md-2">
+									<button type="button"
+										class="btn btn-success btn-block btn-flat" disabled>Anular</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+			</section>
+			<!-- /.content -->
+		</div>
+
+		<!-- BUSCADOR CLIENTES -->
+		<th:block th:replace="fragments/buscador-cliente :: buscador-cliente"></th:block>
+		<th:block th:replace="fragments/footer :: footer"></th:block>
+
+	</div>
+
+	<th:block th:replace="fragments/scripts :: scripts"></th:block>
+
+	<script src="../../js/envios/enviar-giro.js"></script>
+
+</body>
+</html>

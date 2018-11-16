@@ -26,5 +26,11 @@ public class ClienteRestController {
             @RequestParam("cliente") String cliente) {
         return clienteService.findClienteByParams(cliente);
     }
+    
+    @GetMapping("/find-by-documento")
+    public ClienteDTO findByDoc(Principal principal,
+            @RequestParam("documento") String documento) {
+        return clienteService.findByDocumento(documento);
+    }
 
 }

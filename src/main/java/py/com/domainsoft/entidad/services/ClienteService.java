@@ -19,4 +19,5 @@ public interface ClienteService {
     
     List<ClienteDTO> findClienteByParams(String json);
     
+    ClienteDTO findByDocumento(String documento);
 }
