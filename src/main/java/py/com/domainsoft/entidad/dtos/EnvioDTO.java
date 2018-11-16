@@ -36,9 +36,6 @@ public class EnvioDTO {
 
     private List<EnvioDetDTO> detalles;
 
-    public EnvioDTO() {
-    };
-
     public Integer getIdEnvio() {
         return idEnvio;
     }

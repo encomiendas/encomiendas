@@ -27,10 +27,6 @@ public class EnvioDetDTO {
 
     private MonedaDTO monedaEntrega;
 
-    public EnvioDetDTO() {
-    };
-
-  
     public Integer getIdEnvioDet() {
         return idEnvioDet;
     }
