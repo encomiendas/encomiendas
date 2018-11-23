@@ -1,5 +1,8 @@
 package py.com.domainsoft.common;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class Constantes {
@@ -38,5 +41,36 @@ public class Constantes {
         String hashedPassword = passwordEncoder.encode(password);
         return hashedPassword;
     }
+    
+    /**Permite obtener partes de la fecha actual como por ejemplo*/
+    /**Integer year = ConstantesBase.traerFechaSistema().get(Calendar.YEAR);
+	   Integer month = ConstantesBase.traerFechaSistema().get(Calendar.MONTH)
+      */
+	public static Calendar traerFechaSistema() {
+		long millis = System.currentTimeMillis();
+		Calendar now = Calendar.getInstance();
+		now.setTimeInMillis(millis);
+		return now;
+	}
+
+
+	/**le saca lo decimales a un double convertido a string,*/ 
+	/**dejandolo como un integer*/
+	public static String doubleToIntString(String value) {
+		Integer valorInt = new Integer(0);
+		String valorStr = "";
+		if (value != "") {
+			valorInt = (int) Double.parseDouble(value);
+			valorStr = valorInt.toString();
+		}
+		return valorStr;
+	}
+	
+	/** Retorna la fechahora actual */
+	public static Timestamp traerFechaHora(){
+		return new Timestamp(System.currentTimeMillis());
+	}
+	
+    
 
 }

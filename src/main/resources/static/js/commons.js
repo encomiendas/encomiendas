@@ -319,3 +319,17 @@ function checkpass( password){
 function aplicarSeparadorMiles(n){
     return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
+
+
+/*input a string parameters*/
+function supresspoint(n) {
+  n = n.replace(/\./g,'');
+  return n;
+}
+
+//imput a number parameters 000.000,00
+function formatnumberpy(n) {
+	  n = n.toLocaleString('de-DE');
+	  return n;
+}

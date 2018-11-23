@@ -107,5 +107,16 @@
     <changeSet id="2018-10-25T16:20" author="lbareiro">
         <sqlFile path="sql/2018-10-25T16:20.sql" relativeToChangelogFile="true"/>
     </changeSet>    
-
+      
+      <!-- Se agregan las tablas de cotizacion y cotizacion_historicost-->
+    <changeSet id="2018-11-18T19:40" author="lbareiro">
+        <sqlFile path="sql/2018-11-18T19:40.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    
+   <!-- Se agrega trigger tri_cotizacion_au sobre la tabla cotizacion-->
+    <changeSet id="2018-11-22T22:00" author="lbareiro">
+        <sqlFile path="sql/2018-11-22T22:00.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+    
+    
 </databaseChangeLog>

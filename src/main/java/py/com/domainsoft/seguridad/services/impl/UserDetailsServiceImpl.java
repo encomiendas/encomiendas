@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import py.com.domainsoft.entidad.mapper.SucursalMapper;
 import py.com.domainsoft.seguridad.dao.UsuarioDAO;
 import py.com.domainsoft.seguridad.dao.UsuarioRoleDAO;
 import py.com.domainsoft.seguridad.dtos.UserDetailsDTO;
@@ -28,6 +29,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     
     @Autowired
     private PersonaMapper personaMapper;
+    
+    @Autowired
+    private SucursalMapper sucursalMapper;
     
     
 
@@ -60,6 +64,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         .expira(appUser.getExpira())
         .fechaExpiracion(appUser.getFechaExpiracion())
         .persona(personaMapper.entityToDto(appUser.getPersona()))
+        .sucursal(sucursalMapper.entityToDto(appUser.getSucursal()))
         .build();
         
     }

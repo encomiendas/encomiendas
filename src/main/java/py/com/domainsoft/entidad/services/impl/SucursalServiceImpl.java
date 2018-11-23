@@ -28,5 +28,10 @@ public class SucursalServiceImpl implements SucursalService {
                 .entityListToDtoList(WebUtils.
                         toList(sucursalRepo.findAll()));
     }
+    
+    @Override
+    public SucursalDTO finById(Integer id) {
+    	return sucursalMapper.entityToDto(sucursalRepo.findById(id).get());   
+    } 
 
 }
