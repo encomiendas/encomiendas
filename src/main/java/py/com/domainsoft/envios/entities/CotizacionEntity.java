@@ -43,6 +43,7 @@ public class CotizacionEntity {
 	@JoinColumn(name = "id_sucursal")
 	private SucursalEntity sucursal;
     
+
 	@ManyToOne(targetEntity = MonedaEntity.class)
 	@JoinColumn(name = "id_moneda_de")
 	private MonedaEntity monedaDe;

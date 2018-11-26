@@ -35,7 +35,9 @@ public class CotizacionViewController {
     private final CotizacionService cotizacionService;
     private final MonedaService monedaService;
     private final UsuarioService usuarioService;
-    private final SucursalService sucursalService;
+    
+    private static String msj = null;
+    
     
     
     public CotizacionViewController(CotizacionService cotizacionService,
@@ -45,13 +47,12 @@ public class CotizacionViewController {
     	this.cotizacionService = cotizacionService;
     	this.monedaService = monedaService;
     	this.usuarioService = usuarioService;
-    	this.sucursalService = sucursalService;
     	
     }
     
     
     @GetMapping(COTIZACION_LISTA)
-    public ModelAndView paginaLista(
+    public ModelAndView cotiacionLista(
             @RequestParam("pageSize") Optional<Integer> tamanhoPagina,
             @RequestParam("page") Optional<Integer> numeroPagina,
             HttpSession session) {
@@ -83,6 +84,7 @@ public class CotizacionViewController {
         modelAndView.addObject("cotizacion", new CotizacionDTO());
         modelAndView.addObject("monedasDe", monedaService.findAll());
         modelAndView.addObject("monedasA", monedaService.findAll());
+        modelAndView.addObject("message", msj);
         
         //Paginacion
         modelAndView.addObject("listobj", listobj);
@@ -99,11 +101,31 @@ public class CotizacionViewController {
 	public ModelAndView createNewCotizacion(@Valid CotizacionDTO cotizacionDto, BindingResult bindingResult,
 			HttpSession session) {
 
+		
+		msj = null;
+		System.out.println(cotizacionDto.getMonedaDe().getIdMoneda());
+		Boolean error = false;
+		if (cotizacionDto.getMonedaDe().getIdMoneda() == null) { 
+			error = true;
+			msj = "Deba seleccionar las monedas";
+		}
+		
+		if (cotizacionDto.getMonedaA().getIdMoneda() == null) {
+			error = true;
+			msj = "Deba seleccionar las monedas";
+		}
+		
+		if (error) {
+			ModelAndView modelAndView = new ModelAndView("redirect:" + COTIZACION_LISTA);
+			return modelAndView;
+		}		
+		
 		cotizacionDto.setSucursal(((UserDetailsDTO) session.getAttribute(Constantes.SESSION_LOGIN_DATA)).getSucursal());
 		String username = ((UserDetailsDTO) session.getAttribute(Constantes.SESSION_LOGIN_DATA)).getUsername();
 		cotizacionDto.setUsuarioLog(usuarioService.findByLogin(username));
 		cotizacionDto.setFechaLog(Constantes.traerFechaHora());
 		cotizacionService.grabarCotizacion(cotizacionDto);
+		
 		return new ModelAndView("redirect:" + COTIZACION_EXITOSO);
 	}
     
