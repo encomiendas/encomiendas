@@ -47,4 +47,10 @@ public class ConceptoServiceImpl implements ConceptoService {
                 WebUtils.toList(conceptoRepo.findAll()));
     }
 
+    @Override
+    public List<ConceptoDTO> findByGrupoConcepto(Integer IdGrupoConcepto) {
+        return conceptoMapper.entityListToDtoList(
+                WebUtils.toList(conceptoRepo.findByGrupoConceptoIdGrupoConcepto(IdGrupoConcepto)));
+    }
+
 }
