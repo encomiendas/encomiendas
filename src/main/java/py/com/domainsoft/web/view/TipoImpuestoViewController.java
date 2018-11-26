@@ -88,7 +88,7 @@ public class TipoImpuestoViewController {
     
     
     @PostMapping(value = TIPO_IMPUESTO_LISTA)
-    public ModelAndView createNewUnidadNegocio(@Valid TipoImpuestoDTO tipoImpuestoDto,
+    public ModelAndView createUpdateTipoImpuesto(@Valid TipoImpuestoDTO tipoImpuestoDto,
             BindingResult bindingResult) {
     	
     	

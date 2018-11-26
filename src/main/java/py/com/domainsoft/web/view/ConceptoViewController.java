@@ -94,8 +94,9 @@ public class ConceptoViewController {
     
     
     @PostMapping(value = CONCETO_LISTA)
-    public ModelAndView createNewUnidadNegocio(@Valid ConceptoDTO conceptoDto,
-            BindingResult bindingResult) {
+    public ModelAndView createUpdateConcepto(@Valid ConceptoDTO conceptoDto,
+            BindingResult bindingResult,
+            HttpSession session) {
     	
     	conceptoService.grabarConcepto(conceptoDto);
         
