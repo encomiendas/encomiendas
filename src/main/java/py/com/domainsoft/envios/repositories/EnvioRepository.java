@@ -9,7 +9,7 @@ import py.com.domainsoft.entidad.entities.EnvioEntity;
 
 public interface EnvioRepository extends JpaRepository<EnvioEntity, Integer> {
 
-    List<EnvioEntity> findByFechaEnvioBetweenAndEstadoOrderByIdEnvioDesc(LocalDateTime start, LocalDateTime end, String estado);
-    
- 
+    List<EnvioEntity> findByFechaEnvioBetweenAndEstadoOrderByIdEnvioDesc(
+            LocalDateTime start, LocalDateTime end, String estado);
+
 }

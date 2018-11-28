@@ -209,7 +209,5 @@ public class EnvioEntity {
                 + usuarioLog + ", fechaLog=" + fechaLog + ", paisDestino="
                 + paisDestino + ", sucursalDestino=" + sucursalDestino + "]";
     }
-    
-    
 
 }
