@@ -1,0 +1,59 @@
+
+<div th:fragment="detalle-envio">
+
+	<div class="modal fade" id="modalDetalleEnvio" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document"
+			style="width: 60% !important;">
+			<!--Content-->
+			<div class="modal-content">
+				<!--Header-->
+				<div class="modal-header">
+
+					<h4 class="modal-title" id="myModalLabel">Detalle del Envio</h4>
+				</div>
+				<!--Body-->
+				<div class="modal-body">
+					<div class="box-body">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table class="table table-bordered" id="tablaDetalleVenta">
+										<thead>
+											<tr>
+												<th>Item</th>
+												<th>Concepto</th>
+												<th>Moneda</th>
+												<th>Cantidad</th>
+												<th>Monto Envio</th>
+												<th>Monto Tarifa</th>
+												<th>Total</th>
+											</tr>
+										</thead>
+										<tbody>
+                                   	    </tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<div class="row">
+
+						<div class="col-md-6">
+							<button type="button" class="btn btn-danger"
+								id="add_cancelar" data-dismiss="modal">
+								<i class="fa fa-window-close-o"></i> Cerrar
+							</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!--/.Content-->
+		</div>
+	</div>
+</div>

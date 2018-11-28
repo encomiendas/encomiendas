@@ -1,4 +1,4 @@
-package py.com.domainsoft.entidad.services;
+package py.com.domainsoft.envios.services;
 
 import java.util.List;
 
@@ -10,5 +10,10 @@ public interface EnvioService {
 
     EnvioDTO grabarEnvio(EnvioDTO envio, List<EnvioDetDTO> detalles,
             UserDetailsDTO user);
+
+    String procesar(EnvioDTO envio, UserDetailsDTO user);
+
+    List<EnvioDTO> getByParams(String fechadesde, String fechahasta,
+            String cliente);
 
 }
