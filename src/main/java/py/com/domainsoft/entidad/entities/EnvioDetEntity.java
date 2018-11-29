@@ -20,47 +20,40 @@ import py.com.domainsoft.envios.entities.MonedaEntity;
 public class EnvioDetEntity {
 
     @Id
-    @GenericGenerator(name = "envioDetSequenceGenerator",
-    strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-    parameters = {
-            @Parameter(name = SequenceStyleGenerator.SEQUENCE_PARAM,
-                    value = "envio_det_id_envio_det_seq"),
-            @Parameter(name = SequenceStyleGenerator.INITIAL_PARAM,
-            value = "1"),
-            @Parameter(name = SequenceStyleGenerator.INCREMENT_PARAM,
-            value = "1") })
+    @GenericGenerator(name = "envioDetSequenceGenerator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
+            @Parameter(name = SequenceStyleGenerator.SEQUENCE_PARAM, value = "envio_det_id_envio_det_seq"),
+            @Parameter(name = SequenceStyleGenerator.INITIAL_PARAM, value = "1"),
+            @Parameter(name = SequenceStyleGenerator.INCREMENT_PARAM, value = "1") })
     @GeneratedValue(generator = "envioDetSequenceGenerator")
     @Column(name = "id_envio_det")
     private Integer idEnvioDet;
-    
+
     private Integer idEnvio;
-    
+
     private Integer item;
-    
+
     @ManyToOne(targetEntity = ConceptoEntity.class)
     @JoinColumn(name = "id_concepto")
     private ConceptoEntity concepto;
-    
+
     private String comentario;
-    
+
     private Double cantidad;
-    
+
     private Double montoTarifa;
-    
+
     private Double montoTotal;
-    
+
     private Double montoEnvio;
-    
-    
+
     @ManyToOne(targetEntity = MonedaEntity.class)
     @JoinColumn(name = "id_moneda")
     private MonedaEntity moneda;
-    
+
     @ManyToOne(targetEntity = MonedaEntity.class)
     @JoinColumn(name = "id_moneda_entrega")
     private MonedaEntity monedaEntrega;
 
-    
     public Integer getIdEnvioDet() {
         return idEnvioDet;
     }
@@ -165,5 +158,5 @@ public class EnvioDetEntity {
     public int hashCode() {
         return idEnvioDet == null ? 0 : idEnvioDet.hashCode();
     }
-    
+
 }

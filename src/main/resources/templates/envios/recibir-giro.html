@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="fragments/head :: head"></th:block>
+<style>
+#tablaDetalle td:last-child {
+	 display: none; 
+}
+/* BUSCADOR  */
+#tablaClientes tr:first-child {
+	background-color: #A3A8AB;
+	color: white;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+ #tablaClientes td:nth-child(n+5) {
+	 display: none; 
+} 
+</style>
+
+<body class="hold-transition skin-green sidebar-mini ">
+
+	<div class="wrapper">
+
+		<th:block th:replace="fragments/header :: header"></th:block>
+		<th:block th:replace="fragments/aside :: aside"></th:block>
+
+		<!-- =============================================== -->
+
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Giros <small>Recibir giro</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="home"><i class="fa fa-dashboard active"></i>
+							Home</a></li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<!-- Default box -->
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="box ">
+							<div class="box-header with-border">
+								<h3 class="box-title">Busqueda</h3>
+							</div>
+							<!-- /.box-header -->
+							<!-- form start -->
+							<form class="form-horizontal">
+								<div class="box-body">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Rango Fecha</label>
+
+					
+										<div class="col-sm-3">
+											<input class="form-control" type="text" name="daterange"
+												id="fecha" />
+												<br/>
+										</div>
+										<label class="col-sm-1 control-label">Remitente</label>
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="cliente"
+												placeholder="Nombre, apellido o documento" >
+										</div>
+										<div class="col-sm-2">
+											<button type="button"
+												class="btn btn-success btn-block btn-flat" id="btnBuscar" >Buscar</button>
+										</div>
+									</div>
+									
+									<div class="form-group ">
+										
+									</div>
+							</form>
+						</div>
+						<!-- /.box -->
+					</div>
+					<div class="row hidden" id="resultado">
+						<div class="col-sm-12">
+							<div class="box ">
+								<div class="box-header with-border">
+									<h3 class="box-title">Detalle</h3>
+								</div>
+								<!-- /.box-header -->
+								<!-- form start -->
+								<form role="form" class="form-horizontal">
+									<div class="box-body">
+									
+										
+										<div class="form-group table-responsive">
+										<div class="col-sm-12">
+										<table id="tablaDetalle" class="table table-striped">
+											<thead>
+												<tr>
+													<th>Item</th>
+													<th style="min-width: 200px;">Remitente</th>
+													<th style="min-width: 200px;">Destinatario</th>
+													<th>Fecha Envio</th>
+													<th>Pais</th>
+													<th>Monto Total</th>
+													<th>Detalles</th>
+													<th>Accion</th>
+													<td>id</td>
+
+											</thead>
+										</table>
+										</div>
+									</div>
+									</div>
+
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- BOTONOES -->
+					
+				</div>
+
+
+
+			</section>
+			<!-- /.content -->
+		</div>
+
+		<!-- BUSCADOR CLIENTES -->
+		<th:block th:replace="fragments/buscador-cliente :: buscador-cliente"></th:block>
+		<th:block th:replace="fragments/footer :: footer"></th:block>
+		<!-- SE AGREGA EL MODAL DEL DETALLE DEL GIRO-->
+        <div th:replace="envios/fragments/detalle-envio :: detalle-envio">&nbsp;</div>
+
+	</div>
+
+	<th:block th:replace="fragments/scripts :: scripts"></th:block>
+
+	<script src="../../js/envios/recibir-giro.js"></script>
+	<script src="../../js/envios/detalle-giro.js"></script>
+</body>
+</html>

@@ -24,6 +24,7 @@ import py.com.domainsoft.web.base.BaseViewController;
 public class EnvioViewController extends BaseViewController {
 
     private static final String ENVIAR_GIRO = "/enviar-giro";
+    private static final String RECIBIR_GIRO = "/recibir-giro";
     private static final String ENVIO_EXITOSO = "/envio-exitoso";
 
     private final SucursalService sucursalService;
@@ -45,6 +46,33 @@ public class EnvioViewController extends BaseViewController {
     public ModelAndView paginaLista(HttpSession session) {
 
         ModelAndView modelAndView = new ModelAndView("envios/enviar-giro");
+
+        modelAndView.addObject(Constantes.MENU_LIST,
+                (List<MenuDTO>) session.getAttribute(Constantes.SESSION_MENU));
+        modelAndView.addObject(Constantes.SESSION_LOGIN_DATA,
+                (UserDetailsDTO) session
+                        .getAttribute(Constantes.SESSION_LOGIN_DATA));
+        modelAndView.addObject("perfilesUsuarios",
+                (List<PerfilDTO>) session.getAttribute("perfilesUsuarios"));
+        modelAndView.addObject("totalPerfiles",
+                (Integer) session.getAttribute("totalPerfiles"));
+
+        modelAndView.addObject("envio", new EnvioDTO());
+        modelAndView.addObject("envioDet", new EnvioDetDTO());
+        modelAndView.addObject("sucursales", sucursalService.findAll());
+        // 2 - GIROS
+        modelAndView.addObject("conceptos",
+                conceptoService.findByGrupoConcepto(2));
+        modelAndView.addObject("paises", paisService.findAll());
+        modelAndView.addObject("tiposDoc", tipoDocumentoService.findAll());
+
+        return modelAndView;
+    }
+    
+    @GetMapping(RECIBIR_GIRO)
+    public ModelAndView recibirGiro(HttpSession session) {
+
+        ModelAndView modelAndView = new ModelAndView("envios/recibir-giro");
 
         modelAndView.addObject(Constantes.MENU_LIST,
                 (List<MenuDTO>) session.getAttribute(Constantes.SESSION_MENU));

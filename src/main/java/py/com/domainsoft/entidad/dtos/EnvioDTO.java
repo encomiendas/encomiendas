@@ -3,6 +3,10 @@ package py.com.domainsoft.entidad.dtos;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import py.com.domainsoft.envios.dtos.UnidadNegocioDTO;
 import py.com.domainsoft.seguridad.dtos.UsuarioDTO;
 
@@ -10,6 +14,8 @@ public class EnvioDTO {
 
     private Integer idEnvio;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")  
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDateTime fechaEnvio;
 
     private SucursalDTO sucursal;

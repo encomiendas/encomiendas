@@ -1,4 +1,4 @@
-package py.com.domainsoft.entidad.services;
+package py.com.domainsoft.envios.services;
 
 import py.com.domainsoft.entidad.dtos.EnvioDetDTO;
 

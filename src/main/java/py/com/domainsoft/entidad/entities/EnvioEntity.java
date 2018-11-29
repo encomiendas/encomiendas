@@ -31,6 +31,7 @@ public class EnvioEntity {
     @Column(name = "id_envio")
     private Integer idEnvio;
 
+    @Column(nullable = false, updatable = false)
     private LocalDateTime fechaEnvio;
 
     @ManyToOne(targetEntity = SucursalEntity.class)
@@ -195,6 +196,18 @@ public class EnvioEntity {
     @PrePersist
     public void preSave() {
         this.fechaLog = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "EnvioEntity [idEnvio=" + idEnvio + ", fechaEnvio=" + fechaEnvio
+                + ", sucursal=" + sucursal + ", clienteRemitente="
+                + clienteRemitente + ", clienteDestinatario="
+                + clienteDestinatario + ", estado=" + estado
+                + ", unidadNegocio=" + unidadNegocio + ", entregado="
+                + entregado + ", usuario=" + usuario + ", usuarioLog="
+                + usuarioLog + ", fechaLog=" + fechaLog + ", paisDestino="
+                + paisDestino + ", sucursalDestino=" + sucursalDestino + "]";
     }
 
 }
