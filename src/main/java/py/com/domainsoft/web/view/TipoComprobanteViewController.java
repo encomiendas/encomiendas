@@ -96,7 +96,7 @@ public class TipoComprobanteViewController {
     @GetMapping(value = TIPO_COMPROBANTE_EXITOSO)
     public ModelAndView tipoImpuestoExitoso() {
 
-        String htmlpadre = TIPO_COMPROBANTE_EXITOSO;
+        String htmlpadre = TIPO_COMPROBANTE_LISTA;
         String msgexitoso = "Se aplicaron exitosamento los datos de Tipo Comprobante";
 
         ModelAndView modelAndView = new ModelAndView(

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- STYLES IMPORTS -->
+<th:block th:replace="fragments/head :: head"></th:block>
+
+<body class="hold-transition skin-green sidebar-mini ">
+
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<th:block th:replace="fragments/header :: header"></th:block>
+		<!-- ASIDE MENU -->
+		<th:block th:replace="fragments/aside :: aside"></th:block>
+
+		<!-- =============================================== -->
+
+		<!-- CONTENIDO PRINCIPAL DE LA PAGINA -->
+		<div class="content-wrapper">
+
+			<section class="content-header">
+				<h1>
+					Paginas <small>lista de tipo comprobante</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">Tipo Comprobante</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="box box-success">
+							<div class="register-box-body">
+							
+								<div th:if="${message != null}" th:text="${message}"
+						            style="color:red;margin:10px 0px;">
+						        </div>
+							
+								<form action="#" 
+								      method="post" 
+								      th:action="@{/tipo-comprobante-lista}"
+									  id="formulario"								
+									  th:object="${tipoComprobante}" 
+									  class="form-horizontal" 
+									  role="form">
+
+									<div style="color: red" class="requerido">
+										<label id="label"></label>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Identificador</label> 
+										<input 
+											type="text" 
+											value="" 
+											class="form-control"
+											id="idTipoComprobante" 
+											placeholder="Identificador"
+											readonly
+											th:field="*{idTipoComprobante}"
+											>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Descripcion</label> 
+										<input 
+											type="text" 
+											class="form-control" 
+											id="descripcion"
+											style="text-transform:uppercase"
+											placeholder="Nombre Tipo Impuesto"
+											th:field="*{descripcion}"
+											disabled required>
+									</div>
+									
+									
+									
+								<div class="form-group has-feedback">
+										<label>Tipo</label> 
+										<select class="form-control" 
+										        id="tipo"
+										        th:field="*{tipo}"
+										        disabled>
+											<option value="" selected disabled>Seleccione el tipo</option>
+											<option value="E">Activo</option>
+											<option value="C">Inactivo</option>
+										</select>
+									</div>
+									
+	
+
+									<div class="form-group has-feedback">
+										<label>Estado</label> 
+										<select class="form-control" 
+										        id="estado"
+										        th:field="*{estado}"
+										        disabled>
+											<option value="" selected disabled>Estado</option>
+											<option value="true">Activo</option>
+											<option value="false">Inactivo</option>
+										</select>
+									</div>
+									
+									
+									
+									
+									<div class="row">
+										<div class="col-xs-4">
+											<button type="button" class="btn btn-success btn-block btn-flat" id="btnNuevo" onclick="nuevo()">Nuevo</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="submit" class="btn btn-success btn-block btn-flat" id="btnGrabar" disabled>Grabar</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="button" class="btn btn-success btn-block btn-flat" id="btnCancelar" onclick="cancelar(this.form)">Cancelar</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="col-md-8">
+						<div class="box box-success">
+							<div class="box-header"></div>
+							<div class="box-body" id="divTabla">
+								<div class="table-responsive">
+									<div id="tablaProgramas_wrapper"
+										class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+										<div class="row">
+											<div class="col-sm-6">
+												<div class="dataTables_length" id="tablaProgramas_length">
+													<label>Mostrar <select name="tablaProgramas_length"
+														aria-controls="tablaProgramas" class="form-control input-sm">
+															<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
+																th:value="${pageSize}" th:selected="${pageSize} == ${selectedPageSize}"></option>
+													</select> registros
+													</label>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<div id="tablaProgramas_filter" class="dataTables_filter">
+													<label>Buscar:<input type="search" class="form-control input-sm"
+														placeholder="su texto aqui" aria-controls="tablaProgramas"></label>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="row">
+
+											<div class="col-sm-12">
+
+												<table id="tablaProgramas" class="table table-bordered table-hover ">
+													<thead>
+														<tr>
+															<th>Descripcion</th>
+															<th>Tipo</th>
+															<th>Estado</th>
+															<th>ID</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="listobj : ${listobj}" class="selected">
+															<td th:text="${listobj.descripcion}"></td>
+															<td th:text="${listobj.tipo}"></td>
+															<td th:switch="${listobj.estado}">
+															<span th:case="true" th:text="ACTIVO"></span> 
+															<span th:case="false" th:text="INACTIVO"></span></td>
+															<td th:text="${listobj.idTipoComprobante}"></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+
+										<div class="row">
+
+											<div class="col-sm-5">
+												<div class="dataTables_info" id="tablaProgramas_info" role="status" aria-live="polite">
+													Página <span th:text="${listobj.Number + 1}"></span> de <span
+														th:text="${listobj.TotalPages}"></span> de un total de <span
+														th:text="${listobj.TotalElements}"></span> registros
+												</div>
+											</div>
+
+										
+											<div th:if="${listobj.totalPages != 1}" class="col-sm-7">
+
+												<div class="dataTables_paginate paging_simple_numbers" id="tablaProgramas_paginate">
+
+													<ul class="pagination">
+														<li th:class="${listobj.number == 0} ? disabled"><a class="pageLink"
+															th:href="@{/tipo-comprobante-lista(pageSize=${selectedPageSize}, page=1)}">&laquo;</a></li>
+														<li th:class="${listobj.number == 0} ? disabled"><a class="pageLink"
+															th:href="@{/tipo-comprobante-lista(pageSize=${selectedPageSize}, page=${listobj.number})}">&larr;</a></li>
+														<li th:class="${listobj.number == (page - 1)} ? 'active pointer-disabled'"
+															th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}"><a
+															class="pageLink"
+															th:href="@{/tipo-comprobante-lista(pageSize=${selectedPageSize}, page=${page})}"
+															th:text="${page}"></a></li>
+														<li th:class="${listobj.number + 1 == listobj.totalPages} ? disabled"><a
+															class="pageLink"
+															th:href="@{/tipo-comprobante-lista(pageSize=${selectedPageSize}, page=${listobj.number + 2})}">&rarr;</a>
+														</li>
+														<li th:class="${listobj.number + 1 == listobj.totalPages} ? disabled"><a
+															class="pageLink"
+															th:href="@{/tipo-comprobante-lista(pageSize=${selectedPageSize}, page=${listobj.totalPages})}">&raquo;</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+		<!-- ======================================================== -->
+		<!-- FOOTER -->
+		<th:block th:replace="fragments/footer :: footer"></th:block>
+		<!-- ======================================================== -->
+
+	</div>
+
+	<!-- SCRIPTS -->
+	<th:block th:replace="fragments/scripts :: scripts"></th:block>
+	<script src="../../js/envios/tipo-comprobante.js"></script>
+
+</body>
+
+</html>
