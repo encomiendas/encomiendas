@@ -3,6 +3,11 @@
 
 <!-- STYLES IMPORTS -->
 <th:block th:replace="fragments/head :: head"></th:block>
+<style>
+#tablaProgramas td:last-child {
+	display: none;
+}
+</style>
 
 <body class="hold-transition skin-green sidebar-mini ">
 
@@ -86,8 +91,9 @@
 										        th:field="*{tipo}"
 										        disabled>
 											<option value="" selected disabled>Seleccione el tipo</option>
-											<option value="E">Activo</option>
-											<option value="C">Inactivo</option>
+											<option value="FA">FACTURA</option>
+											<option value="NC">NOTA_CREDITO</option>
+											<option value="ND">NOTA_DEBITO</option>
 										</select>
 									</div>
 									
@@ -162,13 +168,17 @@
 															<th>Descripcion</th>
 															<th>Tipo</th>
 															<th>Estado</th>
-															<th>ID</th>
+															<td>ID</td>
 														</tr>
 													</thead>
 													<tbody>
+	
 														<tr th:each="listobj : ${listobj}" class="selected">
 															<td th:text="${listobj.descripcion}"></td>
-															<td th:text="${listobj.tipo}"></td>
+															<td th:switch="${listobj.tipo}">
+															<span th:case="FA" th:text="FACTURA"></span> 
+															<span th:case="NC" th:text="NOTA_CREDITO"></span>
+															<span th:case="ND" th:text="NOTA_DEBITO"></span></td>
 															<td th:switch="${listobj.estado}">
 															<span th:case="true" th:text="ACTIVO"></span> 
 															<span th:case="false" th:text="INACTIVO"></span></td>

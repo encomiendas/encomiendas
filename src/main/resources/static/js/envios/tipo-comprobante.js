@@ -13,10 +13,12 @@ function insertForm(fila) {
 	$("#descripcion").val(fila.cells[0].innerHTML);
 	
 		
-	if ($.trim(fila.cells[1].innerHTML) == '<span>ACTIVO</span>') {
-		$("#estado").prop('selectedIndex', 1);
+	if ($.trim(fila.cells[1].innerHTML) == '<span>FACTURA</span>') {
+		$("#tipo").prop('selectedIndex', 1);
+	} else if($.trim(fila.cells[1].innerHTML) == '<span>NOTA_CREDITO</span>'){
+		$("#tipo").prop('selectedIndex', 2);
 	} else {
-		$("#estado").prop('selectedIndex', 2);
+		$("#tipo").prop('selectedIndex', 3);
 	}	
 	
 	if ($.trim(fila.cells[2].innerHTML) == '<span>ACTIVO</span>') {
