@@ -122,5 +122,10 @@
     <changeSet id="2018-11-22T22:00" author="lbareiro">
         <sqlFile path="sql/2018-11-22T22:00.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
+    
+     <!-- Se agrega la tabla tipo comprobante-->
+    <changeSet id="2018-12-03T14:30" author="jdferreira">
+        <sqlFile path="sql/2018-12-03T14:30.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
 
 </databaseChangeLog>

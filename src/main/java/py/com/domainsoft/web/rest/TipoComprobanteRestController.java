@@ -5,9 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 
-@RequestMapping(value = "/api/v1/usuarios")
+@RequestMapping(value = "/api/v1/tipo-comprobante")
 public class TipoComprobanteRestController {
 
-    
-    
 }
