@@ -8,7 +8,7 @@ import com.google.common.base.MoreObjects;
 
 import py.com.domainsoft.entidad.dtos.SucursalDTO;
 
-public class UsuarioDTO implements Serializable{
+public class UsuarioDTO implements Serializable {
 
     private Integer idUsuario;
 
@@ -18,21 +18,23 @@ public class UsuarioDTO implements Serializable{
     private String password;
 
     private Boolean activo;
-    
+
     private PersonaDTO persona;
-    
+
     private SucursalDTO sucursal;
-    
+
     private Boolean expira;
 
-    public UsuarioDTO() {}
+    public UsuarioDTO() {
+    }
 
-    private UsuarioDTO(Integer idUsuario, 
-            String login,
-            String password,
-            Boolean activo,
-            PersonaDTO persona,
-            SucursalDTO sucursal,
+    public UsuarioDTO(Integer idUsuario) {
+        super();
+        this.idUsuario = idUsuario;
+    }
+
+    private UsuarioDTO(Integer idUsuario, String login, String password,
+            Boolean activo, PersonaDTO persona, SucursalDTO sucursal,
             Boolean expira) {
         this.idUsuario = idUsuario;
         this.login = login;
@@ -71,34 +73,29 @@ public class UsuarioDTO implements Serializable{
             this.activo = activo;
             return this;
         }
-        
+
         public Builder persona(PersonaDTO persona) {
             this.persona = persona;
             return this;
         }
-        
+
         public Builder sucursal(SucursalDTO sucursal) {
             this.sucursal = sucursal;
             return this;
         }
-        
-        public Builder expira(Boolean expira){
+
+        public Builder expira(Boolean expira) {
             this.expira = expira;
             return this;
         }
 
         public UsuarioDTO build() {
-            return new UsuarioDTO(idUsuario, 
-                    login, 
-                    password, 
-                    activo, 
-                    persona, 
-                    sucursal, 
-                    expira);
+            return new UsuarioDTO(idUsuario, login, password, activo, persona,
+                    sucursal, expira);
         }
     }
-    
-    public static Builder builder(){
+
+    public static Builder builder() {
         return new Builder();
     }
 
@@ -149,7 +146,7 @@ public class UsuarioDTO implements Serializable{
     public void setSucursal(SucursalDTO sucursal) {
         this.sucursal = sucursal;
     }
-    
+
     public Boolean getExpira() {
         return expira;
     }
@@ -160,15 +157,10 @@ public class UsuarioDTO implements Serializable{
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("idUsuario", idUsuario)
-                .add("login", login)
-                .add("password", password)
-                .add("activo", activo)
-                .add("persona", persona)
-                .add("sucursal", sucursal)
-                .add("expira", expira)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("idUsuario", idUsuario)
+                .add("login", login).add("password", password)
+                .add("activo", activo).add("persona", persona)
+                .add("sucursal", sucursal).add("expira", expira).toString();
     }
-    
+
 }

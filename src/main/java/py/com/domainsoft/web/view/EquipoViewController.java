@@ -1,5 +1,6 @@
 package py.com.domainsoft.web.view;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,9 +24,11 @@ import py.com.domainsoft.envios.services.EquipoService;
 import py.com.domainsoft.seguridad.dtos.MenuDTO;
 import py.com.domainsoft.seguridad.dtos.PerfilDTO;
 import py.com.domainsoft.seguridad.dtos.UserDetailsDTO;
+import py.com.domainsoft.seguridad.dtos.UsuarioDTO;
+import py.com.domainsoft.web.base.BaseViewController;
 
 @Controller
-public class EquipoViewController {
+public class EquipoViewController extends BaseViewController {
 
     private static final String EQUIPO_LISTA = "/equipo-lista";
     private static final String EQUIPO_EXITOSO = "/equipo-exitoso";
@@ -33,8 +36,7 @@ public class EquipoViewController {
     private final EquipoService equipoService;
     private final SucursalService sucursalService;
 
-    public EquipoViewController(
-            EquipoService equipoService,
+    public EquipoViewController(EquipoService equipoService,
             SucursalService sucursalService) {
 
         this.equipoService = equipoService;
@@ -89,10 +91,10 @@ public class EquipoViewController {
     }
 
     @PostMapping(value = EQUIPO_LISTA)
-    public ModelAndView createUpdateTipoImpuesto(
-            @Valid EquipoDTO equipo,
-            BindingResult bindingResult) {
-
+    public ModelAndView createUpdateTipoImpuesto(@Valid EquipoDTO equipo,
+            BindingResult bindingResult, Principal principal) {
+        equipo.setUsuario(
+                new UsuarioDTO(getUsuarioDTO(principal).getIdUsuario()));
         equipoService.grabarEquipo(equipo);
 
         return new ModelAndView("redirect:" + EQUIPO_EXITOSO);
