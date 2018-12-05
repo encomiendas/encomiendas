@@ -9,3 +9,11 @@ create table equipo (
   fecha_log timestamp default now(),
   estado boolean
 );
+
+
+alter table equipo add constraint Fk_equipo_sucursal foreign key (id_sucursal) references sucursal (id_sucursal);
+alter table equipo add constraint Fk_equipo_usuario foreign key (id_usuario) references usuario (id);
+
+
+
+
