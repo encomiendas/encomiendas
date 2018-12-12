@@ -127,5 +127,15 @@
     <changeSet id="2018-12-03T14:30" author="jdferreira">
         <sqlFile path="sql/2018-12-03T14:30.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
+    
+    <!-- Se agrega la tabla equipo-->
+    <changeSet id="2018-12-05T10:01" author="jdferreira">
+        <sqlFile path="sql/2018-12-05T10:01.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+    
+    <!-- Se agrega la tabla existencia comprobante-->
+    <changeSet id="2018-12-11T18:33" author="jdferreira">
+        <sqlFile path="sql/2018-12-11T18:33.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
 
 </databaseChangeLog>
