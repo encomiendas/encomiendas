@@ -1,5 +1,6 @@
 package py.com.domainsoft.envios.services.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -43,7 +44,7 @@ public class ExistenciaComprobanteServiceImpl
     @Override
     public ExistenciaComprobanteEntity grabarExistenciaComprobante(
             ExistenciaComprobanteDTO existenciaComprobante) {
-
+           existenciaComprobante.setFechaLog(LocalDateTime.now());
         return existenciaComprobanteRepo.save(
                 existenciaComprobanteMapper.dtoToEntity(existenciaComprobante));
     }

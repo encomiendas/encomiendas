@@ -2,12 +2,13 @@ package py.com.domainsoft.envios.dtos;
 
 import java.time.LocalDateTime;
 
+import com.google.common.base.MoreObjects;
+
 import py.com.domainsoft.entidad.dtos.SucursalDTO;
 import py.com.domainsoft.seguridad.dtos.UsuarioDTO;
 
 public class EquipoDTO {
-	
-	
+
     private Integer idEquipo;
     private String descripcion;
     private SucursalDTO sucursal;
@@ -16,8 +17,7 @@ public class EquipoDTO {
     private Boolean estado;
     private LocalDateTime fechaLog;
 
-	
-	public Integer getIdEquipo() {
+    public Integer getIdEquipo() {
         return idEquipo;
     }
 
@@ -72,6 +72,13 @@ public class EquipoDTO {
     public void setFechaLog(LocalDateTime fechaLog) {
         this.fechaLog = fechaLog;
     }
-	
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).add("idEquipo", idEquipo)
+                .add("descripcion", descripcion).add("sucursal", sucursal)
+                .add("usuario", usuario).add("estado", estado).toString();
+
+    }
 
 }

@@ -5,43 +5,46 @@ $(document).ready(function() {
 		$('#tablaProgramas tr').removeClass('highlighted');
 		$(this).toggleClass('highlighted');
 	});
+	$(".select2").select2();
 });
 
 // se inserta los valores
 function insertForm(fila) {
 	
-	$("#descripcion").val(fila.cells[0].innerHTML);
+	$("#idExistenciaComprob").val(fila.cells[0].innerHTML);
+	$('#idEquipo').val(fila.cells[9].innerHTML).trigger('change.select2');
+	$('#idTipoComprobante').val(fila.cells[10].innerHTML).trigger('change.select2');
+	$("#nroDesde").val(fila.cells[3].innerHTML);
+	$("#nroHasta").val(fila.cells[4].innerHTML);
+	$("#nroTimbrado").val(fila.cells[5].innerHTML);
+	$('#fechaInicioTimb').val(fila.cells[6].innerHTML);
+	$('#fechaFinTimb').val(fila.cells[7].innerHTML);
+		
 	
-	$('#idSucursal').val(fila.cells[4].innerHTML).trigger('change');
-	
-	if ($.trim(fila.cells[2].innerHTML) == '<span>SI</span>') {
-		$("#tipo").prop('selectedIndex', 0);
-	} else {
-		$("#tipo").prop('selectedIndex', 1);
-	}	
-	
-	if ($.trim(fila.cells[3].innerHTML) == '<span>ACTIVO</span>') {
+	if ($.trim(fila.cells[8].innerHTML) == '<span>SI</span>') {
 		$("#estado").prop('selectedIndex', 1);
 	} else {
 		$("#estado").prop('selectedIndex', 2);
 	}	
 		
-	$("#idEquipo").val(fila.cells[5].innerHTML);
 
 }
 
 function habilitarCampos() {
 	
-	$('#descripcion').attr('disabled', false);
-	$('#tipo').attr('disabled', false);
+	$('#idEquipo').attr('disabled', false).trigger('change');
+	$('#idTipoComprobante').attr('disabled', false).trigger('change');
+	$('#nroDesde').attr('disabled', false);
+	$('#nroHasta').attr('disabled', false);
+	$('#nroTimbrado').attr('disabled', false);
+	$('#fechaInicioTimb').attr('disabled', false);
+	$('#fechaFinTimb').attr('disabled', false);
 	$('#estado').attr('disabled', false);
-	$('#idSucursal').attr('disabled', false);
 
 	$('#btnGrabar').attr('disabled', false);
 	$('#btnNuevo').attr('disabled', true);
 
-	$("#descripcion").focus();
-	$("#descripcion").select();
+	//$("#descripcion").focus();
 }
 
 function cancelar() {

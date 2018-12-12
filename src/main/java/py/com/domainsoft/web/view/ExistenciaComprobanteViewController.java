@@ -1,5 +1,6 @@
 package py.com.domainsoft.web.view;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,9 +25,11 @@ import py.com.domainsoft.envios.services.TipoComprobanteService;
 import py.com.domainsoft.seguridad.dtos.MenuDTO;
 import py.com.domainsoft.seguridad.dtos.PerfilDTO;
 import py.com.domainsoft.seguridad.dtos.UserDetailsDTO;
+import py.com.domainsoft.seguridad.dtos.UsuarioDTO;
+import py.com.domainsoft.web.base.BaseViewController;
 
 @Controller
-public class ExistenciaComprobanteViewController {
+public class ExistenciaComprobanteViewController extends BaseViewController {
 
     private static final String EXISTENCIA_COMPROBANTE_LISTA = "/existencia-comprobante-lista";
     private static final String EXISTENCIA_COMPROBANTE_EXITOSO = "/existencia-comprobante-exitoso";
@@ -99,8 +102,10 @@ public class ExistenciaComprobanteViewController {
     @PostMapping(value = EXISTENCIA_COMPROBANTE_LISTA)
     public ModelAndView createUpdateTipoImpuesto(
             @Valid ExistenciaComprobanteDTO comprobanteDTO,
-            BindingResult bindingResult) {
-
+            BindingResult bindingResult, Principal principal) {
+        comprobanteDTO.setUsuario(
+                new UsuarioDTO(getUsuarioDTO(principal).getIdUsuario()));
+        System.out.println(comprobanteDTO.toString());
         existenciaComprobanteService
                 .grabarExistenciaComprobante(comprobanteDTO);
 
