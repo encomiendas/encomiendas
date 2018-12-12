@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- STYLES IMPORTS -->
+<th:block th:replace="fragments/head :: head"></th:block>
+<style>
+
+#tablaProgramas td:nth-child(n+10) {
+	 display: none; 
+} 
+
+</style>
+
+<body class="hold-transition skin-green sidebar-mini ">
+
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<th:block th:replace="fragments/header :: header"></th:block>
+		<!-- ASIDE MENU -->
+		<th:block th:replace="fragments/aside :: aside"></th:block>
+
+		<!-- =============================================== -->
+
+		<!-- CONTENIDO PRINCIPAL DE LA PAGINA -->
+		<div class="content-wrapper">
+
+			<section class="content-header">
+				<h1>
+					Paginas <small>lista de existencia comprobante</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">Existencia Comprobante</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="box box-success">
+							<div class="register-box-body">
+							
+								<div th:if="${message != null}" th:text="${message}"
+						            style="color:red;margin:10px 0px;">
+						        </div>
+							
+								<form action="#" 
+								      method="post" 
+								      th:action="@{/existencia-comprobante-lista}"
+									  id="formulario"								
+									  th:object="${existenciaComprobante}" 
+									  class="form-horizontal" 
+									  role="form">
+
+									<div style="color: red" class="requerido">
+										<label id="label"></label>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Identificador</label> 
+										<input 
+											type="text" 
+											value="" 
+											class="form-control"
+											id="idExistenciaComprob" 
+											placeholder="Identificador"
+											readonly
+											th:field="*{idExistenciaComprob}"
+											>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Equipo</label> <select class="form-control select2 editable"
+											id="idEquipo" th:field="${existenciaComprobante.equipo.idEquipo}" disabled>
+											<option value="" selected>Seleccione</option>
+											<option th:each="dropDownItem : ${equipos}"
+												th:value="${dropDownItem.getIdEquipo()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Tipo de Comprobante</label> <select class="form-control select2 editable"
+											id="idTipoComprobante" th:field="${existenciaComprobante.tipoComprobante.idTipoComprobante}" disabled>
+											<option value="" selected>Seleccione</option>
+											<option th:each="dropDownItem : ${tiposComprobantes}"
+												th:value="${dropDownItem.getIdTipoComprobante()}"
+												th:text="${dropDownItem.getDescripcion()}" />
+										</select>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Numero desde</label> 
+										<input 
+											type="number" 
+											class="form-control" 
+											id="nroDesde"
+											placeholder="Ingrese numero desde"
+											th:field="*{nroDesde}"
+											disabled required>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Numero hasta</label> 
+										<input 
+											type="number" 
+											class="form-control" 
+											id="nroHasta"
+											placeholder="Ingrese numero hasta"
+											th:field="*{nroHasta}"
+											disabled required>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Numero de Timbrado</label> 
+										<input 
+											type="text" 
+											class="form-control" 
+											id="nroTimbrado"
+											placeholder="Ingrese numero timbrado"
+											th:field="*{nroTimbrado}"
+											disabled required>
+									</div>
+
+									
+									<div class="form-group has-feedback">
+										<label>Fecha Incio Timbrado</label> <input type="date"
+											class="form-control editable" id="fechaInicioTimb"
+											placeholder="dd/mm/aaaa" th:field="*{fechaInicioTimb}"
+											disabled>
+									</div>
+									
+									<div class="form-group has-feedback">
+										<label>Fecha Fin Timbrado</label> <input type="date"
+											class="form-control editable" id="fechaFinTimb"
+											placeholder="dd/mm/aaaa" th:field="*{fechaFinTimb}"
+											disabled>
+									</div>
+
+									<div class="form-group has-feedback">
+										<label>Imprime?</label> 
+										<select class="form-control" 
+										        id="estado"
+										        th:field="*{imprime}"
+										        disabled>
+											<option value="" selected disabled>Estado</option>
+											<option value="true">Activo</option>
+											<option value="false">Inactivo</option>
+										</select>
+									</div>
+									
+									
+									
+									
+									<div class="row">
+										<div class="col-xs-4">
+											<button type="button" class="btn btn-success btn-block btn-flat" id="btnNuevo" onclick="nuevo()">Nuevo</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="submit" class="btn btn-success btn-block btn-flat" id="btnGrabar" disabled>Grabar</button>
+										</div>
+										<div class="col-xs-4">
+											<button type="button" class="btn btn-success btn-block btn-flat" id="btnCancelar" onclick="cancelar(this.form)">Cancelar</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="col-md-8">
+						<div class="box box-success">
+							<div class="box-header"></div>
+							<div class="box-body" id="divTabla">
+								<div class="table-responsive">
+									<div id="tablaProgramas_wrapper"
+										class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+										<div class="row">
+											<div class="col-sm-6">
+												<div class="dataTables_length" id="tablaProgramas_length">
+													<label>Mostrar <select name="tablaProgramas_length"
+														aria-controls="tablaProgramas" class="form-control input-sm">
+															<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
+																th:value="${pageSize}" th:selected="${pageSize} == ${selectedPageSize}"></option>
+													</select> registros
+													</label>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<div id="tablaProgramas_filter" class="dataTables_filter">
+													<label>Buscar:<input type="search" class="form-control input-sm"
+														placeholder="su texto aqui" aria-controls="tablaProgramas"></label>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="row">
+
+											<div class="col-sm-12">
+
+												<table id="tablaProgramas" class="table table-bordered table-hover ">
+													<thead>
+														<tr>
+															<th>ID</th>
+															<th>Equipo</th>
+															<th>Tipo Comprobante</th>
+															<th>Numero desde</th>
+															<th>Numero hasta</th>
+															<th>Numero timbrado</th>
+															<th>Fecha inicio</th>
+															<th>Fecha fin</th>
+															<th>Imprime</th>
+															<td>id equipo</td>
+															<td>id tipo</td>
+														</tr>
+													</thead>
+													<tbody>
+	
+														<tr th:each="listobj : ${listobj}" class="selected">
+															<td th:text="${listobj.idExistenciaComprob}"></td>
+															<td th:text="${listobj.equipo.descripcion}"></td>
+															<td th:text="${listobj.tipoComprobante.descripcion}"></td>
+															<td th:text="${listobj.nroDesde}"></td>
+															<td th:text="${listobj.nroHasta}"></td>
+															<td th:text="${listobj.nroTimbrado}"></td>
+															<td th:text="${listobj.fechaInicioTimb}"></td>
+															<td th:text="${listobj.fechaFinTimb}"></td>
+															<td th:switch="${listobj.imprime}">
+															<span th:case="true" th:text="SI"></span> 
+															<span th:case="false" th:text="NO"></span></td>
+															<td th:text="${listobj.equipo.idEquipo}"></td>
+															<td th:text="${listobj.tipoComprobante.idTipoComprobante}"></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+
+										<div class="row">
+
+											<div class="col-sm-5">
+												<div class="dataTables_info" id="tablaProgramas_info" role="status" aria-live="polite">
+													Página <span th:text="${listobj.Number + 1}"></span> de <span
+														th:text="${listobj.TotalPages}"></span> de un total de <span
+														th:text="${listobj.TotalElements}"></span> registros
+												</div>
+											</div>
+
+										
+											<div th:if="${listobj.totalPages != 1}" class="col-sm-7">
+
+												<div class="dataTables_paginate paging_simple_numbers" id="tablaProgramas_paginate">
+
+													<ul class="pagination">
+														<li th:class="${listobj.number == 0} ? disabled"><a class="pageLink"
+															th:href="@{/tipo-comprobante-lista(pageSize=${selectedPageSize}, page=1)}">&laquo;</a></li>
+														<li th:class="${listobj.number == 0} ? disabled"><a class="pageLink"
+															th:href="@{/tipo-comprobante-lista(pageSize=${selectedPageSize}, page=${listobj.number})}">&larr;</a></li>
+														<li th:class="${listobj.number == (page - 1)} ? 'active pointer-disabled'"
+															th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}"><a
+															class="pageLink"
+															th:href="@{/tipo-comprobante-lista(pageSize=${selectedPageSize}, page=${page})}"
+															th:text="${page}"></a></li>
+														<li th:class="${listobj.number + 1 == listobj.totalPages} ? disabled"><a
+															class="pageLink"
+															th:href="@{/tipo-comprobante-lista(pageSize=${selectedPageSize}, page=${listobj.number + 2})}">&rarr;</a>
+														</li>
+														<li th:class="${listobj.number + 1 == listobj.totalPages} ? disabled"><a
+															class="pageLink"
+															th:href="@{/tipo-comprobante-lista(pageSize=${selectedPageSize}, page=${listobj.totalPages})}">&raquo;</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+		<!-- ======================================================== -->
+		<!-- FOOTER -->
+		<th:block th:replace="fragments/footer :: footer"></th:block>
+		<!-- ======================================================== -->
+
+	</div>
+
+	<!-- SCRIPTS -->
+	<th:block th:replace="fragments/scripts :: scripts"></th:block>
+	<script src="../../js/envios/existencia-comprobante.js"></script>
+
+</body>
+
+</html>

@@ -15,7 +15,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.base.MoreObjects;
 
 import py.com.domainsoft.seguridad.entities.UsuarioEntity;
@@ -38,13 +40,15 @@ public class ExistenciaComprobanteEntity {
     @JoinColumn(name = "id_equipo")
     private EquipoEntity equipo;
 
-    @ManyToOne(targetEntity = UsuarioEntity.class)
+    @ManyToOne(targetEntity = TipoComprobanteEntity.class)
     @JoinColumn(name = "id_tipo_comprobante")
     private TipoComprobanteEntity tipoComprobante;
 
     private Integer nroDesde;
 
     private Integer nroHasta;
+    
+    private Integer nroTimbrado;
 
     private LocalDate fechaInicioTimb;
 
@@ -55,7 +59,7 @@ public class ExistenciaComprobanteEntity {
     private LocalDateTime fechaLog;
 
     @ManyToOne(targetEntity = UsuarioEntity.class)
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario_log")
     private UsuarioEntity usuario;
 
     public Integer getIdExistenciaComprob() {
@@ -137,6 +141,16 @@ public class ExistenciaComprobanteEntity {
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
     }
+    
+    
+
+    public Integer getNroTimbrado() {
+        return nroTimbrado;
+    }
+
+    public void setNroTimbrado(Integer nroTimbrado) {
+        this.nroTimbrado = nroTimbrado;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -160,10 +174,11 @@ public class ExistenciaComprobanteEntity {
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("idExistenciaComprob", idExistenciaComprob)
-                .add("equipo", equipo).add("nroDesde", nroDesde)
-                .add("nroHasta", nroHasta)
+                .add("tipoComprobante", tipoComprobante).add("equipo", equipo)
+                .add("nroDesde", nroDesde).add("nroHasta", nroHasta)
                 .add("fechaInicioTimb", fechaInicioTimb)
                 .add("fechaFinTimb", fechaFinTimb).add("imprime", imprime)
+                .add("usuario", usuario).add("nroTimbrado", nroTimbrado)
                 .add("fechaLog", fechaLog).toString();
 
     }
